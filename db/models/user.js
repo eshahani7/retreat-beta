@@ -22,30 +22,35 @@ var UserSchema = new mongoose.Schema({
     access: {type: String, required: true},
     token: {type: String, required: true}
   }],
-  name: [{
+  name: {
     firstName: {type: String, minLength: 1, required: true},
     lastName: {type: String, minLength: 1, required: true}
-  }],
+  },
   age: {type: Number, min: 16, required: true}, //not sure if we want an age limit
-  payment: [{
-    name: {type: String, required: true},
-    ccNumber: {
+  payment: {
+    name: {type: String},
+    ccNumber: { //should probs hash this before storing
       type: String,
-      required: true,
+      //required: true,
       validate: {
         validator: validator.isCreditCard,
         message: '{VALUE} is not a valid credit card number'
       }
     },
-    expDate: {type: Date, required: true} //look into this for client side
-  }],
-  billingAddress: [{
+    expDate: {
+      month: {type: Number, min: 1, max: 12},
+      year: {type: Number, min: 2017} //need custom validator
+    }
+  },
+  billingAddress: {
     streetAdd: {type: String, required: true},
     city: {type: String, required: true},
     state: {type: String, required: true, minLength: 2, maxLength: 2},
     zip: {type: Number, required: true} //VALIDATE w/ CALL TO GOOGLE MAPS API
-  }]
+  }
 });
+
+
 
 //----------------------INSTANCE METHODS-------------------//
 //use to override response of http post
@@ -78,6 +83,8 @@ UserSchema.methods.removeToken = function(token) {
     }
   });
 };
+
+
 
 //----------------------STATIC METHODS-------------------//
 UserSchema.statics.findByToken = function(token) {
@@ -118,7 +125,9 @@ UserSchema.statics.findByCredentials = function (email, password) {
   });
 };
 
-//Mongoose middleware
+
+
+//---------------MONGOOSE MIDDLEWARE-----------------//
 //run this code before save --> hash password in callback
 UserSchema.pre('save', function(next) {
   var user = this;
@@ -129,7 +138,16 @@ UserSchema.pre('save', function(next) {
         next();
       });
     });
-  } else {
+  }
+  if(user.isModified('ccNumber')) { //only want to hash if pass was just edited
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.ccNumber, salt, (err, hash) => {
+        user.ccNumber = hash;
+        next();
+      });
+    });
+  }
+  else {
     next();
   }
 });

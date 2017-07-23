@@ -4,21 +4,14 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
+const _ = require('lodash');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
 const {mongoose} = require('./db/mongoose');
-//var mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT;
-
-mongoose.connect('mongodb://localhost:27017/myapp', (error) => {
-  if(err) {
-    console.log('Could not connect to db');
-  }
-});
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
