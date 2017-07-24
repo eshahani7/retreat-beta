@@ -139,14 +139,29 @@ UserSchema.pre('save', function(next) {
       });
     });
   }
-  if(user.isModified('ccNumber')) { //only want to hash if pass was just edited
+  else {
+    next();
+  }
+});
+
+UserSchema.pre('save', function(next) {
+  var user = this;
+  if(user.isModified('payment.ccNumber')) { //only want to hash if pass was just edited
     bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.ccNumber, salt, (err, hash) => {
-        user.ccNumber = hash;
+      bcrypt.hash(user.payment.ccNumber, salt, (err, hash) => {
+        user.payment.ccNumber = hash;
         next();
       });
     });
   }
+  /*if(user.isModified('password')) { //only want to hash if pass was just edited
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        user.password = hash;
+        next();
+      });
+    });
+  }*/
   else {
     next();
   }
