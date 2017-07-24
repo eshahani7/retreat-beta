@@ -3,6 +3,7 @@ var router = express.Router();
 const _ = require('lodash');
 
 var {User} = require('../db/models/user');
+var {authenticate} = require('./middleware/authenticate');
 
 // POST /users (add new user)
 router.post('/', (req, res) => {
@@ -16,6 +17,32 @@ router.post('/', (req, res) => {
     res.header('x-auth', token).send(user);
   }).catch((e) => {
     res.status(400).send(e);
+  });
+});
+
+router.get('/me', authenticate, (req, res) => {
+  res.send(req.user);
+});
+
+// POST /users/login {email, password}
+router.post('/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+
+  User.findByCredentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send(user);
+    });
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
+
+// DELETE /users/me/token --> logging out
+router.delete('/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+    res.status(200).send();
+  }, () => {
+    res.status(400).send();
   });
 });
 
