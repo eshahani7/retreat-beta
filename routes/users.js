@@ -5,6 +5,17 @@ const _ = require('lodash');
 var {User} = require('../db/models/user');
 var {authenticate} = require('./middleware/authenticate');
 
+//REACT TEST
+router.get('/', function(req, res, next) {
+  res.json([{
+  	id: 1,
+  	username: "samsepi0l"
+  }, {
+  	id: 2,
+  	username: "D0loresH4ze"
+  }]);
+});
+
 // POST /users (add new user)
 router.post('/', (req, res) => {
   //var body = _.pick(req.body, ['email', 'password', 'age', 'name', 'payment', 'billingAddress']);
@@ -45,5 +56,22 @@ router.delete('/me/token', authenticate, (req, res) => {
     res.status(400).send();
   });
 });
+
+// DELETE /users/me --> delete user profile
+router.delete('/me', authenticate, (req, res) => {
+  User.findByIdAndRemove(req.user.id).then((user) => {
+    if(user != null) {
+      res.send(user);
+    }
+    res.status(404).send();
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
+
+// PATCH /users/me --> update profile
+// router.patch('/me', authenticate, (req, res) => {
+//   User.findByOneAndUpdate(req.user.id, )
+// });
 
 module.exports = router;

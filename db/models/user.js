@@ -3,6 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
+const request = require('request');
 
 //----------------------USER MODEL-------------------//
 var UserSchema = new mongoose.Schema({
@@ -26,7 +27,7 @@ var UserSchema = new mongoose.Schema({
     firstName: {type: String, minLength: 1, required: true},
     lastName: {type: String, minLength: 1, required: true}
   },
-  age: {type: Number, min: 16, required: true}, //not sure if we want an age limit
+  age: {type: Number, min: 18, required: true}, //not sure if we want an age limit
   payment: {
     name: {type: String},
     ccNumber: { //should probs hash this before storing
@@ -38,18 +39,17 @@ var UserSchema = new mongoose.Schema({
       }
     },
     expDate: {
-      month: {type: Number, min: 1, max: 12},
-      year: {type: Number, min: 2017} //need custom validator
+      month: {type: Number},
+      year: {type: Number} //validate through stripe
     }
   },
   billingAddress: {
     streetAdd: {type: String, required: true},
     city: {type: String, required: true},
     state: {type: String, required: true, minLength: 2, maxLength: 2},
-    zip: {type: Number, required: true} //VALIDATE w/ CALL TO GOOGLE MAPS API
+    zip: {type: Number, required: true}
   }
 });
-
 
 
 //----------------------INSTANCE METHODS-------------------//
@@ -128,7 +128,7 @@ UserSchema.statics.findByCredentials = function (email, password) {
 
 
 //---------------MONGOOSE MIDDLEWARE-----------------//
-//run this code before save --> hash password in callback
+//run this code before save --> hash password & ccNumber
 UserSchema.pre('save', function(next) {
   var user = this;
   if(user.isModified('password')) { //only want to hash if pass was just edited
@@ -154,14 +154,6 @@ UserSchema.pre('save', function(next) {
       });
     });
   }
-  /*if(user.isModified('password')) { //only want to hash if pass was just edited
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.password, salt, (err, hash) => {
-        user.password = hash;
-        next();
-      });
-    });
-  }*/
   else {
     next();
   }
