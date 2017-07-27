@@ -44,10 +44,10 @@ var UserSchema = new mongoose.Schema({
     }
   },
   billingAddress: {
-    streetAdd: {type: String, required: true},
-    city: {type: String, required: true},
-    state: {type: String, required: true, minLength: 2, maxLength: 2},
-    zip: {type: Number, required: true}
+    streetAdd: {type: String},
+    city: {type: String},
+    state: {type: String, minLength: 2, maxLength: 2},
+    zip: {type: Number}
   }
 });
 

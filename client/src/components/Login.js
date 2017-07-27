@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Login extends Component {
-  state = {email:'', password:'', users: [], postRes:''};
+  state = {email:'', password:'', authToken:''};
 
   handleChange(e) {
     const target = e.target;
@@ -11,11 +11,23 @@ class Login extends Component {
     });
   }
 
-  enterCreds() {
-    var userCreds = {
-      email: this.state.email,
-      password: this.state.password
-    }
+  enterCreds(e) {
+    e.preventDefault();
+    fetch('/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    }).then((res) => {
+      this.setState({authToken: res.headers.get('x-auth')});
+    }).catch((e) => {
+      console.log(e);
+    });
+
   }
 
   render() {
