@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router';
 
 class Test extends Component {
   render() {
@@ -15,7 +14,5 @@ class Test extends Component {
     );
   }
 }
-
-<Route path='/test' component={Test}/>
 
 export default Test;

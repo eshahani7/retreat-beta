@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import Main from './Main';
 import Test from './Test';
+import Login from './Login';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <Switch>
         <Route exact path='/' component={Main}/>
         <Route exact path='/test' component={Test}/>
+        <Route exact path='/login' component={Login}/>
       </Switch>
     );
   }

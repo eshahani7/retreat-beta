@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const _ = require('lodash');
+const bodyParser = require('body-parser');
 
 var {User} = require('../db/models/user');
 var {authenticate} = require('./middleware/authenticate');
 
+router.use(bodyParser.json());
+
 // POST /users (add new user)
 router.post('/', (req, res) => {
-  //var body = _.pick(req.body, ['email', 'password', 'age', 'name', 'payment', 'billingAddress']);
-  var body = req.body;
+  var body = _.pick(req.body, ['email', 'password', 'age', 'name']);
+  //var body = req.body;
   var user = new User(body);
 
   user.save().then(() => {
@@ -27,7 +30,7 @@ router.get('/me', authenticate, (req, res) => {
 // POST /users/login {email, password}
 router.post('/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
-
+  console.log(req.body);
   User.findByCredentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) => {
       res.header('x-auth', token).send(user);
