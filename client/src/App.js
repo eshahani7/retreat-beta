@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route } from 'react-router';
+import { Link } from 'react-router-dom'
 
 class App extends Component {
-  state = {users: []}
-
-  componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
-  }
-
   render() {
     return (
       <div className="App">
-        <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to React</h2>
+        </div>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        <Link to="/test">Test</Link>
       </div>
     );
   }
 }
+<Route exact path='/' component={App}/>
 
 export default App;
