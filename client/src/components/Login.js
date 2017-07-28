@@ -23,11 +23,11 @@ class Login extends Component {
         password: this.state.password
       })
     }).then((res) => {
-      this.setState({authToken: res.headers.get('x-auth')});
+      //this.setState({authToken: res.headers.get('x-auth')});
+      sessionStorage.setItem('authToken', res.headers.get('x-auth'));
     }).catch((e) => {
       console.log(e);
     });
-
   }
 
   render() {
