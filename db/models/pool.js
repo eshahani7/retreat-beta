@@ -14,9 +14,13 @@ var PoolSchema = new Mongoose.schema({
   restrictions: {
     gender: {type: String, maxLength: 1},
     minAge: {type: Number, min: 18},
-    maxAge: {type: Number}
+    maxAge: {type: Number},
+    isOpen: {type: Boolean, default: true} //secondary feature
   }
-  currentShares: {type: Number}
+  currentShares: {type: Number},
+  _userList: [{type: mongoose.Schema.Types.ObjectId}],
+  poolCloses: {type: Date, required: true},
+  poolClosed: {type: Boolean, required: true, default: false}
 });
 
 //--------------INSTANCE METHODS------------//
