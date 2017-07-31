@@ -22,10 +22,8 @@ var UserSchema = new mongoose.Schema({
     access: {type: String, required: true},
     token: {type: String, required: true}
   }],
-  name: {
-    firstName: {type: String, minLength: 1, required: true},
-    lastName: {type: String, minLength: 1, required: true}
-  },
+  firstName: {type: String, minLength: 1, required: true},
+  lastName: {type: String, minLength: 1, required: true},
   age: {type: Number, min: 18, required: true},
   payment: {
     name: {type: String},

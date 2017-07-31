@@ -6,7 +6,6 @@ const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 
-const index = require('./routes/index');
 const users = require('./routes/users');
 const pools = require('./routes/pools');
 const {mongoose} = require('./db/mongoose');
@@ -24,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/users', users);
 app.use('/pools', pools);
 
