@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-grid-system';
 
 class FormField extends Component {
   render() {
@@ -16,12 +17,32 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <form>
-          <FormField label="Email: " name="email"/>
-          <FormField label="Password: " name="password"/>
-          <FormField label="First name: " name="firstName"/>
-          <FormField label="Last name: " name="lastName"/>
-          <FormField label="Age: " name="age"/>
-          <input type="submit" value="Submit"/>
+          <Row>
+            <Col md= {4}>
+              <FormField label="Email: " name="email"/>
+            </Col>
+            <Col md={4}>
+              <FormField label="Password: " name="password"/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md= {4}>
+              <FormField label="First name: " name="firstName"/>
+            </Col>
+            <Col md={4}>
+              <FormField label="Last name: " name="lastName"/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
+                <FormField label="Age: " name="age"/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <input type="submit" value="Submit"/>
+            </Col>
+          </Row>
         </form>
       </div>
     );
