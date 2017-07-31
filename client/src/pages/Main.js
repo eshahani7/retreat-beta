@@ -15,7 +15,8 @@ class Main extends Component {
           To get started, edit <code>src/Main.js</code> and save to reload.
         </p>
         <Link to="/test">Test</Link><br/>
-        <Link to="/login">Login</Link>
+        <Link to="/login">Login</Link><br/>
+        <Link to="/signup">Sign Up</Link>
       </div>
     );
   }
