@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 //---------------POOL MODEL------------------//
-var PoolSchema = new Mongoose.schema({
+var PoolSchema = new mongoose.Schema({
   location: {type: String, required: true},
   _creator: {type: mongoose.Schema.Types.ObjectId, required: true},
   startDate: {type: Date, required: true},
@@ -16,7 +16,7 @@ var PoolSchema = new Mongoose.schema({
     minAge: {type: Number, min: 18},
     maxAge: {type: Number},
     isOpen: {type: Boolean, default: true} //secondary feature
-  }
+  },
   currentShares: {type: Number},
   _userList: [{type: mongoose.Schema.Types.ObjectId}],
   poolCloses: {type: Date, required: true},
