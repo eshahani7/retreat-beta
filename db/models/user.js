@@ -26,10 +26,10 @@ var UserSchema = new mongoose.Schema({
     firstName: {type: String, minLength: 1, required: true},
     lastName: {type: String, minLength: 1, required: true}
   },
-  age: {type: Number, min: 18, required: true}, //not sure if we want an age limit
+  age: {type: Number, min: 18, required: true},
   payment: {
     name: {type: String},
-    ccNumber: { //should probs hash this before storing
+    ccNumber: {
       type: String,
       //required: true,
       validate: {
@@ -47,7 +47,8 @@ var UserSchema = new mongoose.Schema({
     city: {type: String},
     state: {type: String, minLength: 2, maxLength: 2},
     zip: {type: Number}
-  }
+  },
+  picture: {type: String}
 });
 
 
