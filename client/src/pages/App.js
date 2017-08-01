@@ -4,6 +4,7 @@ import Main from './Main';
 import Test from './Test';
 import Login from './Login';
 import SignUp from './SignUp';
+import ViewUser from './ViewUser';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Route exact path='/test' component={Test}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/signup' component={SignUp}/>
+        <Route exact path='/viewuser' component={ViewUser}/>
       </Switch>
     );
   }

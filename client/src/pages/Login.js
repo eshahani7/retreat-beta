@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   state = {email:'', password:'', authToken:''};
@@ -46,6 +47,7 @@ class Login extends Component {
             </label>
             <input type="submit" value="Submit" onClick={this.enterCreds.bind(this)}/>
           </form>
+          <Link to="/viewuser">View User</Link>
         </div>
       );
     }
