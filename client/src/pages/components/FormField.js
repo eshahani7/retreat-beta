@@ -6,7 +6,7 @@ class FormField extends Component {
     return(
       <label>
         {this.props.label}
-        <input type="text" name={this.props.name} onChange={this.props.changeFunction}/>
+        <input type="text" name={this.props.name} value={this.props.default} onChange={this.props.changeFunction}/>
       </label>
     );
   }

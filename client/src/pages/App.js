@@ -5,6 +5,7 @@ import Test from './Test';
 import Login from './Login';
 import SignUp from './SignUp';
 import ViewUser from './ViewUser';
+import EditUser from './EditUser';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         <Route exact path='/login' component={Login}/>
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/viewuser' component={ViewUser}/>
+        <Route exact path='/edituser' component={EditUser}/>
       </Switch>
     );
   }
