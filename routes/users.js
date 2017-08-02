@@ -65,8 +65,15 @@ router.delete('/me', authenticate, (req, res) => {
 });
 
 // PATCH /users/me --> update profile
-// router.patch('/me', authenticate, (req, res) => {
-//   User.findByOneAndUpdate(req.user.id, )
-// });
+router.patch('/me', authenticate, (req, res) => {
+  User.findOneAndUpdate({_id: req.user.id}, {$set: req.body}, {new: true}).then((user) => {
+    if(user != null) {
+      res.status(200).send(user);
+    }
+    return res.status(404).send();
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
 module.exports = router;

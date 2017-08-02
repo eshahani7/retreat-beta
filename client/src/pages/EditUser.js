@@ -39,6 +39,25 @@ class EditUser extends Component {
     });
   }
 
+  saveChange(e) {
+    e.preventDefault();
+    fetch('/users/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        age: this.state.age
+      })
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+
   render() {
     return (
       <div className="EditUser">
