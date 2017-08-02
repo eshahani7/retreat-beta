@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const _ = require('lodash');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 
 var {User} = require('../db/models/user');
 var {authenticate} = require('./middleware/authenticate');
@@ -65,12 +66,19 @@ router.delete('/me', authenticate, (req, res) => {
 });
 
 // PATCH /users/me --> update profile
+//fix hashing new password problem
 router.patch('/me', authenticate, (req, res) => {
-  User.findOneAndUpdate({_id: req.user.id}, {$set: req.body}, {new: true}).then((user) => {
-    if(user != null) {
-      res.status(200).send(user);
-    }
-    return res.status(404).send();
+
+  req.user.email = req.body.email;
+  req.user.firstName = req.body.firstName;
+  req.user.lastName = req.body.lastName;
+  req.user.age = req.body.age;
+  if(req.body.password != '') {
+    req.user.password = req.body.password;
+  }
+
+  req.user.save((user) => {
+    res.status(200).send(user);
   }).catch((e) => {
     res.status(400).send();
   });
