@@ -8,7 +8,6 @@ class EditUser extends Component {
 
   componentWillMount() {
     var token = sessionStorage.getItem('authToken');
-    console.log(token);
     var userHeader = new Headers();
     userHeader.append('x-auth', token);
 
@@ -23,9 +22,9 @@ class EditUser extends Component {
         email: body.email,
         password: body.password,
         firstName: body.firstName,
-        lastName: body.lastName
+        lastName: body.lastName,
+        age: body.age
       });
-      console.log(body);
     }).catch((e) => {
       console.log(e);
     });
@@ -44,7 +43,8 @@ class EditUser extends Component {
     fetch('/users/me', {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type':'application/json',
+        'x-auth': sessionStorage.getItem('authToken')
       },
       body: JSON.stringify({
         email: this.state.email,
@@ -53,8 +53,6 @@ class EditUser extends Component {
         lastName: this.state.lastName,
         age: this.state.age
       })
-    }).catch((e) => {
-      console.log(e);
     });
   }
 
@@ -64,33 +62,33 @@ class EditUser extends Component {
         <form>
           <Row>
             <Col md= {4}>
-              <FormField label="Email: " name="email" default={this.state.email}
-                changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="Email: " name="email" type="text"
+                default={this.state.email} changeFunction={this.handleChange.bind(this)}/>
             </Col>
             <Col md={4}>
-              <FormField label="Password: " name="password"
+              <FormField label="Password: " name="password" type="password"
                 changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
             <Col md= {4}>
-              <FormField label="First name: " name="firstName" default={this.state.firstName}
-                changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="First name: " name="firstName" type="text"
+                default={this.state.firstName} changeFunction={this.handleChange.bind(this)}/>
             </Col>
             <Col md={4}>
-              <FormField label="Last name: " name="lastName" default={this.state.lastName}
-                changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="Last name: " name="lastName" type="text"
+                default={this.state.lastName} changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
             <Col md={4}>
-                <FormField label="Age: " name="age" default={this.state.lastName}
-                  changeFunction={this.handleChange.bind(this)}/>
+                <FormField label="Age: " name="age" type="number"
+                  default={this.state.age} changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
             <Col md={12}>
-              <input type="submit" value="Save"/>
+              <input type="submit" value="Save" onClick={this.saveChange.bind(this)}/>
             </Col>
           </Row>
         </form>

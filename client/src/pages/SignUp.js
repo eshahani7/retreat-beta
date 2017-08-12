@@ -41,23 +41,23 @@ class SignUp extends Component {
         <form>
           <Row>
             <Col md= {4}>
-              <FormField label="Email: " name="email" changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="Email: " name="email" type="text" changeFunction={this.handleChange.bind(this)}/>
             </Col>
             <Col md={4}>
-              <FormField label="Password: " name="password" changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="Password: " name="password" type="password" changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
             <Col md= {4}>
-              <FormField label="First name: " name="firstName" changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="First name: " name="firstName" type="text" changeFunction={this.handleChange.bind(this)}/>
             </Col>
             <Col md={4}>
-              <FormField label="Last name: " name="lastName" changeFunction={this.handleChange.bind(this)}/>
+              <FormField label="Last name: " name="lastName" type="text" changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
             <Col md={4}>
-                <FormField label="Age: " name="age" changeFunction={this.handleChange.bind(this)}/>
+                <FormField label="Age: " name="age" type="number" changeFunction={this.handleChange.bind(this)}/>
             </Col>
           </Row>
           <Row>
