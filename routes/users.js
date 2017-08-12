@@ -68,12 +68,11 @@ router.delete('/me', authenticate, (req, res) => {
 // PATCH /users/me --> update profile
 //fix hashing new password problem
 router.patch('/me', authenticate, (req, res) => {
-
   req.user.email = req.body.email;
   req.user.firstName = req.body.firstName;
   req.user.lastName = req.body.lastName;
   req.user.age = req.body.age;
-  if(req.body.password != '') {
+  if(req.body.password != null) {
     req.user.password = req.body.password;
   }
 
