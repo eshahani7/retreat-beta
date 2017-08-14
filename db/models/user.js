@@ -25,6 +25,7 @@ var UserSchema = new mongoose.Schema({
   firstName: {type: String, minLength: 1, required: true},
   lastName: {type: String, minLength: 1, required: true},
   age: {type: Number, min: 18, required: true},
+  gender: {type: String, maxLength: 1, required: true},
   payment: {
     name: {type: String},
     ccNumber: {
@@ -56,7 +57,7 @@ UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'email', 'firstName', 'lastName', 'age']);
+  return _.pick(userObject, ['_id', 'email', 'firstName', 'lastName', 'age', 'gender']);
 }
 
 UserSchema.methods.generateAuthToken = function() {

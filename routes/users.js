@@ -14,7 +14,6 @@ router.post('/', (req, res) => {
   //var body = _.pick(req.body, ['email', 'password', 'age', 'name']);
   var body = req.body;
   var user = new User(body);
-  console.log(req.body);
 
   user.save().then(() => {
     return user.generateAuthToken();
