@@ -32,6 +32,22 @@ PoolSchema.methods.toJSON = function () {
   return _.pick(poolObject, ['_id', 'location', '_creator', 'themes', 'restrictions', 'startDate']);
 }
 
+PoolSchema.methods.validateUser = function(user) {
+  var pool = this;
+  var rst = pool.restrictions;
+  var valid = true;
+  if(rst.gender != null)
+    valid = user.gender == rst.gender;
+  if(rst.minAge != null && rst.maxAge != null)
+    valid = (user.age > rst.minAge && user.age < rst.maxAge);
+  else if(rst.minAge != null)
+    valid = user.age > rst.minAge;
+  else if(rst.maxAge != null)
+    valid = user.age < rst.maxAge;
+
+  return valid;
+}
+
 var Pool = mongoose.model('Pool', PoolSchema);
 
 module.exports = {Pool};

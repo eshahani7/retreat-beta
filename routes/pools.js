@@ -57,13 +57,18 @@ router.post('/join/:id', authenticate, (req, res) => {
   var id = req.params.id;
 
   Pool.findById(id).then((pool) => {
-    pool._userList.push(req.user.id);
-    pool.save().then(() => {
-      res.status(200).send(pool);
-    }).catch((e) => {
-      console.log(e);
+    if(pool.validateUser(req.user)) {
+      pool._userList.push(req.user.id);
+      pool.save().then(() => {
+        res.status(200).send(pool);
+      }).catch((e) => {
+        console.log(e);
+        res.status(400).send();
+      })
+    }
+    else {
       res.status(400).send();
-    })
+    }
   }).catch((e) => {
     console.log(e);
     res.status(400).send();
