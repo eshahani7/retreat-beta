@@ -7,7 +7,7 @@ var PoolSchema = new mongoose.Schema({
   location: {type: String, required: true},
   _creator: {type: mongoose.Schema.Types.ObjectId, required: true},
   startDate: {type: Date, required: true, default: new Date()},
-  // endDate: {type: Date, required: true}, //convert JSON to date object in client
+  endDate: {type: Date, required: true}, //convert JSON to date object in client
   minPeople: {type: Number, required: true},
   goal: {type: Number, required: true},
   maxShare: {type: Number},
