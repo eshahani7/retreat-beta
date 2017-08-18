@@ -74,6 +74,9 @@ router.get('/list/:query', (req, res) => {
 // POST /pools/join/:id --> join existing pool
 router.post('/join/:id', authenticate, (req, res) => {
   var id = req.params.id;
+  if(!ObjectID.isValid(id)) {
+    res.status(404).send();
+  }
 
   Pool.findById(id).then((pool) => {
     if(pool.validateUser(req.user)) {
@@ -104,6 +107,26 @@ router.get('/me', authenticate, (req, res) => {
 });
 
 // DELETE /pools/leave/:id --> leave existing pool
-router.delete
+router.delete('/leave/:id', authenticate, (req, res) => {
+  var pool;
+  var id = req.params.id;
+  if(!ObjectID.isValid(id)) {
+    res.status(404).send();
+  }
+
+  Pool.findById(id).then((pool) => {
+    var index = pool._userList.indexOf(req.user._id);
+    pool._userList.splice(index, 1);
+    pool.save().then(() => {
+      res.status(200).send(pool);
+    }).catch((e) => {
+      console.log(e);
+      res.status(400).send();
+    })
+  }).catch((e) => {
+    console.log(e);
+    res.status(400).send();
+  });
+});
 
 module.exports = router;
