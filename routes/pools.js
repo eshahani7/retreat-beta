@@ -29,11 +29,6 @@ router.post('/', authenticate, (req, res) => {
   });
 });
 
-// PATCH /pools/edit/:id --> edit details of pool (creator only)
-router.patch('/edit/:id', authenticate, (req, res) => {
-
-});
-
 // DELETE /pools/edit/:id --> delete pool (creator only)
 router.delete('/delete/:id', authenticate, (req, res) => {
   var id = req.params.id;
@@ -54,10 +49,12 @@ router.delete('/delete/:id', authenticate, (req, res) => {
   });
 });
 
+//Note: not adding edit option to owner for now
+
 
 //-----------------PUBLIC---------------------------//
 // GET /pools/:id --> get full details of a particular pool
-router.get('/:id', (req, res) => {
+router.get('/details/:id', (req, res) => {
   var id = req.params.id;
   Pool.findById(id).then((pool) => {
     res.status(200).send(pool);
@@ -68,7 +65,7 @@ router.get('/:id', (req, res) => {
 });
 
 // GET /pools --> get pools based on query params
-router.get('/:query', (req, res) => {
+router.get('/list/:query', (req, res) => {
 
 });
 
@@ -99,11 +96,14 @@ router.post('/join/:id', authenticate, (req, res) => {
 
 // GET /pools/me --> get pools joined by user
 router.get('/me', authenticate, (req, res) => {
-  Pool.find({_creator: req.user._id}).then((pools) => {
+  Pool.find({_userList: { "$in" : [req.user._id]}}).then((pools) => {
     res.status(200).send({pools});
   }).catch((e) => {
     res.status(400).send();
   });
 });
+
+// DELETE /pools/leave/:id --> leave existing pool
+router.delete
 
 module.exports = router;
