@@ -64,9 +64,18 @@ router.get('/details/:id', (req, res) => {
   });
 });
 
-// GET /pools --> get pools based on query params
-router.get('/list/:query', (req, res) => {
-
+// POST /pools/list --> get pools based on query params
+// use "{restrictions.gender:"F"} for nested properties
+router.post('/list', (req, res) => {
+  var query = req.body;
+  Pool.find(query).then((pools) => {
+    if(pools == null) {
+      res.status(404).send();
+    }
+    res.status(200).send({pools});
+  }).catch((e) => {
+    res.status(400).send();
+  });
 });
 
 
