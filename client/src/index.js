@@ -4,11 +4,14 @@ import { BrowserRouter } from 'react-router-dom'
 import './stylesheets/index.css';
 import App from './pages/App';
 import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.css';
 
-ReactDOM.render((
+ReactDOM.render(
   <BrowserRouter>
-    <App />
-  </BrowserRouter>
-), document.getElementById('root'));
+  	<App />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
 registerServiceWorker();

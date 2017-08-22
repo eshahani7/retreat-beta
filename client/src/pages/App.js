@@ -6,6 +6,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import ViewUser from './ViewUser';
 import EditUser from './EditUser';
+import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
   render() {
