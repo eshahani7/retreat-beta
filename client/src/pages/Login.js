@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import RNavBar from './components/RNavBar.js'
+var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
+var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
 class Login extends Component {
   state = {email:'', password:'', authToken:''};
@@ -35,7 +36,7 @@ class Login extends Component {
   render() {
       return (
         <div className="Login">
-          <RNavBar/>
+          <PublicNavBar/>
           <form>
             <label>
               Email:
