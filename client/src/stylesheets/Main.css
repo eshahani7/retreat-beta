@@ -15,24 +15,23 @@
 }
 
 .Main-intro {
-  font-size: large;
+  font-family: Lato;
+  font-weight: 700;
+  font-size: 36px;
+  padding-bottom: 40px;
 }
 
-.navbar-brand {
-  display: flex;
-  align-items: center;
+.image {
+    position: relative;
 }
 
-.link {
-  color: black;
-}
-
-.link:hover {
-  color: gray;
-  text-decoration: none;
-}
-
-.header-text {
-  color: black;
-  text-align: center;
+.image h2 {
+    position: absolute;
+    width: 100%;
+    top: 15px;
+    text-align: center;
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 36px;
+    color: white;
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 import NavLink from './Link.js';
 import logo from '../../img/logo.png';
+import '../../stylesheets/navbar.css';
 
 class PublicNavBar extends Component {
   render() {
@@ -10,9 +12,9 @@ class PublicNavBar extends Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">
+            <Link to="/" className="link">
               <img src={logo} className="Main-logo" alt="logo" />
-            </a>
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -44,9 +46,9 @@ class UserNavBar extends Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">
+            <Link to="/" className="link">
               <img src={logo} className="Main-logo" alt="logo" />
-            </a>
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

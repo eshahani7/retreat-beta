@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import FormField from './components/FormField.js';
+var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
+var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
 class SignUp extends Component {
 
@@ -38,6 +40,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="SignUp">
+        <PublicNavBar/>
         <form>
           <Row>
             <Col md= {4}>
