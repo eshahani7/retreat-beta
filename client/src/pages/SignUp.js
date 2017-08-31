@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-grid-system';
+import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 'react-bootstrap';
+import '../stylesheets/form.css';
 import FormField from './components/FormField.js';
+
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
 class SignUp extends Component {
 
-  state = {email:'', password:'', firstName:'', lastName:'', age:0};
+  state = {email:'', password:'', firstName:'', lastName:'', gender:'', age:null};
 
   handleChange(e) {
     const target = e.target;
@@ -28,12 +30,22 @@ class SignUp extends Component {
         password: this.state.password,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
-        age: this.state.age
+        age: this.state.age,
+        gender: this.state.gender
       })
     }).then((res) => {
       sessionStorage.setItem('authToken', res.headers.get('x-auth'));
     }).catch((e) => {
       console.log(e);
+    });
+
+    this.setState({
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      age: null,
+      gender: ''
     });
   }
 
@@ -41,34 +53,105 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <PublicNavBar/>
-        <form>
-          <Row>
-            <Col md= {4}>
-              <FormField label="Email: " name="email" type="text" changeFunction={this.handleChange.bind(this)}/>
+        <Form horizontal className="signUpForm">
+          <FormGroup controlId="formEmail">
+            <Col componentClass={ControlLabel} sm={4}>
+              Email
             </Col>
-            <Col md={4}>
-              <FormField label="Password: " name="password" type="password" changeFunction={this.handleChange.bind(this)}/>
+            <Col sm={4}>
+              <FormControl
+                type="email"
+                placeholder="janedoe@gmail.com"
+                value={this.state.email}
+                name="email"
+                onChange={this.handleChange.bind(this)}
+                 />
             </Col>
-          </Row>
-          <Row>
-            <Col md= {4}>
-              <FormField label="First name: " name="firstName" type="text" changeFunction={this.handleChange.bind(this)}/>
+          </FormGroup>
+
+          <FormGroup controlId="formPassword">
+            <Col componentClass={ControlLabel} sm={4}>
+              Password
             </Col>
-            <Col md={4}>
-              <FormField label="Last name: " name="lastName" type="text" changeFunction={this.handleChange.bind(this)}/>
+            <Col sm={4}>
+              <FormControl
+                type="password"
+                placeholder="password"
+                value={this.state.password}
+                name="password"
+                onChange={this.handleChange.bind(this)}
+                />
             </Col>
-          </Row>
-          <Row>
-            <Col md={4}>
-                <FormField label="Age: " name="age" type="number" changeFunction={this.handleChange.bind(this)}/>
+          </FormGroup>
+
+          <FormGroup controlId="formFirstName">
+            <Col componentClass={ControlLabel} sm={4}>
+              First Name
             </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <input type="submit" value="Submit" onClick={this.submitDetails.bind(this)}/>
+            <Col sm={4}>
+              <FormControl
+                type="text"
+                placeholder="Jane"
+                value={this.state.firstName}
+                name="firstName"
+                onChange={this.handleChange.bind(this)}
+                />
             </Col>
-          </Row>
-        </form>
+          </FormGroup>
+
+          <FormGroup controlId="formLastName">
+            <Col componentClass={ControlLabel} sm={4}>
+              Last Name
+            </Col>
+            <Col sm={4}>
+              <FormControl
+                type="text"
+                placeholder="Doe"
+                value={this.state.lastName}
+                name="lastName"
+                onChange={this.handleChange.bind(this)}
+                />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formAge">
+            <Col componentClass={ControlLabel} sm={4}>
+              Age
+            </Col>
+            <Col sm={4}>
+              <FormControl
+                type="number"
+                placeholder= "21"
+                value={this.state.age}
+                name="age"
+                onChange={this.handleChange.bind(this)}
+                />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formGender">
+            <Col componentClass={ControlLabel} sm={4}>
+              Gender
+            </Col>
+            <Col sm={4}>
+              <FormControl
+                type="text"
+                placeholder= "F"
+                value={this.state.gender}
+                name="gender"
+                onChange={this.handleChange.bind(this)}
+                />
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={4} sm={4}>
+              <Button type="submit" onClick={this.submitDetails.bind(this)} block>
+                Sign Up
+              </Button>
+            </Col>
+          </FormGroup>
+        </Form>
       </div>
     );
   }

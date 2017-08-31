@@ -41,20 +41,9 @@ class Login extends Component {
   }
 
   render() {
-      var btnStyle = {
-        backgroundColor: '#f4b042',
-        borderColor: 'black',
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        color: 'black',
-        fontWeight: 'bold',
-        outlineColor: 'black'
-      }
-
       return (
         <div className="Login">
           <PublicNavBar/>
-          <div className="header">
           <Form horizontal className="loginForm">
             <FormGroup controlId="formHorizontalEmail">
               <Col componentClass={ControlLabel} sm={4}>
@@ -88,13 +77,12 @@ class Login extends Component {
 
             <FormGroup>
               <Col smOffset={4} sm={4}>
-                <Button type="submit" style={btnStyle} onClick={this.enterCreds.bind(this)} block>
+                <Button type="submit" onClick={this.enterCreds.bind(this)} block>
                   Sign in
                 </Button>
               </Col>
             </FormGroup>
           </Form>
-        </div>
 
           <Link to="/viewuser">View User</Link>
         </div>
