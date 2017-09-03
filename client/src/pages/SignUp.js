@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 'react-bootstrap';
 import '../stylesheets/form.css';
+import '../stylesheets/SignUp.css';
 import FormField from './components/FormField.js';
 
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;

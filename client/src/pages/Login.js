@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Button, FormGroup, Form, FormControl, ControlLabel, Col } from 'react-bootstrap';
+import { Button, FormGroup, Form, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
 import '../stylesheets/form.css';
+import '../stylesheets/Login.css';
 
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 var UserNavBar = require('./components/NavBar.js').UserNavBar;
@@ -44,6 +45,11 @@ class Login extends Component {
       return (
         <div className="Login">
           <PublicNavBar/>
+          <Row>
+            <Col md={12} className="LoginHeader">
+              LOGIN
+            </Col>
+          </Row>
           <Form horizontal className="loginForm">
             <FormGroup controlId="formHorizontalEmail">
               <Col componentClass={ControlLabel} sm={4}>
