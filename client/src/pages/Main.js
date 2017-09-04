@@ -6,6 +6,7 @@ import tokyo from '../img/tokyo.png';
 import florence from '../img/florence.png';
 
 import '../stylesheets/Main.css';
+import LoginControl from './components/LoginControl.js';
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
