@@ -7,7 +7,7 @@ class Test extends Component {
   addNewUser(e) {
     e.preventDefault();
     var user = {
-      email:'reduxtest@gmail.com',
+      email:'reduxtest4@gmail.com',
       password: 'fakepass',
       firstName: 'Redux',
       lastName: 'Test',
