@@ -47,7 +47,7 @@ var UserSchema = new mongoose.Schema({
     state: {type: String, minLength: 2, maxLength: 2},
     zip: {type: Number}
   },
-  picture: {type: String}
+  avatar: { data: Buffer, contentType: String }
 });
 
 

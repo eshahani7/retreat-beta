@@ -54,6 +54,11 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <PublicNavBar/>
+        <Row>
+          <Col md={12} className="SignUpHeader">
+            JOIN RETREAT!
+          </Col>
+        </Row>
         <Form horizontal className="signUpForm">
           <FormGroup controlId="formEmail">
             <Col componentClass={ControlLabel} sm={4}>
@@ -147,8 +152,8 @@ class SignUp extends Component {
 
           <FormGroup>
             <Col smOffset={4} sm={4}>
-              <Button type="submit" onClick={this.submitDetails.bind(this)} block>
-                Sign Up
+              <Button type="submit" id="SignUpButton" onClick={this.submitDetails.bind(this)} block>
+                SIGN UP
               </Button>
             </Col>
           </FormGroup>
