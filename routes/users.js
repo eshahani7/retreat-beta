@@ -8,6 +8,7 @@ var {User} = require('../db/models/user');
 var {authenticate} = require('./middleware/authenticate');
 
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // POST /users (add new user)
 router.post('/', (req, res) => {
