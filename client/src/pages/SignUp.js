@@ -52,6 +52,11 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <PublicNavBar/>
+        <Row>
+          <Col md={12} className="SignUpHeader">
+            JOIN RETREAT!
+          </Col>
+        </Row>
         <Form horizontal className="signUpForm">
           <FormField
             title="Email"
