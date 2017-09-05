@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-grid-system';
+import { FormGroup, Form, FormControl, ControlLabel, Col } from 'react-bootstrap';
 
 class FormField extends Component {
   render() {
     return(
-      <label>
-        {this.props.label}
-        <input type={this.props.type} name={this.props.name} value={this.props.default} onChange={this.props.changeFunction}/>
-      </label>
+      <FormGroup controlId="SignUpForm">
+        <Col componentClass={ControlLabel} sm={4}>
+          {this.props.title}
+        </Col>
+        <Col sm={4}>
+          <FormControl
+            type={this.props.type}
+            placeholder= {this.props.holder}
+            name={this.props.name}
+            onChange={this.props.change}
+            />
+        </Col>
+      </FormGroup>
     );
   }
 }
