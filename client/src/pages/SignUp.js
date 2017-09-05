@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
 import '../stylesheets/form.css';
 import '../stylesheets/SignUp.css';
-import FormField from './components/FormField.js';
 
+import FormField from './components/FormField.js';
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
