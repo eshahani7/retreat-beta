@@ -46,8 +46,8 @@ class Login extends Component {
         <div className="Login">
           <PublicNavBar/>
           <Row>
-            <Col md={12} className="LoginHeader">
-              LOGIN
+            <Col md={12} id="LoginHeader">
+              WELCOME BACK!
             </Col>
           </Row>
           <Form horizontal className="loginForm">
@@ -83,8 +83,8 @@ class Login extends Component {
 
             <FormGroup>
               <Col smOffset={4} sm={4}>
-                <Button type="submit" onClick={this.enterCreds.bind(this)} block>
-                  Sign in
+                <Button type="submit" id="LoginButton" onClick={this.enterCreds.bind(this)} block>
+                  LOG IN
                 </Button>
               </Col>
             </FormGroup>

@@ -5,6 +5,8 @@
 
 .link {
   color: black;
+  font-family: futura;
+  font-weight: 400;
 }
 
 .link:hover {

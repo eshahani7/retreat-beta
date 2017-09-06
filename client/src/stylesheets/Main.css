@@ -9,13 +9,14 @@
 
 .Main-header {
   background-color: #222;
+  font-family: futura;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
 .Main-intro {
-  font-family: Lato;
+  font-family: futura;
   font-weight: 700;
   font-size: 36px;
   padding-bottom: 40px;
@@ -30,7 +31,7 @@
     width: 100%;
     top: 15px;
     text-align: center;
-    font-family: Lato;
+    font-family: futura;
     font-weight: 700;
     font-size: 36px;
     color: white;

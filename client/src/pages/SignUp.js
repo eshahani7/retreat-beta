@@ -53,7 +53,7 @@ class SignUp extends Component {
       <div className="SignUp">
         <PublicNavBar/>
         <Row>
-          <Col md={12} className="SignUpHeader">
+          <Col md={12} id="SignUpHeader">
             JOIN RETREAT!
           </Col>
         </Row>
@@ -101,7 +101,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
 
-          <SubmitBtn title="SignUp" submit={this.addNewUser.bind(this)}/>
+          <SubmitBtn title="SIGN UP" id="SignUpButton" submit={this.addNewUser.bind(this)}/>
         </Form>
       </div>
     );
