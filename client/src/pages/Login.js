@@ -38,29 +38,6 @@ class Login extends Component {
     });
   }
 
-  enterCreds(e) {
-    e.preventDefault();
-    fetch('/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    }).then((res) => {
-      sessionStorage.setItem('authToken', res.headers.get('x-auth'));
-    }).catch((e) => {
-      console.log(e);
-    });
-
-    this.setState({
-      email: '',
-      password: ''
-    });
-  }
-
   render() {
       return (
         <div className="Login">
