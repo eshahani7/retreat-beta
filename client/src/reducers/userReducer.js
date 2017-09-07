@@ -1,10 +1,11 @@
 export default function reducer (state = {
-  user: {},
+  // user: {},
   adding: false,
   added: false,
   fetching: false,
   fetched: false,
-  isLoggedIn: false,
+  loggedIn: false,
+  loggingIn: false,
   error: null
 }, action) {
   switch(action.type) {
@@ -24,7 +25,7 @@ export default function reducer (state = {
         adding:false,
         added:true,
         loggedIn: true,
-        user:action.payload
+        // user:action.payload
       };
       break;
     }
@@ -43,11 +44,11 @@ export default function reducer (state = {
       return {...state,
         loggingIn:false,
         loggedIn:true,
-        user:action.payload
+        // user:action.payload
       }
     }
     default: {
-      return { ...state };
+      return state;
     }
   }
 }
