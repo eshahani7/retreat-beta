@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Button, FormGroup, Form, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import '../stylesheets/form.css';
 import '../stylesheets/Login.css';
 
@@ -10,8 +10,7 @@ import { loginUser } from '../actions/userActions.js';
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
 
-var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
-var UserNavBar = require('./components/NavBar.js').UserNavBar;
+import LoginControl from './components/LoginControl.js';
 
 class Login extends Component {
   state = {email:'', password:''};
@@ -31,17 +30,12 @@ class Login extends Component {
       password: this.state.password,
     };
     this.props.dispatch(loginUser(user));
-    //REMOVE LATER, SHOULD JUST REDIRECT TO NEW PAGE
-    this.setState({
-      email: '',
-      password: ''
-    });
   }
 
   render() {
       return (
         <div className="Login">
-          <PublicNavBar/>
+         <LoginControl/>
           <Row>
             <Col md={12} className="LoginHeader">
               LOGIN

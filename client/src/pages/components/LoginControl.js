@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 var PublicNavBar = require('./NavBar.js').PublicNavBar;
 var UserNavBar = require('./NavBar.js').UserNavBar;
 
-class LoginControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.setState({isLoggedIn: false});
+const mapStateToProps = function(state){
+  return {
+    loggedIn: state.user.loggedIn,
   }
+}
 
+class LoginControl extends React.Component {
+  componentDidMount() {
+    console.log(this.props.loggedIn);
+  }
   render() {
-    const loggedIn = this.state.isLoggedIn;
     let navbar = null;
 
-    if(loggedIn) {
+    if(this.props.loggedIn) {
       navbar = <UserNavBar/>
     } else {
       navbar = <PublicNavBar/>
@@ -26,4 +31,4 @@ class LoginControl extends React.Component {
   }
 }
 
-export default LoginControl;
+export default connect(mapStateToProps)(LoginControl);

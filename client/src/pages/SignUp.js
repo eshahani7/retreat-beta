@@ -9,8 +9,8 @@ import '../stylesheets/SignUp.css';
 
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
+
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
-var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
 class SignUp extends Component {
 
