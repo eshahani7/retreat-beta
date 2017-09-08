@@ -37,8 +37,8 @@ class Login extends Component {
         <div className="Login">
          <LoginControl/>
           <Row>
-            <Col md={12} className="LoginHeader">
-              LOGIN
+            <Col md={12} id="LoginHeader">
+              WELCOME BACK!
             </Col>
           </Row>
 
@@ -57,8 +57,7 @@ class Login extends Component {
               name="password"
               change={this.handleChange.bind(this)}
             />
-
-            <SubmitBtn title="Log In" submit={this.loginUser.bind(this)}/>
+            <SubmitBtn title="Log In" id="LoginButton" submit={this.loginUser.bind(this)}/>
           </Form>
 
           <Link to="/viewuser">View User</Link>

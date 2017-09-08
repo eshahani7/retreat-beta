@@ -6,7 +6,7 @@ class SubmitBtn extends Component {
     return(
       <FormGroup>
         <Col smOffset={4} sm={4}>
-          <Button type="submit" onClick={this.props.submit} block>
+          <Button type="submit" id={this.props.id} onClick={this.props.submit} block>
             {this.props.title}
           </Button>
         </Col>

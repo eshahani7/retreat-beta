@@ -20,6 +20,33 @@ body{
   color: white;
 }
 
-.LoginHeader{
+#LoginHeader{
   text-align: center;
+  font-size: 36px;
+  font-family: futura;
+  letter-spacing: 5px;
+  color: white;
+}
+
+#LoginButton:hover {
+    background-color: white;
+    border: 2px solid white;
+    color: black;
+}
+
+#LoginButton:active {
+    transform: translateY(4px);
+}
+
+#LoginButton{
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  background: transparent;
+  padding: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
+  color: white;
+  border: 2px solid white;
+  letter-spacing: 5px;
 }

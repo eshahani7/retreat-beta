@@ -10,8 +10,11 @@ body{
   height: 100%;
 }
 
-.SignUpHeader{
+#SignUpHeader{
   text-align: center;
+  font-size: 35px;
+  letter-spacing: 5px;
+  font-family: futura;
   color: white;
 }
 
@@ -25,6 +28,7 @@ body{
     background-color: orange;
     border: 2px solid orange;
     color: black;
+    text-shadow: none;
 }
 
 #SignUpButton:active {
