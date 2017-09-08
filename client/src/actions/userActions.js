@@ -10,7 +10,7 @@ export function addUser(user) {
     }).then((res) => {
       if(res.ok) {
         sessionStorage.setItem('authToken', res.headers.get('x-auth'));
-        dispatch({type: 'ADD_USER_FULFILLED'});
+        dispatch({type: 'ADD_USER_FULFILLED', payload: user});
       }
       else  {
         return Promise.reject({status: res.status});
@@ -34,7 +34,7 @@ export function loginUser(user) {
     }).then((res) => {
       if(res.ok) {
         sessionStorage.setItem('authToken', res.headers.get('x-auth'));
-        dispatch({type: 'LOGIN_USER_FULFILLED'});
+        dispatch({type: 'LOGIN_USER_FULFILLED', payload: user});
       }
       else {
         return Promise.reject({status: res.status});
