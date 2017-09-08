@@ -4,6 +4,12 @@ import { Button, FormGroup, Form, FormControl, ControlLabel, Row, Col } from 're
 import '../stylesheets/form.css';
 import '../stylesheets/Login.css';
 
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userActions.js';
+
+import FormField from './components/FormField.js';
+import SubmitBtn from './components/SubmitBtn.js';
+
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 var UserNavBar = require('./components/NavBar.js').UserNavBar;
 
@@ -18,23 +24,14 @@ class Login extends Component {
     });
   }
 
-  enterCreds(e) {
+  loginUser(e) {
     e.preventDefault();
-    fetch('/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    }).then((res) => {
-      sessionStorage.setItem('authToken', res.headers.get('x-auth'));
-    }).catch((e) => {
-      console.log(e);
-    });
-
+    var user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.dispatch(loginUser(user));
+    //REMOVE LATER, SHOULD JUST REDIRECT TO NEW PAGE
     this.setState({
       email: '',
       password: ''
@@ -50,44 +47,23 @@ class Login extends Component {
               WELCOME BACK!
             </Col>
           </Row>
+
           <Form horizontal className="loginForm">
-            <FormGroup controlId="formHorizontalEmail">
-              <Col componentClass={ControlLabel} sm={4}>
-                Email
-              </Col>
-              <Col sm={4}>
-                <FormControl
-                  type="email"
-                  placeholder="janedoe@gmail.com"
-                  value={this.state.email}
-                  name="email"
-                  onChange={this.handleChange.bind(this)}
-                   />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalPassword">
-              <Col componentClass={ControlLabel} sm={4}>
-                Password
-              </Col>
-              <Col sm={4}>
-                <FormControl
-                  type="password"
-                  placeholder="password"
-                  value={this.state.password}
-                  name="password"
-                  onChange={this.handleChange.bind(this)}
-                  />
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col smOffset={4} sm={4}>
-                <Button type="submit" id="LoginButton" onClick={this.enterCreds.bind(this)} block>
-                  LOG IN
-                </Button>
-              </Col>
-            </FormGroup>
+            <FormField
+              title="Email"
+              type="text"
+              holder="janedoe@gmail.com"
+              name="email"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              title="Password"
+              type="password"
+              holder="password"
+              name="password"
+              change={this.handleChange.bind(this)}
+            />
+            <SubmitBtn title="Log In" id="LoginButton" submit={this.loginUser.bind(this)}/>
           </Form>
 
           <Link to="/viewuser">View User</Link>
@@ -96,4 +72,4 @@ class Login extends Component {
     }
   }
 
-  export default Login;
+  export default connect()(Login);
