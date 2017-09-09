@@ -59,6 +59,7 @@ class SignUp extends Component {
         </Row>
         <Form horizontal className="signUpForm">
           <FormField
+            className= "signUpField"
             title="Email"
             type="text"
             holder="janedoe@gmail.com"
@@ -66,6 +67,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className= "signUpField"
             title="Password"
             type="password"
             holder="password"
@@ -73,6 +75,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className= "signUpField"
             title="First Name"
             type="text"
             holder="Jane"
@@ -80,6 +83,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className= "signUpField"
             title="Last Name"
             type="text"
             holder="Doe"
@@ -87,6 +91,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className= "signUpField"
             title="Age"
             type="number"
             holder="21"
@@ -94,6 +99,7 @@ class SignUp extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className= "signUpField"
             title="Gender"
             type="text"
             holder="F"

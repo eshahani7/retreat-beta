@@ -57,7 +57,7 @@ class Login extends Component {
               name="password"
               change={this.handleChange.bind(this)}
             />
-            <SubmitBtn title="Log In" id="LoginButton" submit={this.loginUser.bind(this)}/>
+            <SubmitBtn title="LOG IN" id="LoginButton" submit={this.loginUser.bind(this)}/>
           </Form>
 
           <Link to="/viewuser">View User</Link>
