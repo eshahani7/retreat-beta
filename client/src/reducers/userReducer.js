@@ -6,6 +6,8 @@ export default function reducer (state = {
   fetched: false,
   loggedIn: false,
   loggingIn: false,
+  updating: false,
+  updated: false,
   error: null
 }, action) {
   switch(action.type) {
@@ -46,17 +48,20 @@ export default function reducer (state = {
         loggedIn:true,
         userDetails:action.payload
       };
+      break;
     }
     case 'FETCH_USER': {
       return {...state,
         fetching: true,
       };
+      break;
     }
     case 'FETCH_USER_REJECTED': {
       return {...state,
         fetching: false,
         error: action.payload
       };
+      break;
     }
     case 'FETCH_USER_FULFILLED': {
       return {...state,
@@ -64,6 +69,16 @@ export default function reducer (state = {
         fetched:true,
         userDetails:action.payload
       };
+      break;
+    }
+    case 'UPDATE_USER': {
+      break;
+    }
+    case 'UPDATE_USER_REJECTED': {
+      break;
+    }
+    case 'UPDATE_USER_FULFILLED': {
+      break;
     }
     default: {
       return state;
