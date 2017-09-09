@@ -75,14 +75,15 @@ class ViewUser extends Component {
         </Row>
         <Form horizontal className="ViewUserForm">
           <FormField
+            className = "ViewUserField"
             title="Email"
-            class = "ViewUserField"
             type="text"
             holder={this.state.email}
             name="email"
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className = "ViewUserField"
             title="First Name"
             type="text"
             holder={this.state.firstName}
@@ -90,6 +91,7 @@ class ViewUser extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className = "ViewUserField"
             title="Last Name"
             type="text"
             holder={this.state.lastName}
@@ -97,6 +99,7 @@ class ViewUser extends Component {
             change={this.handleChange.bind(this)}
           />
           <FormField
+            className = "ViewUserField"
             title="Age"
             type="number"
             holder={this.state.age}

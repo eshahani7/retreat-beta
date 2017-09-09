@@ -17,4 +17,6 @@
 .header-text {
   color: black;
   text-align: center;
+  font-family: Montserrat;
+  letter-spacing: 3px;
 }
