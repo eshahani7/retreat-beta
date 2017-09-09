@@ -65,7 +65,7 @@ class UserNavBar extends Component {
               <NavLink target="/" name="My Pools"/>
             </NavItem>
             <NavItem eventKey={2} href="#">
-              <NavLink target="/" name="My Profile"/>
+              <NavLink target="/ViewUser" name="My Profile"/>
             </NavItem>
           </Nav>
         </Navbar.Collapse>
