@@ -72,12 +72,24 @@ export default function reducer (state = {
       break;
     }
     case 'UPDATE_USER': {
+      return {...state,
+        updating: true,
+      };
       break;
     }
     case 'UPDATE_USER_REJECTED': {
+      return {...state,
+        updating: false,
+        error: action.payload
+      };
       break;
     }
     case 'UPDATE_USER_FULFILLED': {
+      return {...state,
+        updating: false,
+        updated: true,
+        userDetails: action.payload
+      };
       break;
     }
     default: {
