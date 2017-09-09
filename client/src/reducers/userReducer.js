@@ -1,5 +1,5 @@
 export default function reducer (state = {
-  // user: {},
+  userDetails: {},
   adding: false,
   added: false,
   fetching: false,
@@ -25,7 +25,7 @@ export default function reducer (state = {
         adding:false,
         added:true,
         loggedIn: true,
-        // user:action.payload
+        userDetails:action.payload
       };
       break;
     }
@@ -38,14 +38,32 @@ export default function reducer (state = {
       return {...state,
         loggingIn: false,
         error: action.payload
-      }
+      };
     }
     case 'LOGIN_USER_FULFILLED': {
       return {...state,
         loggingIn:false,
         loggedIn:true,
-        // user:action.payload
-      }
+        userDetails:action.payload
+      };
+    }
+    case 'FETCH_USER' {
+      return {...state,
+        fetching: true,
+      };
+    }
+    case 'FETCH_USER_REJECTED' {
+      return {...state,
+        fetching: false,
+        error: action.payload
+      };
+    }
+    case 'FETCH_USER_FULFILLED': {
+      return {...state,
+        fetching:false,
+        fetched:true,
+        userDetails:action.payload
+      };
     }
     default: {
       return state;
