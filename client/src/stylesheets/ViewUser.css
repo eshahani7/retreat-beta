@@ -1,0 +1,22 @@
+.ViewUser{
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  color: black;
+}
+
+#ViewUserHeader{
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: 5px;
+  font-family: futura;
+  color: white;
+}
+
+.ViewUserField{
+  color: white;
+}
+
+#updateButton{
+  
+}

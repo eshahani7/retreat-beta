@@ -3,12 +3,14 @@ import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 're
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
+import '../stylesheets/ViewUser.css';
+
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
 
 import { viewUser } from '../actions/userActions.js';
 
-var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
+import LoginControl from './components/LoginControl.js';
 
 class ViewUser extends Component {
   state = {_id:'', email: '', password:'', firstName:'', lastName:'', age:0};
@@ -65,7 +67,7 @@ class ViewUser extends Component {
   render() {
     return (
       <div className="ViewUser">
-        <PublicNavBar/>
+        <LoginControl/>
         <Row>
           <Col md={12} id="ViewUserHeader">
             YOUR PROFILE
@@ -74,6 +76,7 @@ class ViewUser extends Component {
         <Form horizontal className="ViewUserForm">
           <FormField
             title="Email"
+            class = "ViewUserField"
             type="text"
             holder={this.state.email}
             name="email"
