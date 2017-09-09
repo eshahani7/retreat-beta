@@ -12,30 +12,27 @@ import { viewUser } from '../actions/userActions.js';
 
 import LoginControl from './components/LoginControl.js';
 
+const mapStateToProps = (state) => {
+    return({
+      email: state.user.userDetails.email,
+      firstName: state.user.userDetails.firstName,
+      lastName: state.user.userDetails.lastName,
+      age: state.user.userDetails.age
+    });
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    viewUser: () => {dispatch(viewUser());},
+    //add fetchUser map here
+  }
+};
+
 class ViewUser extends Component {
   state = {_id:'', email: '', password:'', firstName:'', lastName:'', age:0};
 
   componentWillMount() {
-    var token = sessionStorage.getItem('authToken');
-    var userHeader = new Headers();
-    userHeader.append('x-auth', token);
-
-    fetch('/users/me', {
-      method: 'GET',
-      headers: userHeader
-    }).then((res) => {
-      return res.json();
-    }).then((body) => {
-      this.setState({
-        _id: body._id,
-        email: body.email,
-        firstName: body.firstName,
-        lastName: body.lastName,
-        age: body.age
-      });
-    }).catch((e) => {
-      console.log(e);
-    });
+    this.props.viewUser();
   }
 
   handleChange(e) {
@@ -78,7 +75,7 @@ class ViewUser extends Component {
             className = "ViewUserField"
             title="Email"
             type="text"
-            holder={this.state.email}
+            holder={this.props.email}
             name="email"
             change={this.handleChange.bind(this)}
           />
@@ -86,7 +83,7 @@ class ViewUser extends Component {
             className = "ViewUserField"
             title="First Name"
             type="text"
-            holder={this.state.firstName}
+            holder={this.props.firstName}
             name="firstName"
             change={this.handleChange.bind(this)}
           />
@@ -94,7 +91,7 @@ class ViewUser extends Component {
             className = "ViewUserField"
             title="Last Name"
             type="text"
-            holder={this.state.lastName}
+            holder={this.props.lastName}
             name="lastName"
             change={this.handleChange.bind(this)}
           />
@@ -102,7 +99,7 @@ class ViewUser extends Component {
             className = "ViewUserField"
             title="Age"
             type="number"
-            holder={this.state.age}
+            holder={this.props.age}
             name="age"
             change={this.handleChange.bind(this)}
           />
@@ -114,4 +111,4 @@ class ViewUser extends Component {
   }
 }
 
-export default ViewUser;
+export default connect(mapStateToProps, mapDispatchToProps)(ViewUser);

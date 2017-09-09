@@ -46,7 +46,7 @@ export function loginUser(user) {
   }
 }
 
-export function viewUser(user) {
+export function viewUser() {
   return function(dispatch) {
     dispatch({type: 'FETCH_USER'});
 
@@ -65,7 +65,12 @@ export function viewUser(user) {
         return Promise.reject({status: res.status});
       }
     }).then((body) => {
-      dispatch({type:'FETCH_USER_FULFILLED', payload: {email: body.email, firstName: body.firstName, lastName: body.lastName, age: body.age}})
+      dispatch({type:'FETCH_USER_FULFILLED', payload: {
+        email: body.email,
+        firstName: body.firstName,
+        lastName: body.lastName,
+        age: body.age}
+      })
     }).catch((e) => {
       dispatch({type:'FETCH_USER_REJECTED', payload:e});
       console.log(e);
