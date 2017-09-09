@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+
 import FormField from './components/FormField.js';
+import SubmitBtn from './components/SubmitBtn.js';
+
+import { viewUser } from '../actions/userActions.js';
+
+var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 
 class ViewUser extends Component {
   state = {_id:'', email: '', password:'', firstName:'', lastName:'', age:0};
@@ -59,39 +65,44 @@ class ViewUser extends Component {
   render() {
     return (
       <div className="ViewUser">
-        <form>
-          <Row>
-            <Col md= {4}>
-              <FormField label="Email: " name="email" type="text" placeholder={this.state.email}
-                default={this.state.email} changeFunction={this.handleChange.bind(this)}/>
-            </Col>
-            <Col md={4}>
-              <FormField label="Password: " name="password" type="password"
-                changeFunction={this.handleChange.bind(this)}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col md= {4}>
-              <FormField label="First name: " name="firstName" type="text" placeholder={this.state.firstName}
-                default={this.state.firstName} changeFunction={this.handleChange.bind(this)}/>
-            </Col>
-            <Col md={4}>
-              <FormField label="Last name: " name="lastName" type="text" placeholder={this.state.lastName}
-                default={this.state.lastName} changeFunction={this.handleChange.bind(this)}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={4}>
-                <FormField label="Age: " name="age" type="number" placeholder={this.state.age}
-                  default={this.state.age} changeFunction={this.handleChange.bind(this)}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <input type="submit" value="UPDATE" onClick={this.saveChange.bind(this)}/>
-            </Col>
-          </Row>
-        </form>
+        <PublicNavBar/>
+        <Row>
+          <Col md={12} id="ViewUserHeader">
+            YOUR PROFILE
+          </Col>
+        </Row>
+        <Form horizontal className="ViewUserForm">
+          <FormField
+            title="Email"
+            type="text"
+            holder={this.state.email}
+            name="email"
+            change={this.handleChange.bind(this)}
+          />
+          <FormField
+            title="First Name"
+            type="text"
+            holder={this.state.firstName}
+            name="firstName"
+            change={this.handleChange.bind(this)}
+          />
+          <FormField
+            title="Last Name"
+            type="text"
+            holder={this.state.lastName}
+            name="lastName"
+            change={this.handleChange.bind(this)}
+          />
+          <FormField
+            title="Age"
+            type="number"
+            holder={this.state.age}
+            name="age"
+            change={this.handleChange.bind(this)}
+          />
+
+          <SubmitBtn title="UPDATE" id="updateButton" submit={this.saveChange.bind(this)}/>
+        </Form>
       </div>
     );
   }
