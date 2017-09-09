@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import { Button, FormGroup, Form, FormControl, ControlLabel, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-
-import { addUser } from '../actions/userActions.js';
-
-import '../stylesheets/form.css';
-import '../stylesheets/SignUp.css';
-
 import FormField from './components/FormField.js';
-import SubmitBtn from './components/SubmitBtn.js';
-
-var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
 
 class ViewUser extends Component {
   state = {_id:'', email: '', password:'', firstName:'', lastName:'', age:0};
@@ -39,61 +30,68 @@ class ViewUser extends Component {
     });
   }
 
+  handleChange(e) {
+    const target = e.target;
+    const name = target.name;
+    this.setState({
+      [name]: target.value
+    });
+  }
+
+  saveChange(e) {
+    e.preventDefault();
+    fetch('/users/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json',
+        'x-auth': sessionStorage.getItem('authToken')
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        age: this.state.age
+      })
+    });
+  }
+
   render() {
     return (
       <div className="ViewUser">
-        <PublicNavBar/>
-        <Row>
-          <Col md={12} id="ViewUserHeader">
-            JOIN RETREAT!
-          </Col>
-        </Row>
-        <Form horizontal className="ViewUserForm">
-          <FormField
-            title="Email"
-            type="text"
-            holder="janedoe@gmail.com"
-            name="email"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            title="Password"
-            type="password"
-            holder="password"
-            name="password"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            title="First Name"
-            type="text"
-            holder="Jane"
-            name="firstName"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            title="Last Name"
-            type="text"
-            holder="Doe"
-            name="lastName"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            title="Age"
-            type="number"
-            holder="21"
-            name="age"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            title="Gender"
-            type="text"
-            holder="F"
-            name="gender"
-            change={this.handleChange.bind(this)}
-          />
-
-          <SubmitBtn title="UPDATE" id="UpdateUserButton" submit={this.addNewUser.bind(this)}/>
-        </Form>
+        <form>
+          <Row>
+            <Col md= {4}>
+              <FormField label="Email: " name="email" type="text" placeholder={this.state.email}
+                default={this.state.email} changeFunction={this.handleChange.bind(this)}/>
+            </Col>
+            <Col md={4}>
+              <FormField label="Password: " name="password" type="password"
+                changeFunction={this.handleChange.bind(this)}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md= {4}>
+              <FormField label="First name: " name="firstName" type="text" placeholder={this.state.firstName}
+                default={this.state.firstName} changeFunction={this.handleChange.bind(this)}/>
+            </Col>
+            <Col md={4}>
+              <FormField label="Last name: " name="lastName" type="text" placeholder={this.state.lastName}
+                default={this.state.lastName} changeFunction={this.handleChange.bind(this)}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
+                <FormField label="Age: " name="age" type="number" placeholder={this.state.age}
+                  default={this.state.age} changeFunction={this.handleChange.bind(this)}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <input type="submit" value="UPDATE" onClick={this.saveChange.bind(this)}/>
+            </Col>
+          </Row>
+        </form>
       </div>
     );
   }

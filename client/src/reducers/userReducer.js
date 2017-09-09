@@ -47,12 +47,12 @@ export default function reducer (state = {
         userDetails:action.payload
       };
     }
-    case 'FETCH_USER' {
+    case 'FETCH_USER': {
       return {...state,
         fetching: true,
       };
     }
-    case 'FETCH_USER_REJECTED' {
+    case 'FETCH_USER_REJECTED': {
       return {...state,
         fetching: false,
         error: action.payload
