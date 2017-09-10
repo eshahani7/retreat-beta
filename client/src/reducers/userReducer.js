@@ -6,6 +6,7 @@ export default function reducer (state = {
   fetched: false,
   loggedIn: false,
   loggingIn: false,
+  loggingOut: false,
   updating: false,
   updated: false,
   error: null
@@ -43,6 +44,24 @@ export default function reducer (state = {
       return {...state,
         loggingIn:false,
         loggedIn:true,
+        userDetails:action.payload
+      };
+    }
+    case 'LOGOUT_USER': {
+      return {...state,
+        loggingOut: true
+      };
+    }
+    case 'LOGOUT_USER_REJECTED': {
+      return {...state,
+        loggingOut: false,
+        error: action.payload
+      };
+    }
+    case 'LOGOUT_USER_FULFILLED': {
+      return {...state,
+        loggingOut:false,
+        loggedIn:false,
         userDetails:action.payload
       };
     }

@@ -77,3 +77,26 @@ export function viewUser() {
       });
   }
 }
+
+export function logoutUser() {
+  var token = sessionStorage.getItem('authToken');
+  var userHeader = new Headers();
+  userHeader.append('x-auth', token);
+
+  return function(dispatch) {
+    dispatch({type:'LOGOUT_USER'});
+    fetch('/users/me/token', {
+      method: 'DELETE',
+      headers: userHeader
+    }).then((res) => {
+      if(res.ok) {
+        dispatch({type:'LOGOUT_USER_FULFILLED'});
+      }
+      else {
+        return Promise.reject({status: res.status});
+      }
+    }).catch((e) => {
+      dispatch({type:'LOGOUT_USER_REJECTED', payload:e});
+    });
+  }
+}
