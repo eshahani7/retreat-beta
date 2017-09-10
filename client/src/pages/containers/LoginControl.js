@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { logoutUser } from '../../actions/userActions.js'
 
-var PublicNavBar = require('./NavBar.js').PublicNavBar;
-var UserNavBar = require('./NavBar.js').UserNavBar;
+var PublicNavBar = require('../components/NavBar.js').PublicNavBar;
+var UserNavBar = require('../components/NavBar.js').UserNavBar;
 
 const mapStateToProps = (state ) => {
   return {
