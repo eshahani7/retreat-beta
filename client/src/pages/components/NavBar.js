@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
+import { Navbar, NavItem, NavDropdown, MenuItem, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
 import NavLink from './Link.js';
@@ -66,6 +66,9 @@ class UserNavBar extends Component {
             </NavItem>
             <NavItem eventKey={2} href="#">
               <NavLink target="/ViewUser" name="My Profile"/>
+            </NavItem>
+            <NavItem eventKey={3} href="#" onSelect={this.props.logout}>
+              Logout
             </NavItem>
           </Nav>
         </Navbar.Collapse>
