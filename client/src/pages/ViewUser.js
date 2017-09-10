@@ -10,7 +10,7 @@ import SubmitBtn from './components/SubmitBtn.js';
 
 import { viewUser } from '../actions/userActions.js';
 
-import LoginControl from './containers/LoginControl.js';
+import LoginControl from './components/LoginControl.js';
 
 const mapStateToProps = (state) => {
     return({

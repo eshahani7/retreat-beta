@@ -6,7 +6,7 @@ import tokyo from '../img/tokyo.png';
 import florence from '../img/florence.png';
 
 import '../stylesheets/Main.css';
-import LoginControl from './containers/LoginControl.js';
+import LoginControl from './components/LoginControl.js';
 
 class Main extends Component {
   render() {

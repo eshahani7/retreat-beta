@@ -10,7 +10,7 @@ import { loginUser } from '../actions/userActions.js';
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
 
-import LoginControl from './containers/LoginControl.js';
+import LoginControl from './components/LoginControl.js';
 
 class Login extends Component {
   state = {email:'', password:''};
