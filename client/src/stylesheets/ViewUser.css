@@ -1,7 +1,7 @@
 .ViewUser{
   width: 100%;
   height: 100%;
-  background-color: #8A2BE2;
+  background-color: lightgray;
   color: black;
 }
 
@@ -10,13 +10,14 @@
   font-size: 35px;
   letter-spacing: 5px;
   font-family: futura;
-  color: white;
+  color: black;
   padding-bottom: 2.5%;
 }
 
 .ViewUserField{
     font-family: Lato;
-    color: white !important;
+    color: black !important;
+    background-color: transparent !important;
 }
 
 .ViewUserField::placeholder{
@@ -37,7 +38,7 @@
 
 #updateButton{
   display: block;
-  color: white;
+  color: black;
   background-color: transparent;
   border-color: orange;
   display: inline-block;
