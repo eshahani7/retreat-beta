@@ -13,14 +13,12 @@ export default function reducer (state = {
   switch(action.type) {
     case 'ADD_USER': {
       return {...state, adding:true};
-      break;
     }
     case 'ADD_USER_REJECTED': {
       return {...state,
         adding:false,
         error:action.payload
       };
-      break;
     }
     case 'ADD_USER_FULFILLED': {
       return {...state,
@@ -29,7 +27,6 @@ export default function reducer (state = {
         loggedIn: true,
         userDetails:action.payload
       };
-      break;
     }
     case 'LOGIN_USER': {
       return {...state,
@@ -48,20 +45,17 @@ export default function reducer (state = {
         loggedIn:true,
         userDetails:action.payload
       };
-      break;
     }
     case 'FETCH_USER': {
       return {...state,
         fetching: true,
       };
-      break;
     }
     case 'FETCH_USER_REJECTED': {
       return {...state,
         fetching: false,
         error: action.payload
       };
-      break;
     }
     case 'FETCH_USER_FULFILLED': {
       return {...state,
@@ -69,20 +63,17 @@ export default function reducer (state = {
         fetched:true,
         userDetails:action.payload
       };
-      break;
     }
     case 'UPDATE_USER': {
       return {...state,
         updating: true,
       };
-      break;
     }
     case 'UPDATE_USER_REJECTED': {
       return {...state,
         updating: false,
         error: action.payload
       };
-      break;
     }
     case 'UPDATE_USER_FULFILLED': {
       return {...state,
@@ -90,7 +81,6 @@ export default function reducer (state = {
         updated: true,
         userDetails: action.payload
       };
-      break;
     }
     default: {
       return state;
