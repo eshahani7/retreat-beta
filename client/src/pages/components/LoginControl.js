@@ -19,9 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class LoginControl extends React.Component {
-  componentDidMount() {
-    console.log(this.props.loggedIn);
-  }
   render() {
     let navbar = null;
 

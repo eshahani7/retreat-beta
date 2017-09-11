@@ -37,7 +37,7 @@ class QueryBox extends Component {
             <Col componentClass={ControlLabel} sm={2}>
               Dates
             </Col>
-            <Col sm={4}>
+            <Col sm={6}>
               <DatePicker name="startDate" selected={this.state.startDate}
                 onChange={this.handleChangeStart.bind(this)}/>
               to
@@ -50,7 +50,7 @@ class QueryBox extends Component {
             <Col componentClass={ControlLabel} sm={2}>
               Gender
             </Col>
-            <Col sm={4}>
+            <Col sm={6}>
               <FormControl componentClass="select" placeholder="select">
                 <option value="other">N/A</option>
                 <option value="M">M</option>
@@ -63,7 +63,7 @@ class QueryBox extends Component {
             <Col componentClass={ControlLabel} sm={2}>
               Themes
             </Col>
-            <Col sm={4}>
+            <Col sm={6}>
               <FormControl componentClass="select">
                 <option value="other">N/A</option>
                 <option value="M">Adventure</option>
@@ -73,7 +73,7 @@ class QueryBox extends Component {
           </FormGroup>
 
           <FormGroup>
-            <Col smOffset={2} sm={4}>
+            <Col smOffset={2} sm={6}>
               <Button type="submit">
                 Search
               </Button>
