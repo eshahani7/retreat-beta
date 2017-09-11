@@ -1,5 +1,6 @@
 export default function reducer (state = {
-  poolsList: [],
+  initLocation: null,
+  poolList: [],
   fetching: false,
   fetched: false,
   error: null
@@ -20,7 +21,12 @@ export default function reducer (state = {
       return {...state,
         fetching: false,
         fetched: true,
-        poolsList: action.payload
+        poolList: action.payload
+      };
+    }
+    case 'SET_INIT_LOCATION': {
+      return {...state,
+        initLocation: action.payload
       };
     }
     default: {
