@@ -35,7 +35,7 @@ class PoolListContainer extends Component {
         <LoginControl/>
         <Row>
           <Col sm={3}>
-            Location
+            {this.props.initLocation}
           </Col>
           <Col sm={9}>
             Create Pool
@@ -43,7 +43,8 @@ class PoolListContainer extends Component {
         </Row>
         <Row>
           <Col sm={3}>
-            <QueryBox/>
+            <QueryBox search={(query) => {this.props.fetchPools(query)}}
+              location={this.props.initLocation}/>
           </Col>
         </Row>
       </div>

@@ -9,7 +9,7 @@ import '../../stylesheets/form.css';
 import '../../stylesheets/querybox.css';
 
 class QueryBox extends Component {
-  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), minPeople:3, maxPeople:5};
+  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), gender:'F', theme:''};
 
   handleChangeStart(date) {
    this.setState({
@@ -27,6 +27,17 @@ class QueryBox extends Component {
     this.setState({
       [name]: target.value
     });
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    var query = {
+      location: this.props.location,
+      gender: this.state.gender,
+      theme: this.state.theme
+    }
+    Object.keys(query).forEach(key => query[key] === '' ? delete query[key] : '');
+    console.log(query);
+    this.props.search(query);
   }
 
   render() {
@@ -51,10 +62,11 @@ class QueryBox extends Component {
               Gender
             </Col>
             <Col sm={6}>
-              <FormControl componentClass="select" placeholder="select">
-                <option value="other">N/A</option>
-                <option value="M">M</option>
-                <option value="F">F</option>
+              <FormControl componentClass="select"
+                onChange={this.handleChange.bind(this)}>
+                  <option value="other">N/A</option>
+                  <option value="M">M</option>
+                  <option value="F">F</option>
               </FormControl>
             </Col>
           </FormGroup>
@@ -64,7 +76,8 @@ class QueryBox extends Component {
               Themes
             </Col>
             <Col sm={6}>
-              <FormControl componentClass="select">
+              <FormControl componentClass="select"
+                onChange={this.handleChange.bind(this)}>
                 <option value="other">N/A</option>
                 <option value="M">Adventure</option>
                 <option value="F">Business</option>
@@ -74,7 +87,7 @@ class QueryBox extends Component {
 
           <FormGroup>
             <Col smOffset={2} sm={6}>
-              <Button type="submit">
+              <Button type="submit" onClick={this.onSubmit.bind(this)}>
                 Search
               </Button>
             </Col>
