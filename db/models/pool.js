@@ -12,12 +12,10 @@ var PoolSchema = new mongoose.Schema({
   goal: {type: Number, required: true},
   maxShare: {type: Number},
   themes: [{type: String}],
-  restrictions: {
-    gender: {type: String, maxLength: 1}, //drop down option front end
-    minAge: {type: Number, min: 18},
-    maxAge: {type: Number},
-    isOpen: {type: Boolean, default: true} //secondary feature
-  },
+  gender: {type: String, maxLength: 1}, //drop down option front end
+  minAge: {type: Number, min: 18},
+  maxAge: {type: Number},
+  isOpen: {type: Boolean, default: true}, //secondary feature
   currentShares: {type: Number},
   _userList: [{type: mongoose.Schema.Types.ObjectId}],
   poolCloses: {type: Date, required: true},
@@ -29,21 +27,20 @@ PoolSchema.methods.toJSON = function () {
   var pool = this;
   var poolObject = pool.toObject();
 
-  return _.pick(poolObject, ['_id', 'location', '_creator', 'themes', 'restrictions', 'startDate']);
+  return _.pick(poolObject, ['_id', 'location', '_creator', 'themes', 'gender', 'minAge', 'maxAge', 'isOpen', 'startDate']);
 }
 
 PoolSchema.methods.validateUser = function(user) {
   var pool = this;
-  var rst = pool.restrictions;
   var valid = true;
-  if(rst.gender != null)
-    valid = user.gender == rst.gender;
-  if(rst.minAge != null && rst.maxAge != null)
-    valid = (user.age > rst.minAge && user.age < rst.maxAge);
-  else if(rst.minAge != null)
-    valid = user.age > rst.minAge;
-  else if(rst.maxAge != null)
-    valid = user.age < rst.maxAge;
+  if(pool.gender != null)
+    valid = user.gender == pool.gender;
+  if(pool.minAge != null && pool.maxAge != null)
+    valid = (user.age > pool.minAge && user.age < pool.maxAge);
+  else if(pool.minAge != null)
+    valid = user.age > pool.minAge;
+  else if(pool.maxAge != null)
+    valid = user.age < pool.maxAge;
 
   return valid;
 }
