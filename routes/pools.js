@@ -67,9 +67,9 @@ router.get('/details/:id', (req, res) => {
 // POST /pools/list --> get pools based on query params
 router.post('/list', (req, res) => {
   var query = req.body;
-  qStartDate = query.startDate;
-  if(query.startDate != null) {
-    query.startDate = {$gte: qStartDate};
+  if(query.startDate != null && query.endDate != null) {
+    query.startDate = {$gte: query.startDate};
+    query.endDate = {$lte: query.endDate};
   }
 
   Pool.find(query).then((pools) => {

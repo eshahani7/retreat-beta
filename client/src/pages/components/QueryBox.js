@@ -3,13 +3,26 @@ import { Row, Col, Panel, FormControl, ControlLabel, Button, FormGroup, Form } f
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import Select from 'react-select';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-select/dist/react-select.css';
 import '../../stylesheets/form.css';
 import '../../stylesheets/querybox.css';
 
+function clean(obj) {
+  for (var propName in obj) {
+    if (obj[propName] === '') {
+      delete obj[propName];
+    }
+    else if(Array.isArray(obj[propName]) && obj[propName].length == 0) {
+      delete obj[propName];
+    }
+  }
+}
+
 class QueryBox extends Component {
-  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), gender:'F', themes:[]};
+  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), gender:'', themes:[]};
 
   handleChangeStart(date) {
    this.setState({
@@ -21,27 +34,42 @@ class QueryBox extends Component {
      endDate: date
    });
   }
-  handleChange(e) {
-    const target = e.target;
-    const name = target.name;
+  handleChangeTheme(data) {
+    console.log(data);
     this.setState({
-      [name]: target.value
+      themes: this.state.themes.concat(data[data.length-1].value)
     });
+    console.log(this.state.themes);
+  }
+  handleChangeGender(data) {
+    console.log(data.value);
+    this.setState({ gender: data.value });
   }
   onSubmit(e) {
     e.preventDefault();
     var query = {
       location: this.props.location,
       gender: this.state.gender,
-      themes: this.state.theme,
-      startDate: this.state.startDate.toDate()
+      themes: this.state.themes,
+      startDate: this.state.startDate.toDate(),
+      endDate: this.state.endDate.toDate()
     }
-    Object.keys(query).forEach(key => query[key] === '' ? delete query[key] : '');
+    clean(query);
     console.log(query);
     this.props.search(query);
   }
 
   render() {
+    const themeOptions = [
+      { value: 'adventure', label: 'Adventure'},
+      { value: 'hiking', label: 'Hiking'}
+    ]
+    const genderOptions = [
+      { value: '', label: 'N/A'},
+      { value: 'F', label: 'F'},
+      { value: 'M', label: 'M' }
+    ]
+
     return(
       <Panel id="QueryPanel">
         <Form horizontal className="queryForm">
@@ -63,12 +91,12 @@ class QueryBox extends Component {
               Gender
             </Col>
             <Col sm={6}>
-              <FormControl componentClass="select"
-                onChange={this.handleChange.bind(this)}>
-                  <option value="other">N/A</option>
-                  <option value="M">M</option>
-                  <option value="F">F</option>
-              </FormControl>
+              <Select
+                name='gender'
+                value={this.state.gender}
+                options={genderOptions}
+                onChange={this.handleChangeGender.bind(this)}
+              />
             </Col>
           </FormGroup>
 
@@ -77,12 +105,13 @@ class QueryBox extends Component {
               Themes
             </Col>
             <Col sm={6}>
-              <FormControl componentClass="select"
-                onChange={this.handleChange.bind(this)}>
-                <option value="other">N/A</option>
-                <option value="M">Adventure</option>
-                <option value="F">Business</option>
-              </FormControl>
+              <Select
+                name='themes'
+                value={this.state.themes}
+                options={themeOptions}
+                multi={true}
+                onChange={this.handleChangeTheme.bind(this)}
+              />
             </Col>
           </FormGroup>
 
