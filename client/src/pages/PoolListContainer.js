@@ -22,6 +22,20 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
+const PoolsList = () => {
+  const pools = this.props.poolList;
+  const poolItems = pools.map((pool) => {
+    <li key={pool._id}>
+      {pool.location}
+    </li>
+  });
+  return (
+    <ul>
+      {poolItems}
+    </ul>
+  );
+}
+
 class PoolListContainer extends Component {
   componentWillMount() {
     this.props.fetchPools({
@@ -30,6 +44,7 @@ class PoolListContainer extends Component {
   }
 
   render() {
+    const pools = this.props.poolList;
     return(
       <div className="poolList">
         <LoginControl/>
@@ -45,6 +60,13 @@ class PoolListContainer extends Component {
           <Col sm={3}>
             <QueryBox search={(query) => {this.props.fetchPools(query)}}
               location={this.props.initLocation}/>
+          </Col>
+          <Col sm={9}>
+            {pools.map((pool) =>
+              <li key={pool._id}>
+                {pool.location}
+              </li>
+              )}
           </Col>
         </Row>
       </div>

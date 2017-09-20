@@ -65,9 +65,13 @@ router.get('/details/:id', (req, res) => {
 });
 
 // POST /pools/list --> get pools based on query params
-// use "{restrictions.gender:"F"} for nested properties
 router.post('/list', (req, res) => {
   var query = req.body;
+  qStartDate = query.startDate;
+  if(query.startDate != null) {
+    query.startDate = {$gte: qStartDate};
+  }
+
   Pool.find(query).then((pools) => {
     if(pools == null) {
       res.status(404).send();

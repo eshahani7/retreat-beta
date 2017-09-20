@@ -9,7 +9,7 @@ import '../../stylesheets/form.css';
 import '../../stylesheets/querybox.css';
 
 class QueryBox extends Component {
-  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), gender:'F', theme:''};
+  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), gender:'F', themes:[]};
 
   handleChangeStart(date) {
    this.setState({
@@ -33,7 +33,8 @@ class QueryBox extends Component {
     var query = {
       location: this.props.location,
       gender: this.state.gender,
-      theme: this.state.theme
+      themes: this.state.theme,
+      startDate: this.state.startDate.toDate()
     }
     Object.keys(query).forEach(key => query[key] === '' ? delete query[key] : '');
     console.log(query);

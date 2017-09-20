@@ -21,7 +21,7 @@ export default function reducer (state = {
       return {...state,
         fetching: false,
         fetched: true,
-        poolList: action.payload
+        poolList: action.payload.pools
       };
     }
     case 'SET_INIT_LOCATION': {
