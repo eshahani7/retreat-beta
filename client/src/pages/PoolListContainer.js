@@ -7,7 +7,8 @@ import '../stylesheets/poolsearch.css'
 import { fetchPools } from '../actions/poolActions'
 
 import LoginControl from './components/LoginControl';
-import QueryBox from './components/QueryBox'
+import QueryBox from './components/QueryBox';
+import PoolPreview from './components/PoolPreview';
 
 const mapStateToProps = (state) => {
   return {
@@ -25,9 +26,12 @@ const mapDispatchToProps = (dispatch) => {
 const PoolsList = () => {
   const pools = this.props.poolList;
   const poolItems = pools.map((pool) => {
-    <li key={pool._id}>
-      {pool.location}
-    </li>
+    <PoolPreview
+      key={pool._id}
+      location={pool.location}
+      startDate={pool.startDate}
+      endDate={pool.endDate}
+    />
   });
   return (
     <ul>
@@ -49,10 +53,10 @@ class PoolListContainer extends Component {
       <div className="poolList">
         <LoginControl/>
         <Row>
-          <Col sm={3}>
+          <Col sm={3} id="header">
             {this.props.initLocation}
           </Col>
-          <Col sm={9}>
+          <Col sm={9} id="header">
             Create Pool
           </Col>
         </Row>
@@ -63,9 +67,13 @@ class PoolListContainer extends Component {
           </Col>
           <Col sm={9}>
             {pools.map((pool) =>
-              <li key={pool._id}>
-                {pool.location}
-              </li>
+              <PoolPreview
+                key={pool._id}
+                location={pool.location}
+                startDate={pool.startDate}
+                endDate={pool.endDate}
+                host={pool._creator}
+              />
               )}
           </Col>
         </Row>
