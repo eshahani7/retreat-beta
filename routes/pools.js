@@ -71,6 +71,9 @@ router.post('/list', (req, res) => {
     query.startDate = {$gte: query.startDate};
     query.endDate = {$lte: query.endDate};
   }
+  if(query.themes != null) {
+    query.themes = {$in: query.themes}
+  }
 
   Pool.find(query).then((pools) => {
     if(pools == null) {

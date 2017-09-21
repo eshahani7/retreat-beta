@@ -27,7 +27,8 @@ PoolSchema.methods.toJSON = function () {
   var pool = this;
   var poolObject = pool.toObject();
 
-  return _.pick(poolObject, ['_id', 'location', '_creator', 'themes', 'gender', 'minAge', 'maxAge', 'isOpen', 'startDate']);
+  return _.pick(poolObject, ['_id', 'location', '_creator', 'themes',
+  'gender', 'minAge', 'maxAge', 'isOpen', 'startDate', 'endDate']);
 }
 
 PoolSchema.methods.validateUser = function(user) {
