@@ -26,8 +26,20 @@ router.post('/', (req, res) => {
   });
 });
 
+//GET /users/me
 router.get('/me', authenticate, (req, res) => {
   res.send(req.user);
+});
+
+//GET /users/:id
+router.get('/:id', (req, res) => {
+  var id = req.params.id;
+  User.findById(id).then((user) => {
+    res.status(200).send(user);
+  }).catch((e) => {
+    console.log(e);
+    res.status(404).send();
+  });
 });
 
 // POST /users/login {email, password}
