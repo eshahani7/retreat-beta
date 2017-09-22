@@ -27,7 +27,7 @@ PoolSchema.methods.toJSON = function () {
   var pool = this;
   var poolObject = pool.toObject();
 
-  return _.pick(poolObject, ['_id', 'location', '_creator', 'themes',
+  return _.pick(poolObject, ['_id', 'location', '_creator', '_userList', 'themes',
   'gender', 'minAge', 'maxAge', 'isOpen', 'startDate', 'endDate']);
 }
 

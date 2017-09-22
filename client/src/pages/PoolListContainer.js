@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import '../stylesheets/poolsearch.css'
 
-import { fetchPools } from '../actions/poolActions'
+import { fetchPools, selectPool } from '../actions/poolActions'
 
 import LoginControl from './components/LoginControl';
 import QueryBox from './components/QueryBox';
@@ -20,7 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchPools: (query) => {dispatch(fetchPools(query))}
+      fetchPools: (query) => { dispatch(fetchPools(query)) },
+      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) }
   }
 };
 
@@ -53,10 +54,12 @@ class PoolListContainer extends Component {
             {pools.map((pool) =>
               <PoolPreview
                 key={pool._id}
+                id={pool._id}
                 location={pool.location}
                 startDate={pool.startDate}
                 endDate={pool.endDate}
                 host={pool._creator}
+                select={(poolId) => {this.props.selectPool(poolId)}}
               />
               )}
           </Col>
