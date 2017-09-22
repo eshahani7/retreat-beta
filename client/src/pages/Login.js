@@ -37,7 +37,6 @@ class Login extends Component {
 
   responseFacebook(response) {
     console.log(response)
-    
   }
 
   render() {

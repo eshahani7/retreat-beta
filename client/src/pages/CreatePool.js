@@ -48,15 +48,32 @@ class CreatePool extends Component {
   }
   handleChangeTheme(data) {
     console.log(data);
-    this.setState({
-      themes: this.state.themes.concat(data[data.length-1].value)
-    });
+    var submittedThemes = [];
+    for (var i = 0; i < data.length; i++){
+      submittedThemes[i] = data[i].value;
+      console.log(submittedThemes[i]);
+    }
+    this.setState({ themes: submittedThemes });
+    console.log(this.state.themes);
   }
   handleChangeGender(data) {
-    this.setState({ gender: data.value });
+    if(data == null){
+      this.setState({gender: null});
+    }
+    else{
+      this.setState({gender: data.value });
+      console.log(this.state.gender);
+    }
   }
   handleChangeLoc(data) {
-    this.setState({ location: data.value });
+    console.log(data);
+    if(data == null){
+      this.setState({location: null});
+    }
+    else{
+      this.setState({location: data.value });
+      console.log(this.state.location);
+    }
   }
 
   //----------------------DISPATCH ACTION----------------------------//
