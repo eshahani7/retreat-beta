@@ -10,6 +10,7 @@ import ViewUser from './ViewUser';
 import EditUser from './EditUser';
 import PoolListContainer from './PoolListContainer';
 import CreatePool from './CreatePool';
+import MyPools from './MyPools';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route exact path='/edituser' component={EditUser}/>
         <Route exact path='/pools' component={PoolListContainer}/>
         <Route exact path='/create' component={CreatePool}/>
+        <Route exact path='/mypools' component={MyPools}/>
         <Route exact path='/test' component={Test}/>
       </Switch>
     );

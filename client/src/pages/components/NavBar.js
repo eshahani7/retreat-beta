@@ -62,7 +62,7 @@ class UserNavBar extends Component {
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} href="#">
-              <NavLink target="/" name="My Pools"/>
+              <NavLink target="/mypools" name="My Pools"/>
             </NavItem>
             {/*<NavDropdown eventKey={2} title="i" id="infoDropdown">
               <MenuItem eventKey={2.1}><NavLink target="/ViewUser" name="My Profile"/></MenuItem>
