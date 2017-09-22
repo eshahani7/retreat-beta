@@ -24,23 +24,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const PoolsList = () => {
-  const pools = this.props.poolList;
-  const poolItems = pools.map((pool) => {
-    <PoolPreview
-      key={pool._id}
-      location={pool.location}
-      startDate={pool.startDate}
-      endDate={pool.endDate}
-    />
-  });
-  return (
-    <ul>
-      {poolItems}
-    </ul>
-  );
-}
-
 class PoolListContainer extends Component {
   componentWillMount() {
     this.props.fetchPools({
