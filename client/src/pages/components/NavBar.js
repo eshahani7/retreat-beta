@@ -64,16 +64,16 @@ class UserNavBar extends Component {
             <NavItem eventKey={1} href="#">
               <NavLink target="/" name="My Pools"/>
             </NavItem>
-            <NavDropdown eventKey={2} title="i" id="infoDropdown">
+            {/*<NavDropdown eventKey={2} title="i" id="infoDropdown">
               <MenuItem eventKey={2.1}><NavLink target="/ViewUser" name="My Profile"/></MenuItem>
               <MenuItem eventKey={2.2} onSelect={this.props.logout}>Log Out</MenuItem>
-            </NavDropdown>
-            // <NavItem eventKey={2} href="#">
-            //   <NavLink target="/ViewUser" name="My Profile"/>
-            // </NavItem>
-            // <NavItem eventKey={3} href="#" onSelect={this.props.logout}>
-            //   Logout
-            // </NavItem>
+            </NavDropdown>*/}
+            <NavItem eventKey={2} href="#">
+              <NavLink target="/ViewUser" name="My Profile"/>
+            </NavItem>
+            <NavItem eventKey={3} href="#" onSelect={this.props.logout}>
+              Logout
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
