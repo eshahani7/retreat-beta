@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { fetchMyPools } from '../actions/poolActions'
+import { joinPool } from '../actions/poolActions'
 
 import LoginControl from './components/LoginControl';
 import PoolPreview from './components/PoolPreview';
@@ -17,6 +17,11 @@ const mapStateToProps = (state) => {
 should be similar to what needs to be done for PoolPreview*/}
 
 class PoolDetails extends Component {
+  join(e) {
+    e.preventDefault();
+    this.props.dispatch(joinPool(this.props.selectedPool._id));
+  }
+
   render() {
     const selected = this.props.selectedPool;
     return(
@@ -26,7 +31,8 @@ class PoolDetails extends Component {
         {selected.startDate} <br/>
         {selected.endDate} <br/>
         host: {selected._creator} <br/>
-        Joined: {selected._userList}
+        Joined: {selected._userList} <br/>
+        <Button onClick={this.join.bind(this)}>Join</Button>
       </div>
     );
   }

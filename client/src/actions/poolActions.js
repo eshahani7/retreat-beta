@@ -96,3 +96,28 @@ export function selectPool(poolId) {
     })
   }
 }
+
+export function joinPool(poolId) {
+  return function(dispatch) {
+    dispatch({ type:'JOIN_POOL '});
+    var token = sessionStorage.getItem('authToken');
+    var userHeader = new Headers();
+    userHeader.append('x-auth', token);
+
+    fetch(`/pools/join/${poolId}`, {
+      method:'POST',
+      headers: userHeader
+    }).then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+      else  {
+        return Promise.reject({status: res.status});
+      }
+    }).then((body) => {
+      dispatch({type: 'JOIN_POOL_FULFILLED', payload: body});
+    }).catch((e) => {
+      dispatch({type: 'JOIN_POOL_REJECTED', payload: e});
+    })
+  }
+}

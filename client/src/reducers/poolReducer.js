@@ -8,6 +8,8 @@ export default function reducer (state = {
   selected: false,
   creating: false,
   created: false,
+  joining: false,
+  joined: false,
   error: null
 }, action) {
   switch(action.type) {
@@ -63,6 +65,23 @@ export default function reducer (state = {
         selecting: false,
         selected: true,
         selectedPool: action.payload
+      };
+    }
+    case 'JOIN_POOL': {
+      return {...state,
+        joining: true
+      };
+    }
+    case 'JOIN_POOL_REJECTED': {
+      return {...state,
+        joining: false,
+        error: action.payload
+      };
+    }
+    case 'JOIN_POOL_FULFILLED': {
+      return {...state,
+        joining: false,
+        joined: true,
       };
     }
     case 'SET_INIT_LOCATION': {
