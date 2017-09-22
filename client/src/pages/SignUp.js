@@ -57,6 +57,7 @@ class SignUp extends Component {
             JOIN RETREAT!
           </Col>
         </Row>
+
         <Form horizontal className="signUpForm">
           <FormField
             className= "signUpField"
