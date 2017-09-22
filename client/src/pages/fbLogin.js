@@ -14,7 +14,7 @@ import SubmitBtn from './components/SubmitBtn.js';
 
 import LoginControl from './components/LoginControl.js';
 
-class Login extends Component {
+class fbLogin extends Component {
   state = {email:'', password:''};
 
   handleChange(e) {
@@ -68,4 +68,4 @@ class Login extends Component {
     }
   }
 
-  export default connect()(Login);
+  export default connect()(fbLogin);

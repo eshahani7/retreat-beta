@@ -37,6 +37,7 @@ class Login extends Component {
 
   responseFacebook(response) {
     console.log(response)
+    
   }
 
   render() {
@@ -54,11 +55,39 @@ class Login extends Component {
                 appId="1972077469742341"
                 autoLoad={true}
                 fields="name,email,picture"
+                scope="public_profile,email"
                 callback={this.responseFacebook}
               />
             </Col>
           </Row>
-        </div>
+
+          <Row>
+            <Col md={12} id="LoginHeader">
+             WELCOME BACK!
+            </Col>
+          </Row>
+
+           <Form horizontal className="loginForm">
+             <FormField
+               title="Email"
+               type="text"
+               holder="janedoe@gmail.com"
+               name="email"
+               change={this.handleChange.bind(this)}
+             />
+             <FormField
+               title="Password"
+               type="password"
+               holder="password"
+               name="password"
+               change={this.handleChange.bind(this)}
+             />
+             <SubmitBtn title="LOG IN" id="LoginButton" submit={this.loginUser.bind(this)}/>
+           </Form>
+
+           <Link to="/viewuser">View User</Link>
+         </div>
+
 
 
 
@@ -148,38 +177,6 @@ class Login extends Component {
         //   <h1>
         //     FACEBOOK LOGIN HERE
         //   </h1>
-        // </div>
-
-        // <div className="Login">
-        //  <LoginControl/>
-        //   <Row>
-        //     <Col md={12} id="LoginHeader">
-        //       WELCOME BACK!
-        //     </Col>
-        //   </Row>
-        //   <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true">
-        //     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        //     </fb:login-button>
-        //   </div>
-          // <Form horizontal className="loginForm">
-          //   <FormField
-          //     title="Email"
-          //     type="text"
-          //     holder="janedoe@gmail.com"
-          //     name="email"
-          //     change={this.handleChange.bind(this)}
-          //   />
-          //   <FormField
-          //     title="Password"
-          //     type="password"
-          //     holder="password"
-          //     name="password"
-          //     change={this.handleChange.bind(this)}
-          //   />
-          //   <SubmitBtn title="LOG IN" id="LoginButton" submit={this.loginUser.bind(this)}/>
-          // </Form>
-          //
-          // <Link to="/viewuser">View User</Link>
         // </div>
       );
     }
