@@ -26,3 +26,30 @@ export function fetchPools(query) {
 export function setInitLocation(location) {
   return { type:'SET_INIT_LOCATION', payload:location };
 }
+
+export function createPool(pool) {
+  return function(dispatch) {
+    dispatch({ type:'CREATE_POOLS' });
+
+    var token = sessionStorage.getItem('authToken');
+    var userHeader = new Headers();
+    userHeader.append('x-auth', token);
+    userHeader.append('Content-Type', 'application/json');
+    console.log(userHeader);
+
+    fetch('/pools', {
+      method: 'POST',
+      headers: userHeader,
+      body: JSON.stringify(pool)
+    }).then((res) => {
+      if(res.ok) {
+        dispatch({ type:'CREATE_POOL_FULFILLED', payload: pool });
+      }
+      else  {
+        return Promise.reject({status: res.status});
+      }
+    }).catch((e) => {
+      dispatch({ type:'CREATE_POOL_REJECTED', payload: e });
+    });
+  }
+}
