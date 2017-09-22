@@ -36,7 +36,7 @@ class Main extends Component {
         </Row>
         <Row>
           <Col md={4}>
-            <Link to="/pools" className="link">
+            <Link to="/pools/paris" className="link">
               <div className = "image" onClick={() => {this.props.setInitLocation('Paris')}}>
                 <img src={paris}/>
                 <h2>Paris</h2>
@@ -44,7 +44,7 @@ class Main extends Component {
             </Link>
           </Col>
           <Col md={4}>
-            <Link to="/pools" className="link" onClick={() => {this.props.setInitLocation('Tokyo')}}>
+            <Link to="/pools/tokyo" className="link" onClick={() => {this.props.setInitLocation('Tokyo')}}>
               <div className="image">
                 <img src={tokyo}/>
                 <h2>Tokyo</h2>
@@ -52,7 +52,7 @@ class Main extends Component {
             </Link>
           </Col>
           <Col md={4}>
-            <Link to="/pools" className="link" onClick={() => {this.props.setInitLocation('Florence')}}>
+            <Link to="/pools/florence" className="link" onClick={() => {this.props.setInitLocation('Florence')}}>
               <div className="image">
                 <img src={florence}/>
                 <h2>Florence</h2>
