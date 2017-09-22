@@ -76,3 +76,23 @@ export function fetchMyPools() {
     });
   }
 }
+
+export function selectPool(poolId) {
+  return function(dispatch) {
+    dispatch({ type:'SELECT_POOL '});
+    fetch(`/pools/details/${poolId}`, {
+      method:'GET'
+    }).then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+      else  {
+        return Promise.reject({status: res.status});
+      }
+    }).then((body) => {
+      dispatch({type: 'SELECT_POOL_FULFILLED', payload: body});
+    }).catch((e) => {
+      dispatch({type: 'SELECT_POOL_REJECTED', payload: e});
+    })
+  }
+}

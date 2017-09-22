@@ -1,8 +1,11 @@
 export default function reducer (state = {
   initLocation: null,
   poolList: [],
+  selectedPool: {},
   fetching: false,
   fetched: false,
+  selecting: false,
+  selected: false,
   creating: false,
   created: false,
   error: null
@@ -42,6 +45,24 @@ export default function reducer (state = {
         creating: false,
         created: true,
         poolList: action.payload.pools
+      };
+    }
+    case 'SELECT_POOL': {
+      return {...state,
+        selecting: true
+      };
+    }
+    case 'SELECT_POOL_REJECTED': {
+      return {...state,
+        selecting: false,
+        error: action.payload
+      };
+    }
+    case 'SELECT_POOL_FULFILLED': {
+      return {...state,
+        selecting: false,
+        selected: true,
+        selectedPool: action.payload
       };
     }
     case 'SET_INIT_LOCATION': {
