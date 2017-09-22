@@ -18,7 +18,6 @@ router.post('/', authenticate, (req, res) => {
   var pool = new Pool(req.body);
   pool._creator = req.user._id;
   pool._userList.push(req.user._id);
-  pool.endDate = pool.startDate;
   pool.poolCloses = pool.endDate; //need to decide when to close pools
 
   pool.save().then(() => {

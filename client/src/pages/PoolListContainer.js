@@ -9,6 +9,7 @@ import { fetchPools } from '../actions/poolActions'
 import LoginControl from './components/LoginControl';
 import QueryBox from './components/QueryBox';
 import PoolPreview from './components/PoolPreview';
+import NavLink from './components/Link';
 
 const mapStateToProps = (state) => {
   return {
@@ -57,7 +58,7 @@ class PoolListContainer extends Component {
             {this.props.initLocation}
           </Col>
           <Col sm={9} id="header">
-            Create Pool
+            <NavLink target="/create" name="Create Pool"/>
           </Col>
         </Row>
         <Row>

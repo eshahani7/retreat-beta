@@ -9,6 +9,7 @@ import SignUp from './SignUp';
 import ViewUser from './ViewUser';
 import EditUser from './EditUser';
 import PoolListContainer from './PoolListContainer';
+import CreatePool from './CreatePool';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
         <Route exact path='/viewuser' component={ViewUser}/>
         <Route exact path='/edituser' component={EditUser}/>
         <Route exact path='/pools' component={PoolListContainer}/>
+        <Route exact path='/create' component={CreatePool}/>
         <Route exact path='/test' component={Test}/>
       </Switch>
     );
