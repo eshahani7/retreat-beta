@@ -6,7 +6,7 @@ const {ObjectID} = require('mongodb');
 const schedule = require('node-schedule');
 
 var {User} = require('../db/models/user');
-var {authenticate} = require('./middleware/authenticate');
+var {authenticate, authAdmin} = require('./middleware/authenticate');
 
 var {Pool} = require('../db/models/pool');
 
@@ -150,6 +150,19 @@ router.delete('/leave/:id', authenticate, (req, res) => {
     })
   }).catch((e) => {
     console.log(e);
+    res.status(400).send();
+  });
+});
+
+//----------------------ADMINS---------------------//
+router.post('/admin/list', authAdmin, (req, res) => { //to list closed pools
+  var query = req.body;
+  Pool.find(query).then((pools) => {
+    if(pools == null) {
+      res.status(404).send();
+    }
+    res.status(200).send({pools});
+  }).catch((e) => {
     res.status(400).send();
   });
 });

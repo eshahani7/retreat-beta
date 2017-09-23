@@ -4,7 +4,7 @@ const _ = require('lodash');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 
-var {authenticate} = require('./middleware/authenticate');
+var {authAdmin} = require('./middleware/authenticate');
 
 var {Booking} = require('../db/models/booking');
 
@@ -12,7 +12,7 @@ router.use(bodyParser.json());
 
 //------------------ADMIN ONLY---------------------//
 //POST /bookings
-router.post('/', (req, res) => {
+router.post('/', authAdmin, (req, res) => {
   var body = req.body;
   if(!ObjectID.isValid(body._locId) || !ObjectID.isValid(body._poolId)) {
     res.status(404).send();
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 });
 
 //GET /bookings
-router.get('/', (req, res) => {
+router.get('/', authAdmin, (req, res) => {
   Booking.find({}).then((bookings) => {
     if(bookings == null) {
       res.status(404).send();
