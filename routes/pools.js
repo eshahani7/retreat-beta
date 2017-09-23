@@ -21,7 +21,13 @@ router.post('/', authenticate, (req, res) => {
   pool._userList.push(req.user._id);
   pool.poolCloses = pool.endDate; //need to decide when to close pools
   schedule.scheduleJob(pool.poolCloses, () => {
-    console.log('pool closed');
+    pool.poolClosed = true;
+    pool.save().then(() => {
+      console.log('pool closed');
+    }).catch((e) => {
+      console.log(e);
+      console.log('error with closing pool');
+    });
   });
 
   pool.save().then(() => {
