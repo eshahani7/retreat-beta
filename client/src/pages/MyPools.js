@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import '../stylesheets/MyPools.css';
 
 import { fetchMyPools } from '../actions/poolActions'
 
@@ -30,13 +31,19 @@ class MyPools extends Component {
     return(
       <div className="mypools">
         <LoginControl/>
-        <Row>
-          <Col sm={3}>
-            Placeholder
+        <Row className="myPoolsHeader">
+          <Col sm={12}>
+            My Pools
           </Col>
-          <Col sm={9}>
+        </Row>
+        <Row id="myPoolsList">
+          <Col sm={2}>
+          </Col>
+          <Col sm={8}>
+
             {pools.map((pool) =>
               <PoolPreview
+                className="poolPreviews"
                 key={pool._id}
                 location={pool.location}
                 startDate={pool.startDate}
@@ -44,6 +51,8 @@ class MyPools extends Component {
                 host={pool._creator}
               />
               )}
+          </Col>
+          <Col sm={2}>
           </Col>
         </Row>
       </div>
