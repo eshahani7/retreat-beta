@@ -32,7 +32,8 @@ class SignUp extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       age: this.state.age,
-      gender: this.state.gender
+      gender: this.state.gender,
+      isAdmin: false
     };
 
     this.props.dispatch(addUser(user));

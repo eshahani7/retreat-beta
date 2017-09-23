@@ -11,6 +11,8 @@ import PoolListContainer from './PoolListContainer';
 import CreatePool from './CreatePool';
 import MyPools from './MyPools';
 import PoolDetails from './PoolDetails';
+import AdminList from './AdminList';
+import AdminSelect from './AdminSelect';
 
 class App extends Component {
   render() {
@@ -26,6 +28,8 @@ class App extends Component {
         <Route exact path='/create' component={CreatePool}/>
         <Route exact path='/mypools' component={MyPools}/>
         <Route path='/pool/details' component={PoolDetails}/>
+        <Route exact path='/admin' component={AdminList}/>
+        <Route path='/admin/book' component={AdminSelect}/>
         <Route exact path='/test' component={Test}/>
       </Switch>
     );

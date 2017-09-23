@@ -155,9 +155,8 @@ router.delete('/leave/:id', authenticate, (req, res) => {
 });
 
 //----------------------ADMINS---------------------//
-router.post('/admin/list', authAdmin, (req, res) => { //to list closed pools
-  var query = req.body;
-  Pool.find(query).then((pools) => {
+router.get('/admin/list', authAdmin, (req, res) => { //to list closed pools
+  Pool.find({ poolClosed: true }).then((pools) => {
     if(pools == null) {
       res.status(404).send();
     }
