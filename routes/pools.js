@@ -3,6 +3,7 @@ var router = express.Router();
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
+const schedule = require('node-schedule');
 
 var {User} = require('../db/models/user');
 var {authenticate} = require('./middleware/authenticate');
@@ -19,6 +20,9 @@ router.post('/', authenticate, (req, res) => {
   pool._creator = req.user._id;
   pool._userList.push(req.user._id);
   pool.poolCloses = pool.endDate; //need to decide when to close pools
+  schedule.scheduleJob(pool.poolCloses, () => {
+    console.log('pool closed');
+  });
 
   pool.save().then(() => {
     res.status(200).send(pool);
