@@ -1,0 +1,19 @@
+.mypools{
+  text-align: center;
+}
+.myPoolsHeader{
+  text-align: center;
+  font-family: futura;
+  font-size: 32px;
+}
+
+#myPoolsList{
+  text-align: center;
+  padding: 2%;
+}
+
+.poolPreviews{
+  text-align: left;
+  font-family: Lato;
+  font-size: 16px;
+}

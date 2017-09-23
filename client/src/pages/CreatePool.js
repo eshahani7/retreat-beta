@@ -37,14 +37,16 @@ class CreatePool extends Component {
     });
   }
   handleChangeStart(date) {
-   this.setState({
+    this.setState({
      startDate: date
-   });
+    });
+    console.log(this.state.startDate);
   }
   handleChangeEnd(date) {
-   this.setState({
-     endDate: date
-   });
+    this.setState({
+      endDate: date
+    });
+    console.log(this.state.endDate);
   }
   handleChangeTheme(data) {
     console.log(data);
@@ -81,6 +83,7 @@ class CreatePool extends Component {
     e.preventDefault();
     var pool = this.state;
     pool.startDate = pool.startDate.toDate();
+    console.log("Start Date: " + typeof pool.startDate + " " + pool.startDate);
     pool.endDate = pool.endDate.toDate();
     this.props.dispatch(createPool(pool));
     console.log(pool);
