@@ -11,8 +11,8 @@ var {Loc} = require('../db/models/location');
 router.use(bodyParser.json());
 
 //---------------------ADMIN ONLY---------------------//
-//GET /locations
-router.get('/', authAdmin, (req, res) => {
+//POST /locations --> get all locations with specified city
+router.post('/', authAdmin, (req, res) => {
   var city = req.body;
 
   Loc.find(city).then((locs) => {
@@ -26,7 +26,7 @@ router.get('/', authAdmin, (req, res) => {
 });
 
 //POST /locations
-router.post('/', authAdmin, (req, res) => {
+router.post('/add', authAdmin, (req, res) => {
   var loc = new Loc(req.body);
   loc.save().then(() => {
     res.status(200).send(loc);

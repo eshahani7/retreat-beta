@@ -37,7 +37,7 @@ class AdminList extends Component {
             endDate={pool.endDate}
             host={pool._creator}
             select={(poolId) => {this.props.selectPool(poolId)}}
-            isAdmin={true}
+            linkTarget={`/admin/book/${pool._id}`}
           />
           )}
       </div>
