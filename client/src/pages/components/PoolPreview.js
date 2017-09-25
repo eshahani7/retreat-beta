@@ -8,17 +8,18 @@ import { findUser } from '../../actions/userActions';
 import NavLink from './Link';
 
 const mapStateToProps = (state ) => {
+  console.log("STATE: " + state);
   return {
     hostInfo: state.user.userDetails,
     hostFirstName: state.user.userDetails.firstName,
     hostLastName: state.user.userDetails.lastName,
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       findUser: (userID) =>{ dispatch(findUser(userID))}
-  }
+  };
 };
 
 class PoolPreview extends Component {
@@ -27,24 +28,25 @@ class PoolPreview extends Component {
     this.props.select(this.props.id);
   }
 
+  componentWillMount(){
+    this.props.findUser(this.props.host);
+  }
+
   render() {
 
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
-    console.log("INFO: " + this.props.findUser);
-
-    //this.props.findUser(this.props.host);
 
     return(
       <Panel className={this.props.className}>
         <strong>{this.props.location}</strong><br/>
         {startDate.toDateString()}<br/>
         {endDate.toDateString()}<br/>
-        host: {this.props.host}<br/>
+        host: {this.props.hostFirstName + " " + this.props.hostLastName}<br/>
       <NavLink target={this.props.linkTarget} name="Details"/>
       </Panel>
     );
   }
 }
 
-export default PoolPreview;
+export default connect(mapStateToProps, mapDispatchToProps)(PoolPreview);
