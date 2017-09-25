@@ -14,7 +14,7 @@ var LocSchema = new mongoose.Schema({
 LocSchema.methods.toJSON = function(){
   var loc = this;
   var locObject = loc.toObject();
-  return _.pick(locObject, ['_id', 'listingUrl', 'numBed',
+  return _.pick(locObject, ['_id', 'city', 'listingUrl', 'numBed',
   'numBath', 'maxCapacity']);
 }
 
