@@ -35,6 +35,7 @@ class PoolDetails extends Component {
 
   join(e) {
     e.preventDefault();
+    console.log(this.props.selectedPool._id);
     this.props.joinPool(this.props.selectedPool._id);
   }
 

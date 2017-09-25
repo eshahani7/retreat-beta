@@ -49,6 +49,7 @@ class MyPools extends Component {
                 startDate={pool.startDate}
                 endDate={pool.endDate}
                 host={pool._creator}
+                linkTarget={`/pool/details/${pool._id}`}
               />
               )}
           </Col>
