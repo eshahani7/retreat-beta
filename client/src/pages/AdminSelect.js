@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { fetchLocs } from '../actions/locActions';
 import { selectPool } from '../actions/poolActions';
+import { bookPool } from '../actions/bookingActions';
 
 import LoginControl from './components/LoginControl';
 
@@ -21,12 +22,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchLocs: (city) => { dispatch(fetchLocs(city)) },
-    selectPool: (poolId) => { dispatch(selectPool(poolId)) }
+    selectPool: (poolId) => { dispatch(selectPool(poolId)) },
+    bookPool: (details) => { dispatch(bookPool(details)) }
   };
 }
 
 class AdminSelect extends Component {
-  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days')};
+  state = {startDate: moment(), endDate: moment(new Date()).add(1,'days'), location:{}};
 
   componentWillMount() {
     var url = window.location.href;
@@ -47,18 +49,25 @@ class AdminSelect extends Component {
   }
 
   handleChangeStart(date) {
-    this.setState({
-     startDate: date
-    });
+    this.setState({ startDate: date });
   }
   handleChangeEnd(date) {
-    this.setState({
-      endDate: date
-    });
+    this.setState({ endDate: date });
   }
 
-  selectLoc() {
+  selectLoc(loc) {
+    this.setState({ location: loc })
+  }
 
+  book(e) {
+    e.preventDefault();
+    var details = {
+      startDate: this.state.startDate.toDate(),
+      endDate: this.state.endDate.toDate(),
+      _poolId: this.props.selectedPool._id,
+      _locId: this.state.location._id
+    }
+    this.props.bookPool(details);
   }
 
   render() {
@@ -88,11 +97,13 @@ class AdminSelect extends Component {
               onChange={this.handleChangeEnd.bind(this)}/>
           </Col>
           <Col sm={9}>
-            <Button onClick={this.select.bind(this)}>Find Properties</Button><br/><br/>
+            <Button onClick={this.select.bind(this)}>Find Properties</Button>
+            <Button onClick={this.book.bind(this)}>Book Property</Button>
+            <h3>Select a property</h3>
             <ListGroup>
             {locs.map((loc) =>
               <ListGroupItem key={loc._id} header={loc.city}
-                onClick={this.selectLoc.bind(this)}>
+                onClick={() => this.selectLoc(loc)}>
                 Bedrooms: {loc.numBed}, Bathrooms:{loc.numBath} <br/>
                 Max Capacity: {loc.maxCapacity} <br/>
                 {loc.listingUrl}
