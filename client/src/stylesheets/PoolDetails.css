@@ -1,31 +1,6 @@
-.mypools{
-  text-align: center;
+.poolDetails{
   background-color: tan;
-}
-.myPoolsHeader{
-  text-align: center;
-  font-family: futura;
-  font-size: 32px;
-}
-
-#myPoolsList{
-  text-align: center;
-  padding: 2%;
-}
-
-.panel{
-  text-align: left;
-  font-family: Lato;
-  font-size: 16px;
-  /*background-image: url("../img/paris.png") !important;*/
-}
-
-.poolPreviews{
-  text-align: left;
-  font-family: Lato;
-  color: white;
-  font-size: 16px;
-  background-image: url("../img/paris.png") !important;
+  height: 100%;
 }
 
 .Paris{
@@ -34,6 +9,10 @@
   color: white;
   font-size: 16px;
   background-image: url("../img/paris.png") !important;
+  border: none !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .Tokyo{

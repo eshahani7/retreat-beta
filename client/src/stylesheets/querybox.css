@@ -1,4 +1,22 @@
 #QueryPanel {
-  background-color: #b7d2e5;
+  background-color: rgba(0,0,0,0.25);
   margin-left: 10px;
+}
+
+.queryForm{
+  padding-top: 25%;
+  padding-bottom: 25%;
+  padding-left: 2%;
+  padding-right: 2%;
+  text-align: center;
+}
+
+.queryForm>.form-group>.control-label{
+  margin-right: 5%;
+  color: white;
+}
+
+.queryForm>.form-group>.col-sm-6>.control-label{
+  margin-right: 5%;
+  color: white;
 }

@@ -36,14 +36,22 @@ class QueryBox extends Component {
   }
   handleChangeTheme(data) {
     console.log(data);
-    this.setState({
-      themes: this.state.themes.concat(data[data.length-1].value)
-    });
+    var submittedThemes = [];
+    for (var i = 0; i < data.length; i++){
+      submittedThemes[i] = data[i].value;
+      console.log(submittedThemes[i]);
+    }
+    this.setState({ themes: submittedThemes });
     console.log(this.state.themes);
   }
   handleChangeGender(data) {
-    console.log(data.value);
-    this.setState({ gender: data.value });
+    if(data == null){
+      this.setState({gender: null});
+    }
+    else{
+      this.setState({gender: data.value });
+      console.log(this.state.gender);
+    }
   }
   onSubmit(e) {
     e.preventDefault();
@@ -80,7 +88,7 @@ class QueryBox extends Component {
             <Col sm={6}>
               <DatePicker name="startDate" selected={this.state.startDate}
                 onChange={this.handleChangeStart.bind(this)}/>
-              to
+              <div className="control-label">to</div>
               <DatePicker name="endDate" selected={this.state.endDate}
                 onChange={this.handleChangeEnd.bind(this)}/>
             </Col>

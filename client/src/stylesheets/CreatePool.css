@@ -1,0 +1,46 @@
+.CreatePool{
+  height: 100%;
+  background: url('../img/beachResort.jpg');
+}
+
+#createPoolHeader{
+  font-family: futura;
+  font-size: 36px;
+  text-align: center;
+  padding-bottom: 2%;
+  color: white;
+}
+
+.createPoolForm{
+  font-family: Lato;
+}
+
+#restrictionsHeader{
+  font-family: futura;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 2%;
+  color: white;
+}
+
+.react-datepicker{
+  font-family: futura;
+}
+
+#createPoolButton{
+  padding: 5%;
+  font-family: Lato;
+  background: rgba(0,0,0,0.05);
+  color: white;
+  border: 1px solid white;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  letter-spacing: 4px;
+}
+
+#createPoolButton:hover{
+  padding: 5%;
+  background: white;
+  color: black
+}

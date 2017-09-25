@@ -1,3 +1,62 @@
-#header {
-  margin-bottom: 50px;
+.poolList{
+  text-align: center;
+  background: url("../img/beachResort.jpg");
+  background-size: cover;
+  height: 100%;
+}
+
+#headerLocation {
+  font-family: futura;
+  font-size: 36px;
+  color: white;
+  margin-bottom: 1%;
+}
+
+#header{
+  font-family: futura;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 1%;
+  color: white;
+}
+
+#header>a{
+  color: white;
+}
+
+.searchPoolPanel{
+  background-color: rgba(0,0,0,0.25) !important;
+  color: white;
+}
+
+.panel-body>a{
+  color: white;
+}
+
+.Paris{
+  text-align: left;
+  font-family: Lato;
+  color: white;
+  font-size: 16px;
+  background-image: url("../img/paris.png") !important;
+  border: none !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.Tokyo{
+  text-align: left;
+  font-family: Lato;
+  color: white;
+  font-size: 16px;
+  background-image: url("../img/tokyo.png") !important;
+}
+
+.Florence{
+  text-align: left;
+  font-family: Lato;
+  color: white;
+  font-size: 16px;
+  background-image: url("../img/florence.png") !important;
 }

@@ -8,6 +8,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-select/dist/react-select.css';
 import '../stylesheets/form.css';
+import '../stylesheets/CreatePool.css';
 
 import { createPool } from '../actions/poolActions.js';
 
@@ -109,7 +110,7 @@ class CreatePool extends Component {
       <div className="CreatePool">
         <LoginControl/>
         <Row>
-          <Col md={12}>
+          <Col md={12} id="createPoolHeader">
             Create Pool
           </Col>
         </Row>
@@ -163,7 +164,7 @@ class CreatePool extends Component {
             change={this.handleChange.bind(this)}
           />
 
-          <Col sm={12}>
+          <Col sm={12} id="restrictionsHeader">
             Restrictions
           </Col>
 
@@ -213,7 +214,7 @@ class CreatePool extends Component {
             change={this.handleChange.bind(this)}
           />
 
-          <SubmitBtn title="Create" submit={this.addNewPool.bind(this)}/>
+          <SubmitBtn title="CREATE" id="createPoolButton" submit={this.addNewPool.bind(this)}/>
         </Form>
       </div>
     );

@@ -39,10 +39,10 @@ class PoolListContainer extends Component {
         <LoginControl/>
         <Row>
           <Col sm={3} id="header">
-            {this.props.initLocation}
+            <NavLink target="/create" name="CREATE POOL"/>
           </Col>
-          <Col sm={9} id="header">
-            <NavLink target="/create" name="Create Pool"/>
+          <Col sm={9} id="headerLocation">
+            {this.props.initLocation}
           </Col>
         </Row>
         <Row>
@@ -53,6 +53,7 @@ class PoolListContainer extends Component {
           <Col sm={9}>
             {pools.map((pool) =>
               <PoolPreview
+                className="searchPoolPanel"
                 key={pool._id}
                 id={pool._id}
                 location={pool.location}
