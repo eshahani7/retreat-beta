@@ -29,8 +29,6 @@ class PoolPreview extends Component {
   }
 
   render() {
-    const linkTarget = '/pool/details/' + this.props.id;
-
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
 
@@ -40,7 +38,7 @@ class PoolPreview extends Component {
         {startDate.toDateString()}<br/>
         {endDate.toDateString()}<br/>
         host: {this.props.host}<br/>
-        <Link to={linkTarget} onClick={this.onSelect.bind(this)}>Details</Link>
+      <NavLink target={this.props.linkTarget} name="Details"/>
       </Panel>
     );
   }

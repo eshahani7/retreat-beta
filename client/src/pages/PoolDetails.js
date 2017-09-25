@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { joinPool } from '../actions/poolActions'
+import { joinPool, selectPool } from '../actions/poolActions'
 
 import LoginControl from './components/LoginControl';
 import PoolPreview from './components/PoolPreview';
@@ -13,10 +13,23 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) }
+  }
+};
+
 {/*Note: also have to display host and joined user IDs as names by lookup,
 should be similar to what needs to be done for PoolPreview*/}
 
 class PoolDetails extends Component {
+  componentWillMount() {
+    var url = window.location.href;
+    var i = url.lastIndexOf('/');
+    var selectId = url.substr(i+1);
+    this.props.selectPool(selectId);
+  }
+
   join(e) {
     e.preventDefault();
     this.props.dispatch(joinPool(this.props.selectedPool._id));
@@ -38,4 +51,4 @@ class PoolDetails extends Component {
   }
 }
 
-export default connect(mapStateToProps)(PoolDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(PoolDetails);
