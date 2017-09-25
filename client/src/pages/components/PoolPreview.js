@@ -13,7 +13,7 @@ class PoolPreview extends Component {
   render() {
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
-
+    console.log("THIS.PROPS.LINKTARGET: " + this.props.linkTarget + " -:- Type: " + (typeof this.props.linkTarget));
     return(
       <Panel className={this.props.className}>
         <strong>{this.props.location}</strong><br/>
