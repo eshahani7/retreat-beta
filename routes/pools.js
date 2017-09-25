@@ -99,6 +99,7 @@ router.post('/list', (req, res) => {
 // POST /pools/join/:id --> join existing pool
 router.post('/join/:id', authenticate, (req, res) => {
   var id = req.params.id;
+  console.log(req.params.id);
   if(!ObjectID.isValid(id)) {
     res.status(404).send();
   }
