@@ -35,8 +35,13 @@ const mapDispatchToProps = (dispatch) => {
 
 class PoolListContainer extends Component {
   componentWillMount() {
+    var url = window.location.href;
+    var i = url.lastIndexOf('/');
+    var loc = url.substr(i+1);
+    loc = loc.charAt(0).toUpperCase() + loc.slice(1);
+    console.log(loc);
     this.props.fetchPools({
-      location: this.props.initLocation
+      location: loc
     });
   }
 
