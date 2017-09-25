@@ -1,6 +1,8 @@
 .mypools{
   text-align: center;
-  background-color: tan;
+  background: url('../img/beachResort.jpg');
+  background-size: cover;
+  background-position: center;
 }
 .myPoolsHeader{
   text-align: center;

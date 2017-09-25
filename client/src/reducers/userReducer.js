@@ -4,6 +4,8 @@ export default function reducer (state = {
   added: false,
   fetching: false,
   fetched: false,
+  finding: false,
+  found: false,
   loggedIn: false,
   loggingIn: false,
   loggingOut: false,
@@ -81,6 +83,24 @@ export default function reducer (state = {
         fetching:false,
         fetched:true,
         userDetails:action.payload
+      };
+    }
+    case 'FIND_USER': {
+      return {...state,
+        finding: true,
+      };
+    }
+    case 'FIND_USER_REJECTED': {
+      return {...state,
+        finding: false,
+        error: action.payload
+      };
+    }
+    case 'FIND_USER_FULFILLED': {
+      return {...state,
+        finding: false,
+        found: true,
+        userDetails: action.payload
       };
     }
     case 'UPDATE_USER': {
