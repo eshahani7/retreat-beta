@@ -3,9 +3,10 @@ var router = express.Router();
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
+const schedule = require('node-schedule');
 
 var {User} = require('../db/models/user');
-var {authenticate} = require('./middleware/authenticate');
+var {authenticate, authAdmin} = require('./middleware/authenticate');
 
 var {Pool} = require('../db/models/pool');
 
@@ -19,6 +20,15 @@ router.post('/', authenticate, (req, res) => {
   pool._creator = req.user._id;
   pool._userList.push(req.user._id);
   pool.poolCloses = pool.endDate; //need to decide when to close pools
+  schedule.scheduleJob(pool.poolCloses, () => {
+    pool.poolClosed = true;
+    pool.save().then(() => {
+      console.log('pool closed');
+    }).catch((e) => {
+      console.log(e);
+      console.log('error with closing pool');
+    });
+  });
 
   pool.save().then(() => {
     res.status(200).send(pool);
@@ -140,6 +150,18 @@ router.delete('/leave/:id', authenticate, (req, res) => {
     })
   }).catch((e) => {
     console.log(e);
+    res.status(400).send();
+  });
+});
+
+//----------------------ADMINS---------------------//
+router.get('/admin/list', authAdmin, (req, res) => { //to list closed pools
+  Pool.find({ poolClosed: true }).then((pools) => {
+    if(pools == null) {
+      res.status(404).send();
+    }
+    res.status(200).send({pools});
+  }).catch((e) => {
     res.status(400).send();
   });
 });

@@ -61,6 +61,7 @@ class PoolListContainer extends Component {
                 endDate={pool.endDate}
                 host={pool._creator}
                 select={(poolId) => {this.props.selectPool(poolId)}}
+                linkTarget={`/pool/details/${pool._id}`}
               />
               )}
           </Col>

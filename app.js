@@ -8,6 +8,8 @@ const _ = require('lodash');
 
 const users = require('./routes/users');
 const pools = require('./routes/pools');
+const locations = require('./routes/locations');
+const bookings = require('./routes/bookings');
 const {mongoose} = require('./db/mongoose');
 
 const app = express();
@@ -25,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', users);
 app.use('/pools', pools);
+app.use('/locations', locations);
+app.use('/bookings', bookings)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
