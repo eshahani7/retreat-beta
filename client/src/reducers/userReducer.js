@@ -101,6 +101,11 @@ export default function reducer (state = {
         userDetails: action.payload
       };
     }
+    case 'REFRESH_LOGIN' : {
+      return {...state,
+        loggedIn: action.payload
+      };
+    }
     default: {
       return state;
     }

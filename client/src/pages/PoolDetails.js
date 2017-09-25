@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) }
+      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
+      joinPool: (poolId) => { dispatch(joinPool(poolId)) }
   }
 };
 
@@ -32,7 +33,7 @@ class PoolDetails extends Component {
 
   join(e) {
     e.preventDefault();
-    this.props.dispatch(joinPool(this.props.selectedPool._id));
+    this.props.joinPool(this.props.selectedPool._id);
   }
 
   render() {

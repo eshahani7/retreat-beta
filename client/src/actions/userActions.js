@@ -100,3 +100,18 @@ export function logoutUser() {
     });
   }
 }
+
+export function refreshLogin() {
+  if(sessionStorage.getItem('authToken') != null) {
+    return {
+      type: 'REFRESH_LOGIN',
+      payload: true
+    };
+  }
+  else {
+    return {
+      type: 'REFRESH_LOGIN',
+      payload: false
+    }
+  }
+}

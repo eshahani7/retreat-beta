@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { logoutUser } from '../../actions/userActions.js'
+import { logoutUser, refreshLogin } from '../../actions/userActions.js'
 
 var PublicNavBar = require('../components/NavBar.js').PublicNavBar;
 var UserNavBar = require('../components/NavBar.js').UserNavBar;
@@ -15,10 +15,15 @@ const mapStateToProps = (state ) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logoutUser: () => { dispatch(logoutUser()); },
+    refreshLogin: () => { dispatch(refreshLogin()); }
   }
 };
 
 class LoginControl extends React.Component {
+  componentWillMount() {
+    this.props.refreshLogin();
+  }
+
   render() {
     let navbar = null;
 
