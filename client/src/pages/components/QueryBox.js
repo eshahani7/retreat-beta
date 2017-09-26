@@ -73,7 +73,7 @@ class QueryBox extends Component {
       { value: 'hiking', label: 'Hiking'}
     ]
     const genderOptions = [
-      { value: '', label: 'N/A'},
+      { value: '', label: '-'},
       { value: 'F', label: 'F'},
       { value: 'M', label: 'M' }
     ]
@@ -82,53 +82,62 @@ class QueryBox extends Component {
       <Panel id="QueryPanel">
         <Form horizontal className="queryForm">
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>
-              Dates
-            </Col>
-            <Col sm={6}>
-              <DatePicker name="startDate" selected={this.state.startDate}
-                onChange={this.handleChangeStart.bind(this)}/>
-              <div className="control-label">to</div>
-              <DatePicker name="endDate" selected={this.state.endDate}
-                onChange={this.handleChangeEnd.bind(this)}/>
-            </Col>
+            <Row componentClass={ControlLabel}>
+              <Col sm={12} id="datePickerLabel">
+                Dates
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                <DatePicker name="startDate" selected={this.state.startDate}
+                  onChange={this.handleChangeStart.bind(this)}/>
+                <span className="control-label">to</span>
+                <DatePicker name="endDate" selected={this.state.endDate}
+                  onChange={this.handleChangeEnd.bind(this)}/>
+              </Col>
+            </Row>
           </FormGroup>
 
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>
-              Gender
-            </Col>
-            <Col sm={6}>
-              <Select
-                name='gender'
-                value={this.state.gender}
-                options={genderOptions}
-                onChange={this.handleChangeGender.bind(this)}
-              />
-            </Col>
+            <Row>
+              <Col sm={3} componentClass={ControlLabel} id="genderPickerLabel">
+                Gender
+              </Col>
+              <Col sm={9} id="genderPicker">
+                <Select
+                  name='gender'
+                  value={this.state.gender}
+                  options={genderOptions}
+                  onChange={this.handleChangeGender.bind(this)}
+                />
+              </Col>
+            </Row>
           </FormGroup>
 
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>
-              Themes
-            </Col>
-            <Col sm={6}>
-              <Select
-                name='themes'
-                value={this.state.themes}
-                options={themeOptions}
-                multi={true}
-                onChange={this.handleChangeTheme.bind(this)}
-              />
-            </Col>
+            <Row>
+              <Col sm={3} componentClass={ControlLabel} id="themePickerLabel">
+                Themes
+              </Col>
+              <Col sm={9} id="themePicker">
+                <Select
+                  name='themes'
+                  value={this.state.themes}
+                  options={themeOptions}
+                  onChange={this.handleChangeTheme.bind(this)}
+                />
+              </Col>
+            </Row>
           </FormGroup>
 
           <FormGroup>
-            <Col smOffset={2} sm={6}>
-              <Button type="submit" onClick={this.onSubmit.bind(this)}>
-                Search
-              </Button>
-            </Col>
+            <Row>
+              <Col sm={12}>
+                <Button id="queryButton" type="submit" onClick={this.onSubmit.bind(this)}>
+                  SEARCH
+                </Button>
+              </Col>
+            </Row>
           </FormGroup>
         </Form>
       </Panel>

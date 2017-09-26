@@ -71,7 +71,7 @@ class UserNavBar extends Component {
             <NavItem eventKey={2} href="#">
               <NavLink target="/ViewUser" name="My Profile"/>
             </NavItem>
-            <NavItem eventKey={3} href="#" onSelect={this.props.logout}>
+            <NavItem className="userNavItem" eventKey={3} href="#" onSelect={this.props.logout}>
               Logout
             </NavItem>
           </Nav>

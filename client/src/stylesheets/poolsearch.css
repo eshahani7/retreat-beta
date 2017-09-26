@@ -1,37 +1,149 @@
+html{
+  height: 100%;
+}
+
+body{
+  height: 100%;
+}
+
 .poolList{
   text-align: center;
-  background: url("../img/beachResort.jpg");
+  background-color: #efefef;
   background-size: cover;
   height: 100%;
 }
 
+#poolsLeftSide{
+  padding-left: 2%;
+}
+
+#poolsRightSide{
+  padding-right: 2%;
+}
+
+#poolsListings{
+  align-content: center;
+  padding: 2%;
+}
+
+
 #headerLocation {
   font-family: futura;
   font-size: 36px;
-  color: white;
+  color: black;
   margin-bottom: 1%;
+}
+
+#locationButton {
+  font-family: futura;
+  font-size: 36px;
+  color: black;
+  padding: 10px;
+  width: 100%;
+  border-radius: 0;
+
+  transition: all 0.5s;
+}
+
+#locationButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+#locationButton span:after {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+#locationButton:hover span {
+  padding-right: 25px;
+}
+#locationButton:hover span:after {
+  opacity: 1;
+}
+
+.ParisButton{
+  background: url('../img/paris.png') !important;
+  background-size: cover !important;
+  color: white !important;
+}
+
+.TokyoButton{
+  background: url('../img/tokyo.png') !important;
+  background-size: cover !important;
+  color: white !important;
+}
+
+.FlorenceButton{
+  background: url('../img/florence.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  color: white !important;
+}
+
+#backArrow{
+  text-align: left;
+}
+
+#searchThingy{
+  padding: 5%;
 }
 
 #header{
   font-family: futura;
   font-size: 16px;
-  text-align: center;
+  text-align: right;
   margin-top: 1%;
-  color: white;
+  padding-right: 2%;
+  color: black;
 }
 
-#header>a{
+#createButton{
+  padding: 9px;
+  background: transparent;
+  color: black;
+  letter-spacing: 3px;
+  border: 1.25px solid black;
+  cursor: pointer;
+
+  transition: all 0.35s;
+}
+
+#createButton:hover{
+  background-color: black;
   color: white;
+  letter-spacing: 5px;
+  padding: 15px;
 }
 
 .searchPoolPanel{
-  background-color: rgba(0,0,0,0.25) !important;
+  background-color: rgb(51,153,255) !important;
   color: white;
-  margin-right: 2%;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .panel-body>a{
-  color: white;
+  color: black;
+}
+
+.list-group{
+  margin-bottom: 0 !important;
+}
+
+.list-group-item{
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  border-color: white !important;
+  background-color: lightgray !important;
+  /*width: 80%;*/
+}
+
+.plusGlyph{
+  margin-right: 4px;
 }
 
 .Paris{
@@ -60,4 +172,33 @@
   color: white;
   font-size: 16px;
   background-image: url("../img/florence.png") !important;
+}
+
+@media screen and (max-width: 767px){
+  #header{
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #header{
+    text-align: center;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+}
+
+@media screen and (max-width: 375px){
+
+}
+
+@media screen and (max-width: 360px){
+
+}
+
+@media screen and (max-width: 320px){
+
 }
