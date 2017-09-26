@@ -16,11 +16,6 @@ const mapStateToProps = (state) => {
   return {
     initLocation: state.pool.initLocation,
     poolList: state.pool.poolList,
-
-    hostEmail: state.user.userInfo.email,
-    hostFirstName: state.user.userInfo.firstName,
-    hostLastName: state.user.userInfo.lastName,
-    hostAge: state.user.userInfo.age
   };
 };
 
@@ -28,8 +23,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
       fetchPools: (query) => { dispatch(fetchPools(query)) },
       selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
-
-      findUser: (userID) =>{ dispatch(findUser(userID))}
   }
 };
 

@@ -37,7 +37,7 @@ class PoolPreview extends Component {
 
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
-
+    console.log(this.props.hostInfo);
     return(
       <Panel className={this.props.className}>
         <strong>{this.props.location}</strong><br/>
