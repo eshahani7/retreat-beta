@@ -41,7 +41,8 @@ class PoolListContainer extends Component {
     loc = loc.charAt(0).toUpperCase() + loc.slice(1);
     console.log(loc);
     this.props.fetchPools({
-      location: loc
+      location: loc,
+      poolClosed: false
     });
   }
 

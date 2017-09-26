@@ -10,7 +10,7 @@ import EditUser from './EditUser';
 import PoolListContainer from './PoolListContainer';
 import CreatePool from './CreatePool';
 import MyPools from './MyPools';
-import PoolDetails from './PoolDetails';
+import PoolDetails from './PoolDetailsContainer';
 import AdminList from './AdminList';
 import AdminSelect from './AdminSelect';
 
