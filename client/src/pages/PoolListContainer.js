@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Glyphicon, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import '../stylesheets/poolsearch.css'
@@ -45,12 +45,50 @@ class PoolListContainer extends Component {
     return(
       <div className="poolList">
         <LoginControl/>
-        <Row>
-          <Col sm={3} id="header">
-            <NavLink target="/create" name="CREATE POOL"/>
+        <Row id="poolsListingPage">
+          <Col sm={3} id="poolsLeftSide">
+            <Row id="headerLocation">
+              <Button className={this.props.initLocation + "Button"} id="locationButton" href="/"><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
+            </Row>
+            <Row id="searchThingy">
+              <QueryBox search={(query) => {this.props.fetchPools(query)}}
+                location={this.props.initLocation}/>
+            </Row>
           </Col>
-          <Col sm={9} id="headerLocation">
-            {this.props.initLocation}
+
+          <Col sm={9} id="poolsRightSide">
+            <Row id="header">
+              <Button id="createButton" href="/create"><Glyphicon glyph="plus-sign"/> CREATE POOL</Button>
+            </Row>
+            <Row id="poolsListings">
+              <ListGroup>
+                {pools.map((pool) =>
+                  <ListGroupItem>
+                    <PoolPreview
+                      className="searchPoolPanel"
+                      key={pool._id}
+                      id={pool._id}
+                      location={pool.location}
+                      startDate={pool.startDate}
+                      endDate={pool.endDate}
+                      host={pool._creator}
+                      select={(poolId) => {this.props.selectPool(poolId)}}
+                      linkTarget={`/pool/details/${pool._id}`}
+                    />
+                  </ListGroupItem>
+                  )}
+              </ListGroup>
+            </Row>
+          </Col>
+        </Row>
+
+        {/*
+        <Row>
+          <Col sm={2} id="headerLocation">
+            <Button className={this.props.initLocation + "Button"} id="locationButton" href="/"><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
+          </Col>
+          <Col sm={10} id="header">
+            <Button id="createButton" href="/create"><Glyphicon glyph="plus-sign"/> CREATE POOL</Button>
           </Col>
         </Row>
         <Row>
@@ -59,21 +97,26 @@ class PoolListContainer extends Component {
               location={this.props.initLocation}/>
           </Col>
           <Col sm={9}>
+          <ListGroup>
             {pools.map((pool) =>
-              <PoolPreview
-                className="searchPoolPanel"
-                key={pool._id}
-                id={pool._id}
-                location={pool.location}
-                startDate={pool.startDate}
-                endDate={pool.endDate}
-                host={pool._creator}
-                select={(poolId) => {this.props.selectPool(poolId)}}
-                linkTarget={`/pool/details/${pool._id}`}
-              />
+              <ListGroupItem>
+                <PoolPreview
+                  className="searchPoolPanel"
+                  key={pool._id}
+                  id={pool._id}
+                  location={pool.location}
+                  startDate={pool.startDate}
+                  endDate={pool.endDate}
+                  host={pool._creator}
+                  select={(poolId) => {this.props.selectPool(poolId)}}
+                  linkTarget={`/pool/details/${pool._id}`}
+                />
+              </ListGroupItem>
               )}
+          </ListGroup>
           </Col>
         </Row>
+        */}
       </div>
     );
   }

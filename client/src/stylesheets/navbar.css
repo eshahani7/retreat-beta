@@ -3,6 +3,11 @@
   align-items: center;
 }
 
+.userNavItem{
+  font-family: futura;
+  font-weight: 400;
+}
+
 .link {
   color: black;
   font-family: futura;
