@@ -7,6 +7,7 @@ const {ObjectID} = require('mongodb');
 var {authAdmin} = require('./middleware/authenticate');
 
 var {Booking} = require('../db/models/booking');
+var {Pool} = require('../db/models/pool');
 
 router.use(bodyParser.json());
 
@@ -20,7 +21,13 @@ router.post('/', authAdmin, (req, res) => {
 
   var booking = new Booking(body);
   booking.save().then(() => {
-    res.status(200).send(booking);
+    Pool.findByIdAndUpdate(req.body._poolId, {$set: { poolBooked: true }}).then((pool) => {
+      res.status(200).send(pool);
+    }).catch((e) => {
+      console.log(e);
+      res.status(400).send();
+    });
+  //  res.status(200).send(booking);
   }).catch((e) => {
     console.log(e);
     res.status(400).send();

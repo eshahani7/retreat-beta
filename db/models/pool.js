@@ -19,7 +19,8 @@ var PoolSchema = new mongoose.Schema({
   currentShares: {type: Number},
   _userList: [{type: mongoose.Schema.Types.ObjectId}],
   poolCloses: {type: Date, required: true},
-  poolClosed: {type: Boolean, required: true, default: false}
+  poolClosed: {type: Boolean, required: true, default: false},
+  poolBooked: {type: Boolean, required: true, default: false}
 });
 
 //--------------INSTANCE METHODS------------//
