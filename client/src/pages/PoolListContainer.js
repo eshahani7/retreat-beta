@@ -17,10 +17,10 @@ const mapStateToProps = (state) => {
     initLocation: state.pool.initLocation,
     poolList: state.pool.poolList,
 
-    hostEmail: state.user.userDetails.email,
-    hostFirstName: state.user.userDetails.firstName,
-    hostLastName: state.user.userDetails.lastName,
-    hostAge: state.user.userDetails.age
+    hostEmail: state.user.userInfo.email,
+    hostFirstName: state.user.userInfo.firstName,
+    hostLastName: state.user.userInfo.lastName,
+    hostAge: state.user.userInfo.age
   };
 };
 
@@ -42,7 +42,7 @@ class PoolListContainer extends Component {
 
   render() {
     const pools = this.props.poolList;
-    var hostName = this.props.hostFirstName + " " + this.props.hostLastName;
+    // var hostName = this.props.hostFirstName + " " + this.props.hostLastName;
     return(
       <div className="poolList">
         <LoginControl/>
