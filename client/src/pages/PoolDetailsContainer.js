@@ -6,6 +6,8 @@ import { joinPool, selectPool } from '../actions/poolActions'
 
 import LoginControl from './components/LoginControl';
 import PoolPreview from './components/PoolPreview';
+import PoolOpen from './components/PoolOpen';
+import PoolClosed from './components/PoolClosed';
 
 import '../stylesheets/PoolDetails.css';
 
@@ -40,25 +42,38 @@ class PoolDetails extends Component {
   }
 
   render() {
+    let details = null;
     const selected = this.props.selectedPool;
-
-    console.log("Start DATE: " + selected.startDate);
 
     var startDate = new Date(selected.startDate);
     var endDate = new Date(selected.endDate);
 
+    if(selected.PoolClosed) {
+      details =
+      <PoolOpen
+        location={selected.location}
+        start={startDate.toDateString()}
+        end={endDate.toDateString()}
+        host={selected._creator}
+        joined={selected._userList}
+        submit={this.join.bind(this)}
+      />
+    }
+    else {
+      details =
+      <PoolClosed
+        location={selected.location}
+        start={startDate.toDateString()}
+        end={endDate.toDateString()}
+        host={selected._creator}
+        joined={selected._userList}
+      />
+    }
+
     return(
       <div className="poolDetails">
         <LoginControl/>
-        <Panel className={selected.location}>
-          <strong>{selected.location}</strong><br/>
-          {startDate.toDateString()}<br/>
-          {endDate.toDateString()}<br/>
-          host: {selected._creator}<br/>
-          Joined: {selected._userList} <br/>
-          <Button onClick={this.join.bind(this)}>Join</Button>
-        </Panel>
-
+        {details}
       </div>
     );
 
