@@ -1,5 +1,6 @@
 export default function reducer (state = {
   userDetails: {},
+  userInfo: {},
   adding: false,
   added: false,
   fetching: false,
@@ -100,7 +101,7 @@ export default function reducer (state = {
       return {...state,
         finding: false,
         found: true,
-        userDetails: action.payload
+        userInfo: action.payload
       };
     }
     case 'UPDATE_USER': {

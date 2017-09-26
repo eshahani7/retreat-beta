@@ -10,9 +10,9 @@ import NavLink from './Link';
 const mapStateToProps = (state ) => {
   console.log("STATE: " + state);
   return {
-    hostInfo: state.user.userDetails,
-    hostFirstName: state.user.userDetails.firstName,
-    hostLastName: state.user.userDetails.lastName,
+    hostInfo: state.user.userInfo,
+    hostFirstName: state.user.userInfo.firstName,
+    hostLastName: state.user.userInfo.lastName,
   };
 };
 
@@ -29,6 +29,7 @@ class PoolPreview extends Component {
   }
 
   componentWillMount(){
+    console.log("HOST: " + this.props.host);
     this.props.findUser(this.props.host);
   }
 
@@ -36,7 +37,7 @@ class PoolPreview extends Component {
 
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
-
+    console.log(this.props.hostInfo);
     return(
       <Panel className={this.props.className}>
         <strong>{this.props.location}</strong><br/>
