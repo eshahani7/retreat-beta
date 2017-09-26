@@ -8,11 +8,11 @@ import { findUser } from '../../actions/userActions';
 import NavLink from './Link';
 
 const mapStateToProps = (state ) => {
-  console.log("STATE: " + state);
   return {
     hostInfo: state.user.userInfo,
     hostFirstName: state.user.userInfo.firstName,
     hostLastName: state.user.userInfo.lastName,
+    found: state.user.found
   };
 };
 
@@ -29,15 +29,14 @@ class PoolPreview extends Component {
   }
 
   componentWillMount(){
-    console.log("HOST: " + this.props.host);
-    this.props.findUser(this.props.host);
+    var response = this.props.findUser(this.props.host);
   }
 
   render() {
 
     var startDate = new Date(this.props.startDate);
     var endDate = new Date(this.props.endDate);
-    console.log(this.props.hostInfo);
+    console.log("HOST INFO: " + this.props.hostInfo.firstName);
     return(
       <Panel className={this.props.className}>
         <strong>{this.props.location}</strong><br/>
