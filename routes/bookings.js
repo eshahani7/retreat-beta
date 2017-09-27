@@ -4,10 +4,11 @@ const _ = require('lodash');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 
-var {authAdmin} = require('./middleware/authenticate');
+var {authAdmin, authenticate} = require('./middleware/authenticate');
 
 var {Booking} = require('../db/models/booking');
 var {Pool} = require('../db/models/pool');
+var {Loc} = require('../db/models/location');
 
 router.use(bodyParser.json());
 
@@ -42,6 +43,26 @@ router.get('/', authAdmin, (req, res) => {
     }
     res.status(200).send({bookings});
   }).catch((e) => {
+    res.status(400).send();
+  });
+});
+
+//------------------REGISTERED USERS--------------------//
+//GET /details/:id
+router.get('/details/:id', authenticate, (req, res) => {
+  var poolId = req.params.id;
+  Booking.findOne({ _poolId: poolId }).then((booking) => {
+    if(booking == null) {
+      res.status(404).send();
+    }
+    Loc.findOne({ _id: booking._locId }).then((loc) => {
+      res.status(200).send([loc, booking]);
+    }).catch((e) => {
+      console.log(e);
+      res.status(400).send();
+    })
+  }).catch((e) => {
+    console.log(e);
     res.status(400).send();
   });
 });
