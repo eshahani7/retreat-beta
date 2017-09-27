@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { Row, Col, Button, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { joinPool, selectPool } from '../actions/poolActions'
+import { joinPool, selectPool } from '../actions/poolActions';
+import { fetchBooking } from '../actions/bookingActions';
 
 import LoginControl from './components/LoginControl';
 import PoolPreview from './components/PoolPreview';
 import PoolOpen from './components/PoolOpen';
 import PoolClosed from './components/PoolClosed';
+import PoolBooked from './components/PoolBooked';
 
 import '../stylesheets/PoolDetails.css';
 
 const mapStateToProps = (state) => {
   return {
-    selectedPool: state.pool.selectedPool
+    selectedPool: state.pool.selectedPool,
+    poolBooking: state.booking.booking,
+    poolLocation: state.booking.location
   };
 };
 
@@ -21,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
       selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
       joinPool: (poolId) => { dispatch(joinPool(poolId)) }
-  }
+  };
 };
 
 {/*Note: also have to display host and joined user IDs as names by lookup,
@@ -44,11 +48,13 @@ class PoolDetails extends Component {
   render() {
     let details = null;
     const selected = this.props.selectedPool;
+    const booking = this.props.poolBooking;
+    const location = this.props.poolLocation;
 
     var startDate = new Date(selected.startDate);
     var endDate = new Date(selected.endDate);
 
-    if(selected.PoolClosed) {
+    if(!selected.poolClosed) {
       details =
       <PoolOpen
         location={selected.location}
@@ -57,6 +63,18 @@ class PoolDetails extends Component {
         host={selected._creator}
         joined={selected._userList}
         submit={this.join.bind(this)}
+      />
+    }
+    else if(selected.poolBooked) {
+      details =
+      <PoolBooked
+        location={selected.location}
+        start={booking.startDate}
+        end={booking.endDate}
+        host={selected._creator}
+        joined={selected._userList}
+        beds={location.numBed}
+        baths={location.numBath}
       />
     }
     else {
