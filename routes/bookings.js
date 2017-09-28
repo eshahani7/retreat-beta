@@ -3,6 +3,8 @@ var router = express.Router();
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
+const env = require('node-env-file');
+const stripe = require('stripe')(process.env.STRIPE_KEY_SECRET);
 
 var {authAdmin, authenticate} = require('./middleware/authenticate');
 
@@ -66,5 +68,27 @@ router.get('/details/:id', authenticate, (req, res) => {
     res.status(400).send();
   });
 });
+
+router.post('/charge', (req, res) => {
+  let amount = 500;
+  console.log(req.body);
+
+  stripe.customers.create({
+     email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  })
+  .then(customer =>
+    stripe.charges.create({
+      amount,
+      description: "Sample Charge",
+         currency: "usd",
+         customer: customer.id
+    }))
+  .then((charge) => {
+    res.status(200).send(charge);
+  }).catch((e) => {
+    res.status(400).send();
+  });
+})
 
 module.exports = router;
