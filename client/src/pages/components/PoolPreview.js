@@ -23,64 +23,38 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+function formatDate(convert){
+  var dayNum = convert.getDay();
+  var day = "";
+  var date = convert.getDate();
+  var month = convert.getMonth()+1;
+  var year = convert.getFullYear();
+
+  var dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+    'Friday', 'Saturday', 'Sunday'];
+
+  day = dayArray[dayNum];
+
+  var fullDate = day + ", " + month + "/" + date + "/" + year;
+  console.log(fullDate);
+  return fullDate;
+}
+
 class PoolPreview extends Component {
   onSelect() {
     console.log(this.props.id);
     this.props.select(this.props.id);
   }
 
-  componentWillMount(){
-    var response = this.props.findUser(this.props.host);
-  }
-
-  formatDate(date){
-    var dayNum = date.getDay();
-    var day = "";
-    var date = date.getDate();
-    var month = date.getMonth()+1;
-    var year = date.getFullYear();
-
-    if(dayNum == 0){
-      day = "Sunday";
-    }
-    else if(dayNum == 1){
-      day = "Monday";
-    }
-    else if(dayNum == 2){
-      day = "Tuesday";
-    }
-    else if(dayNum == 3){
-      day = "Wednesday";
-    }
-    else if(dayNum == 4){
-      day = "Thursday";
-    }
-    else if(dayNum == 5){
-      day = "Friday";
-    }
-    else if(dayNum == 6){
-      day = "Saturday";
-    }
-
-    var fullDate = day + " " + date + "/" + month + "/" + year;
-
-    return fullDate;
-  }
-
-  formatThemes(themes){
-    
-  }
+  // componentWillMount(){
+  //   var response = this.props.findUser(this.props.host);
+  // }
 
   render() {
 
-    // var startDate = formatDate(new Date(this.props.startDate));
-    // var endDate = formatDate(new Date(this.props.endDate));
+    var startDate = formatDate(new Date(this.props.startDate));
+    var endDate = formatDate(new Date(this.props.endDate));
 
-    var startDate = new Date(this.props.startDate);
-    var endDate = new Date(this.props.endDate);
-
-    startDate = startDate.toDateString();
-    endDate = endDate.toDateString();
     console.log("GOAL: " + this.props.goal);
 
     console.log("HOST INFO: " + this.props.hostInfo.firstName);
