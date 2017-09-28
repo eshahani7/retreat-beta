@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
   return {
     selectedPool: state.pool.selectedPool,
     poolBooking: state.booking.booking,
-    poolLocation: state.booking.location
+    poolLocation: state.booking.location,
+    hostInfo: state.user.userInfo
   };
 };
 
@@ -60,7 +61,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={startDate.toDateString()}
         end={endDate.toDateString()}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         goal={selected.goal}
         minPeople={selected.minPeople}
         gender={selected.gender}
@@ -77,7 +79,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={booking.startDate}
         end={booking.endDate}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
         minAge={selected.minAge}
         maxAge={selected.maxAge}
@@ -93,7 +96,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={startDate.toDateString()}
         end={endDate.toDateString()}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
         minAge={selected.minAge}
         maxAge={selected.maxAge}

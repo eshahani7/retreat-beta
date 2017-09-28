@@ -19,7 +19,7 @@ class PoolClosed extends Component {
               </Row>
 
               <Row>
-                Host: {this.props.host}
+                Host: {this.props.hostFirst} {this.props.hostLast}
               </Row>
 
               <Row id="closedTravelerInfo">
