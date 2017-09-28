@@ -8,21 +8,6 @@ import '../../stylesheets/poolPreview.css'
 
 import NavLink from './Link';
 
-const mapStateToProps = (state ) => {
-  return {
-    hostInfo: state.user.userInfo,
-    hostFirstName: state.user.userInfo.firstName,
-    hostLastName: state.user.userInfo.lastName,
-    found: state.user.found
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      findUser: (userID) =>{ dispatch(findUser(userID))}
-  };
-};
-
 function formatDate(convert){
   var dayNum = convert.getDay();
   var day = "";
@@ -41,23 +26,21 @@ function formatDate(convert){
 }
 
 class PoolPreview extends Component {
+  componentWillMount() {
+    this.props.select(this.props.id);
+  }
+
   onSelect() {
     console.log(this.props.id);
     this.props.select(this.props.id);
   }
-
-  // componentWillMount(){
-  //   var response = this.props.findUser(this.props.host);
-  // }
 
   render() {
 
     var startDate = formatDate(new Date(this.props.startDate));
     var endDate = formatDate(new Date(this.props.endDate));
 
-    console.log("GOAL: " + this.props.goal);
-
-    console.log("HOST INFO: " + this.props.hostInfo.firstName);
+    // console.log("HOST INFO: " + this.props.hostInfo.firstName);
     return(
       <Panel className={this.props.className}>
         <Row>
@@ -71,7 +54,7 @@ class PoolPreview extends Component {
             </Row>
 
             <Row id="hostInfo">
-              Host: {this.props.hostFirstName} {this.props.hostLastName}
+              Host: {this.props.host}
             </Row>
 
             <Row>
@@ -110,4 +93,4 @@ class PoolPreview extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoolPreview);
+export default PoolPreview;

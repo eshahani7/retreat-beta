@@ -1,6 +1,7 @@
 export default function reducer (state = {
   initLocation: null,
   poolList: [],
+  hostList: [],
   selectedPool: {},
   fetching: false,
   fetched: false,
