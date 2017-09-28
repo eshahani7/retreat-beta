@@ -43,7 +43,6 @@ class MyPools extends Component {
 
             {pools.map((pool) =>
               <PoolPreview
-                className={pool.location}
                 key={pool._id}
                 location={pool.location}
                 startDate={pool.startDate}

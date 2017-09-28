@@ -120,8 +120,8 @@ body{
 }
 
 .searchPoolPanel{
-  background-color: rgb(51,153,255) !important;
-  color: white;
+  background-color: #fffcf4 !important;
+  color: black;
   border-radius: 0 !important;
   margin-bottom: 0 !important;
 }
@@ -137,7 +137,7 @@ body{
 .list-group-item{
   padding: 0 !important;
   margin-bottom: 0 !important;
-  border-color: white !important;
+  border-color: color !important;
   background-color: lightgray !important;
   /*width: 80%;*/
 }

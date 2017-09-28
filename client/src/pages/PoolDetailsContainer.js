@@ -61,6 +61,12 @@ class PoolDetails extends Component {
         start={startDate.toDateString()}
         end={endDate.toDateString()}
         host={selected._creator}
+        goal={selected.goal}
+        minPeople={selected.minPeople}
+        gender={selected.gender}
+        minAge={selected.minAge}
+        maxAge={selected.maxAge}
+        themes={selected.themes}
         joined={selected._userList}
         submit={this.join.bind(this)}
       />
@@ -72,6 +78,10 @@ class PoolDetails extends Component {
         start={booking.startDate}
         end={booking.endDate}
         host={selected._creator}
+        gender={selected.gender}
+        minAge={selected.minAge}
+        maxAge={selected.maxAge}
+        themes={selected.themes}
         joined={selected._userList}
         beds={location.numBed}
         baths={location.numBath}
@@ -84,6 +94,10 @@ class PoolDetails extends Component {
         start={startDate.toDateString()}
         end={endDate.toDateString()}
         host={selected._creator}
+        gender={selected.gender}
+        minAge={selected.minAge}
+        maxAge={selected.maxAge}
+        themes={selected.themes}
         joined={selected._userList}
       />
     }

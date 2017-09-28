@@ -1,6 +1,46 @@
 .poolDetails{
-  background-color: tan;
+  background-color: #efefef;
   height: 100%;
+}
+
+#infoDetails{
+  padding: 2%;
+
+}
+
+#locationDetails{
+  font-size: 32px;
+  margin-bottom: 2%;
+}
+
+#detailsLeftSide{
+
+}
+
+#bookedLocationDetails{
+  font-size: 32px;
+  margin-bottom: 2%;
+}
+
+#closedLocationDetails{
+  font-size: 32px;
+  margin-bottom: 2%;
+}
+
+#openTravelerDetails{
+  margin-bottom: 1%;
+}
+
+#bookedTravelerDetails{
+  margin-bottom: 1%;
+}
+
+#closedTravelerDetails{
+  margin-bottom: 1%;
+}
+
+#openRestrictionDetails{
+  margin-bottom: 1%;
 }
 
 .Paris{

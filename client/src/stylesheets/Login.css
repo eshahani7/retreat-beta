@@ -43,6 +43,12 @@ body{
     transform: translateY(4px);
 }
 
+#LoginButton:focus{
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+}
+
 #LoginButton{
   border-radius: 50px;
   -moz-border-radius: 50px;

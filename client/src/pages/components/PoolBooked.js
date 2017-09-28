@@ -34,21 +34,79 @@ class PoolBooked extends Component {
   render() {
     return(
       <div className="poolDetails">
-        This pool booked yay.
-        <Panel className={this.props.location}>
-          <strong>{this.props.location}</strong><br/>
-          {this.props.start}<br/>
-          {this.props.end}<br/>
-          host: {this.props.host}<br/>
-          Joined: {this.props.joined} <br/>
-          Bedrooms: {this.props.beds} <br/>
-          Bathrooms: {this.props.baths} <br/>
+        <Panel>
+          <Row id="bookedDetails">
+            <Col sm={9} id="">
+              <Row id="bookedLocationDetails">
+                <strong>{this.props.location}</strong>
+              </Row>
+
+              <Row>
+                Travel from {this.props.start} to {this.props.end}
+              </Row>
+
+              <Row>
+                Host: {this.props.host}
+              </Row>
+
+              <Row id="bookedTravelerDetails">
+                Joined: {this.props.joined}
+              </Row>
+
+              <Row id="bookedRestrictionDetails">
+                <strong>Restrictions</strong> <br/>
+                  Gender:{this.props.gender} <br/>
+                  Minimum Age: {this.props.minAge} <br/>
+                  Maximum Age: {this.props.maxAge}
+              </Row>
+
+              <Row>
+                Bedrooms: {this.props.beds}
+              </Row>
+            </Col>
+
+            <Col sm={3}>
+              <Row>
+                Bathrooms: ${this.props.baths}
+              </Row>
+              <Row>
+                people / minPeople
+                {/* {this.props._userList.length}/{this.props.minPeople} */}
+              </Row>
+
+              <StripeCheckout
+                token={this.onToken.bind(this)}
+                stripeKey={process.env.STRIPE_KEY_PUBLIC}
+              />
+            </Col>
+          </Row>
+
+          <Row id="imagesThingyBooked">
+            <img/>
+            <img/>
+            <img/>
+          </Row>
         </Panel>
-        <StripeCheckout
-          token={this.onToken.bind(this)}
-          stripeKey={process.env.STRIPE_KEY_PUBLIC}
-        />
       </div>
+
+
+      // <div className="poolDetails">
+      //   This pool booked yay.
+      //   <Panel className={this.props.location}>
+      //     <strong>{this.props.location}</strong><br/>
+      //     {this.props.start}<br/>
+      //     {this.props.end}<br/>
+      //     host: {this.props.host}<br/>
+      //     Joined: {this.props.joined} <br/>
+      //     Bedrooms: {this.props.beds} <br/>
+      //     Bathrooms: {this.props.baths} <br/>
+      //   </Panel>
+      //   <StripeCheckout
+      //     token={this.onToken.bind(this)}
+      //     stripeKey={process.env.STRIPE_KEY_PUBLIC}
+      //   />
+      // </div>
+
     );
   }
 }

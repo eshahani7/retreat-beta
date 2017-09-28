@@ -98,8 +98,8 @@ class CreatePool extends Component {
       { value: 'Florence', label: 'Florence' }
     ];
     const themeOptions = [
-      { value: 'adventure', label: 'Adventure'},
-      { value: 'hiking', label: 'Hiking'}
+      { value: 'Adventure', label: 'Adventure'},
+      { value: 'Hiking', label: 'Hiking'}
     ];
     const genderOptions = [
       { value: 'F', label: 'F'},

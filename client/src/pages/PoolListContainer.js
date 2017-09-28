@@ -16,6 +16,12 @@ const mapStateToProps = (state) => {
   return {
     initLocation: state.pool.initLocation,
     poolList: state.pool.poolList,
+
+    hostInfo: state.user.userInfo,
+    hostFirstName: state.user.userInfo.firstName,
+    hostLastName: state.user.userInfo.lastName,
+    finding: state.user.finding,
+    found: state.user.found
   };
 };
 
@@ -23,6 +29,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
       fetchPools: (query) => { dispatch(fetchPools(query)) },
       selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
+
+      findUser: (userID) =>{ dispatch(findUser(userID))}
   }
 };
 
@@ -37,6 +45,13 @@ class PoolListContainer extends Component {
       location: loc,
       poolClosed: false
     });
+  }
+
+  queryUser(id){
+    this.props.findUser(id);
+    if(this.props.found){
+      return this.props.hostFirstName;
+    }
   }
 
   render() {
@@ -72,50 +87,53 @@ class PoolListContainer extends Component {
                       startDate={pool.startDate}
                       endDate={pool.endDate}
                       host={pool._creator}
+                      userList={pool._userList}
+                      goal={pool.goal}
+                      minPeople={pool.minPeople}
+                      themes={pool.themes}
                       select={(poolId) => {this.props.selectPool(poolId)}}
                       linkTarget={`/pool/details/${pool._id}`}
                     />
                   </ListGroupItem>
-                  )}
+                )}
               </ListGroup>
             </Row>
           </Col>
         </Row>
-
         {/*
-        <Row>
-          <Col sm={2} id="headerLocation">
-            <Button className={this.props.initLocation + "Button"} id="locationButton" href="/"><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
-          </Col>
-          <Col sm={10} id="header">
-            <Button id="createButton" href="/create"><Glyphicon glyph="plus-sign"/> CREATE POOL</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={3}>
-            <QueryBox search={(query) => {this.props.fetchPools(query)}}
-              location={this.props.initLocation}/>
-          </Col>
-          <Col sm={9}>
-          <ListGroup>
-            {pools.map((pool) =>
-              <ListGroupItem>
-                <PoolPreview
-                  className="searchPoolPanel"
-                  key={pool._id}
-                  id={pool._id}
-                  location={pool.location}
-                  startDate={pool.startDate}
-                  endDate={pool.endDate}
-                  host={pool._creator}
-                  select={(poolId) => {this.props.selectPool(poolId)}}
-                  linkTarget={`/pool/details/${pool._id}`}
-                />
-              </ListGroupItem>
-              )}
-          </ListGroup>
-          </Col>
-        </Row>
+        // <Row>
+        //   <Col sm={2} id="headerLocation">
+        //     <Button className={this.props.initLocation + "Button"} id="locationButton" href="/"><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
+        //   </Col>
+        //   <Col sm={10} id="header">
+        //     <Button id="createButton" href="/create"><Glyphicon glyph="plus-sign"/> CREATE POOL</Button>
+        //   </Col>
+        // </Row>
+        // <Row>
+        //   <Col sm={3}>
+        //     <QueryBox search={(query) => {this.props.fetchPools(query)}}
+        //       location={this.props.initLocation}/>
+        //   </Col>
+        //   <Col sm={9}>
+        //   <ListGroup>
+        //     {pools.map((pool) =>
+        //       <ListGroupItem>
+        //         <PoolPreview
+        //           className="searchPoolPanel"
+        //           key={pool._id}
+        //           id={pool._id}
+        //           location={pool.location}
+        //           startDate={pool.startDate}
+        //           endDate={pool.endDate}
+        //           host={pool._creator}
+        //           select={(poolId) => {this.props.selectPool(poolId)}}
+        //           linkTarget={`/pool/details/${pool._id}`}
+        //         />
+        //       </ListGroupItem>
+        //       )}
+        //   </ListGroup>
+        //   </Col>
+        // </Row>
         */}
       </div>
     );

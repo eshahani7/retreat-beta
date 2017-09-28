@@ -69,8 +69,8 @@ class QueryBox extends Component {
 
   render() {
     const themeOptions = [
-      { value: 'adventure', label: 'Adventure'},
-      { value: 'hiking', label: 'Hiking'}
+      { value: 'Adventure', label: 'Adventure'},
+      { value: 'Hiking', label: 'Hiking'}
     ]
     const genderOptions = [
       { value: '', label: '-'},
