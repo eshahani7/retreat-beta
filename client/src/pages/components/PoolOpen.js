@@ -6,6 +6,7 @@ import '../../stylesheets/PoolDetails.css';
 class PoolOpen extends Component {
   render() {
     var now = 60; //this.props.minPeople / this.props.maxShare
+
     return(
       <div className="poolDetails">
         <Panel>
@@ -24,7 +25,7 @@ class PoolOpen extends Component {
               </Row>
 
               <Row id="openTravelerDetails">
-                Travelers: {this.props.joined}
+                Travelers:
               </Row>
 
               <Row id="openRestrictionDetails">

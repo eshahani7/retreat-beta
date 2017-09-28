@@ -26,10 +26,6 @@ function formatDate(convert){
 }
 
 class PoolPreview extends Component {
-  componentWillMount() {
-    this.props.select(this.props.id);
-  }
-
   onSelect() {
     console.log(this.props.id);
     this.props.select(this.props.id);

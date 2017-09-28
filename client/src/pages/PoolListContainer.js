@@ -38,13 +38,6 @@ class PoolListContainer extends Component {
     });
   }
 
-  queryUser(id){
-    this.props.findUser(id);
-    if(this.props.found){
-      return this.props.hostFirstName;
-    }
-  }
-
   render() {
     const pools = this.props.poolList;
     // var hostName = this.props.hostFirstName + " " + this.props.hostLastName;
