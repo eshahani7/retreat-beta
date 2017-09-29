@@ -15,8 +15,8 @@ class PoolOpen extends Component {
                 <strong>{this.props.location}</strong>
               </Row>
 
-              <Row>
-                Travel from {this.props.start} to {this.props.end}
+              <Row id="openDateDetails">
+                Travel from <u>{this.props.start}</u> to <u>{this.props.end}</u>
               </Row>
 
               <Row>
@@ -29,7 +29,7 @@ class PoolOpen extends Component {
 
               <Row id="openRestrictionDetails">
                 <strong>Restrictions</strong> <br/>
-                  Gender:{this.props.gender} <br/>
+                  Gender: {this.props.gender} <br/>
                   Minimum Age: {this.props.minAge} <br/>
                   Maximum Age: {this.props.maxAge}
               </Row>

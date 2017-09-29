@@ -39,8 +39,9 @@ body{
   font-size: 36px;
   color: black;
   padding: 10px;
-  width: 100%;
+  width: 90%;
   border-radius: 0;
+  letter-spacing: 1.5px;
 
   transition: all 0.5s;
 }
@@ -60,6 +61,7 @@ body{
 }
 #locationButton:hover span {
   padding-right: 25px;
+  letter-spacing: 6px;
 }
 #locationButton:hover span:after {
   opacity: 1;
@@ -144,6 +146,11 @@ body{
 
 .plusGlyph{
   margin-right: 4px;
+}
+
+#userInfoPreview .col-sm-6{
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .Paris{

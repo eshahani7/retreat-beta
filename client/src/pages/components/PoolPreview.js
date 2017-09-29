@@ -63,20 +63,16 @@ class PoolPreview extends Component {
         <Row>
           <Col sm={9} id="infoSide">
             <Row id="locationInfo">
-              <strong>{this.props.location}</strong>
+              <strong>{this.props.location.toUpperCase()}</strong>
             </Row>
 
             <Row id="dateInfo">
-              Travel from {startDate} to {endDate}
+              Travel from <u>{startDate}</u> to <u>{endDate}</u>
             </Row>
 
-            <Row id="hostInfo">
-              Host: {this.props.hostFirstName} {this.props.hostLastName}
-            </Row>
-
-            <Row>
+            <Row id="userInfoPreview">
               <Col sm={6} id="travelerInfo">
-                Travelers: {this.props.userList}
+                Travelers: {this.props.userList.length} people traveling
               </Col>
               <Col sm={6} id="sharePriceInfo">
                 Share Price: ${this.props.goal}
@@ -87,13 +83,13 @@ class PoolPreview extends Component {
               Themes: {this.props.themes}
             </Row>
 
-            <Row>
+            <Row id="detailsButton">
               <NavLink target={this.props.linkTarget} name="Details"/>
             </Row>
           </Col>
 
           <Col sm={3} id="imageSide">
-            <img/>
+            {/* <img url="../../img/goatPhoto.jpeg"/> */}
           </Col>
         </Row>
       </Panel>

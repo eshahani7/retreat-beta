@@ -11,6 +11,13 @@
 #locationDetails{
   font-size: 32px;
   margin-bottom: 2%;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
+
+#openDateDetails{
+  letter-spacing: 2px;
+  margin-bottom: 1%;
 }
 
 #detailsLeftSide{
