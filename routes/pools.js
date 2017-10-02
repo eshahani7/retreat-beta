@@ -129,7 +129,8 @@ router.post('/join/:id', authenticate, (req, res) => {
 
 // GET /pools/me --> get pools joined by user
 router.get('/me', authenticate, (req, res) => {
-  Pool.find({_userList: { "$in" : [req.user._id]}}).then((pools) => {
+  Pool.find({_userList: { "$in" :[[req.user.firstName + ' ' + req.user.lastName, req.user._id]]}})
+  .then((pools) => {
     res.status(200).send({pools});
   }).catch((e) => {
     res.status(400).send();
