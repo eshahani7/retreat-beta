@@ -9,8 +9,19 @@ import '../stylesheets/SignUp.css';
 
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
+import LoginControl from './components/LoginControl.js';
 
 var PublicNavBar = require('./components/NavBar.js').PublicNavBar;
+
+const Loading = require('react-loading-animation');
+
+const mapStateToProps = (state ) => {
+  return {
+    adding: state.user.adding,
+    added: state.user.added,
+    addFailed: state.user.addFailed
+  }
+}
 
 class SignUp extends Component {
 
@@ -50,70 +61,218 @@ class SignUp extends Component {
   }
 
   render() {
-    return (
-      <div className="SignUp">
-        <PublicNavBar/>
+    if(this.props.adding){
+      return (
+        <div className="SignUp">
+          <PublicNavBar/>
+          <Row>
+            <Col md={12} id="SignUpHeader">
+              JOIN RETREAT!
+            </Col>
+          </Row>
+
+          <Form horizontal className="signUpForm">
+            <FormField
+              className= "signUpField"
+              title="Email"
+              type="text"
+              holder="janedoe@gmail.com"
+              name="email"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Password"
+              type="password"
+              holder="password"
+              name="password"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="First Name"
+              type="text"
+              holder="Jane"
+              name="firstName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Last Name"
+              type="text"
+              holder="Doe"
+              name="lastName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Age"
+              type="number"
+              holder="21"
+              name="age"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Gender"
+              type="text"
+              holder="F"
+              name="gender"
+              change={this.handleChange.bind(this)}
+            />
+
+            <SubmitBtn title="SIGN UP" id="SignUpButton" submit={this.addNewUser.bind(this)}/>
+            <Loading/>
+          </Form>
+        </div>
+      );
+    }
+    else if (this.props.added){
+      return(
+        <div className="SignUp">
+        <LoginControl/>
         <Row>
           <Col md={12} id="SignUpHeader">
-            JOIN RETREAT!
+            CONGRATULATIONS ON JOINING RETREAT!
           </Col>
         </Row>
+        <Row id="signUpBottom">
+          <Button id="letsGetStarted" href="/">LETS GET STARTED!</Button>
+        </Row>
+        </div>
+      );
+    }
+    else if (this.props.addFailed){
+      return (
+        <div className="SignUp">
+          <PublicNavBar/>
+          <Row>
+            <Col md={12} id="SignUpHeader">
+              SIGN UP FAILED. PLEASE TRY AGAIN
+            </Col>
+          </Row>
 
-        <Form horizontal className="signUpForm">
-          <FormField
-            className= "signUpField"
-            title="Email"
-            type="text"
-            holder="janedoe@gmail.com"
-            name="email"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            className= "signUpField"
-            title="Password"
-            type="password"
-            holder="password"
-            name="password"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            className= "signUpField"
-            title="First Name"
-            type="text"
-            holder="Jane"
-            name="firstName"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            className= "signUpField"
-            title="Last Name"
-            type="text"
-            holder="Doe"
-            name="lastName"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            className= "signUpField"
-            title="Age"
-            type="number"
-            holder="21"
-            name="age"
-            change={this.handleChange.bind(this)}
-          />
-          <FormField
-            className= "signUpField"
-            title="Gender"
-            type="text"
-            holder="F"
-            name="gender"
-            change={this.handleChange.bind(this)}
-          />
+          <Form horizontal className="signUpForm">
+            <FormField
+              className= "signUpField"
+              title="Email"
+              type="text"
+              holder="janedoe@gmail.com"
+              name="email"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Password"
+              type="password"
+              holder="password"
+              name="password"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="First Name"
+              type="text"
+              holder="Jane"
+              name="firstName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Last Name"
+              type="text"
+              holder="Doe"
+              name="lastName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Age"
+              type="number"
+              holder="21"
+              name="age"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Gender"
+              type="text"
+              holder="F"
+              name="gender"
+              change={this.handleChange.bind(this)}
+            />
 
-          <SubmitBtn title="SIGN UP" id="SignUpButton" submit={this.addNewUser.bind(this)}/>
-        </Form>
-      </div>
-    );
+            <SubmitBtn title="SIGN UP" id="SignUpButton" submit={this.addNewUser.bind(this)}/>
+          </Form>
+        </div>
+      );
+    }
+    else{
+      return (
+        <div className="SignUp">
+          <PublicNavBar/>
+          <Row>
+            <Col md={12} id="SignUpHeader">
+              JOIN RETREAT!
+            </Col>
+          </Row>
+
+          <Form horizontal className="signUpForm">
+            <FormField
+              className= "signUpField"
+              title="Email"
+              type="text"
+              holder="janedoe@gmail.com"
+              name="email"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Password"
+              type="password"
+              holder="password"
+              name="password"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="First Name"
+              type="text"
+              holder="Jane"
+              name="firstName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Last Name"
+              type="text"
+              holder="Doe"
+              name="lastName"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Age"
+              type="number"
+              holder="21"
+              name="age"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "signUpField"
+              title="Gender"
+              type="text"
+              holder="F"
+              name="gender"
+              change={this.handleChange.bind(this)}
+            />
+
+            <SubmitBtn title="SIGN UP" id="SignUpButton" submit={this.addNewUser.bind(this)}/>
+          </Form>
+        </div>
+      );
+    }
   }
 }
 
-export default connect()(SignUp);
+export default connect(mapStateToProps)(SignUp);

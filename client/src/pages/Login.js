@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom'
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import '../stylesheets/form.css';
 import '../stylesheets/Login.css';
 
@@ -107,8 +107,11 @@ class Login extends Component {
             <LoginControl/>
             <Row>
               <Col md={12} id="LoginHeader">
-                CONGRATS! LOGGED IN
+                LOGGED IN!
               </Col>
+            </Row>
+            <Row id="loginBottom">
+              <Button id="getStarted" href="/">LETS GET STARTED!</Button>
             </Row>
           </div>
         );

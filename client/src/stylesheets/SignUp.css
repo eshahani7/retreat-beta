@@ -65,6 +65,31 @@ body{
   border-radius: 4px;
 }
 
+#signUpBottom{
+  text-align: center;
+  padding: 4%;
+}
+
+#letsGetStarted{
+  color: white;
+  background-color: transparent;
+  border: 1.25px solid white;
+  padding: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  letter-spacing: 5px;
+  border-radius: 4px;
+
+  transition: all 0.5s;
+}
+#letsGetStarted:hover{
+  background-color: white;
+  color: black;
+
+  letter-spacing: 10px;
+}
+
 
 .SignUp{
   width: 100%;

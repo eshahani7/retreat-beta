@@ -3,6 +3,7 @@ export default function reducer (state = {
   userInfo: {},
   adding: false,
   added: false,
+  addFailed: false,
   fetching: false,
   fetched: false,
   finding: false,
@@ -17,16 +18,18 @@ export default function reducer (state = {
 }, action) {
   switch(action.type) {
     case 'ADD_USER': {
-      return {...state, adding:true};
+      return {...state, addFailed: false, adding:true};
     }
     case 'ADD_USER_REJECTED': {
       return {...state,
         adding:false,
+        addFailed: true,
         error:action.payload
       };
     }
     case 'ADD_USER_FULFILLED': {
       return {...state,
+        addFailed: false,
         adding:false,
         added:true,
         loggedIn: true,
