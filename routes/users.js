@@ -57,12 +57,9 @@ router.post('/login', (req, res) => {
 
 // DELETE /users/me/token --> logging out
 router.delete('/me/token', authenticate, (req, res) => {
-  console.log("Starting log out...");
   req.user.removeToken(req.token).then(() => {
-    console.log("remove token successful!");
     res.status(200).send();
   }, () => {
-    console.log("remove token failed.")
     res.status(400).send();
   });
 });
