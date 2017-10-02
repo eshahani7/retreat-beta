@@ -1,13 +1,65 @@
-import React, { Component } from 'react';
+import React, { Component, Image } from 'react';
 import { Row, Col, Button, Panel, ProgressBar } from 'react-bootstrap';
 
 import '../../stylesheets/PoolDetails.css';
 
+function formatDate(convert){
+  var dayNum = convert.getDay();
+  var day = "";
+  var date = convert.getDate();
+  var month = convert.getMonth()+1;
+  var year = convert.getFullYear();
+
+  var dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+    'Friday', 'Saturday', 'Sunday'];
+
+  day = dayArray[dayNum];
+
+  var fullDate = day + ", " + month + "/" + date + "/" + year;
+  console.log(fullDate);
+  return fullDate;
+}
+
+function formatThemes(themes){
+  var themeList = "";
+  if(themes != undefined){
+    for(var i = 0; i < themes.length; i++){
+      themeList += themes[i].charAt(0).toUpperCase() + themes[i].slice(1);
+      if(i != (themes.length - 1)){
+          themeList += ", ";
+      }
+    }
+
+    return themeList;
+  }
+}
+
 class PoolOpen extends Component {
+
   render() {
-    var now = 60; //this.props.minPeople / this.props.maxShare
+    var startDate = formatDate(new Date(this.props.start));
+    var endDate = formatDate(new Date(this.props.end));
+
+    var themeList = formatThemes(this.props.themes);
+
+    var now;
+    if(this.props.joined == undefined){
+      now = 0;
+    }
+    else{
+      now = this.props.joined.length / this.props.minPeople * 100;
+    }
+
+    let travelersJoin = null;
+
+    if(this.props.joined == undefined){
+      travelersJoin = "0 / this.props.minPeople travelers have joined";
+    }
+    else{
+      travelersJoin = this.props.joined.length + " / " + this.props.minPeople + " travelers have joined";
+    }
     return(
-      <div className="poolDetails">
+      <div className="poolOpenDetails">
         <Panel>
           <Row id="infoDetails">
             <Col sm={9} id="detailsLeftSide">
@@ -16,52 +68,71 @@ class PoolOpen extends Component {
               </Row>
 
               <Row id="openDateDetails">
-                Travel from <u>{this.props.start}</u> to <u>{this.props.end}</u>
+                Travel from <u>{startDate}</u> to <u>{endDate}</u>
               </Row>
 
               <Row>
-                Host: {this.props.host}
+                Host: {this.props.hostFirst} {this.props.hostLast}
               </Row>
 
               <Row id="openTravelerDetails">
-                Travelers: {this.props.joined}
+                Travelers:
               </Row>
 
               <Row id="openRestrictionDetails">
-                <strong>Restrictions</strong> <br/>
-                  Gender: {this.props.gender} <br/>
-                  Minimum Age: {this.props.minAge} <br/>
-                  Maximum Age: {this.props.maxAge}
+                <strong><u>Restrictions</u></strong>
+                <ul>
+                  <li>
+                    Gender: {this.props.gender}
+                  </li>
+
+                  <li>
+                    Minimum Age: {this.props.minAge}
+                  </li>
+
+                  <li>
+                    Maximum Age: {this.props.maxAge}
+                  </li>
+
+                </ul>
               </Row>
 
               <Row>
-                Themes: {this.props.themes}
+                Themes: {themeList}
               </Row>
             </Col>
 
             <Col sm={3} id="detailsRightSide">
               <Row>
-                Share Price: ${this.props.goal}
+                Goal: ${this.props.goal}
               </Row>
               <Row>
-                people / minPeople
-                {/* {this.props.joined.length}/{this.props.minPeople} */}
+                {travelersJoin}
               </Row>
               <Row>
                 <ProgressBar active bsStyle="success" now={now} label={`${now}%`} />
               </Row>
 
               <Row>
-                <Button onClick={this.props.submit}>Join</Button>
+                <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
               </Row>
 
             </Col>
           </Row>
 
+          <Row id="openDetailsImages">
+            <strong><u>Possible Bookings: </u></strong>
+          </Row>
           <Row id="imagesThingy">
-            <img/>
-            <img/>
-            <img/>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
           </Row>
           {/*}
           <Panel className={this.props.location}>

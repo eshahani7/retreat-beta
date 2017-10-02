@@ -13,12 +13,22 @@ import { viewUser } from '../actions/userActions.js';
 import LoginControl from './components/LoginControl.js';
 
 const mapStateToProps = (state) => {
-    return({
-      email: state.user.userDetails.email,
-      firstName: state.user.userDetails.firstName,
-      lastName: state.user.userDetails.lastName,
-      age: state.user.userDetails.age
-    });
+    if(state.user.userDetails != null){
+      return({
+        email: state.user.userDetails.email,
+        firstName: state.user.userDetails.firstName,
+        lastName: state.user.userDetails.lastName,
+        age: state.user.userDetails.age
+      });
+    }
+    else{
+      return({
+        email: '',
+        firstName: '',
+        lastName: '',
+        age: ''
+      });
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

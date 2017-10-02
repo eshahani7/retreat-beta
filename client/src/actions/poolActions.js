@@ -1,3 +1,6 @@
+import { fetchBooking } from './bookingActions';
+import { findUser } from './userActions';
+
 export function fetchPools(query) {
   return function(dispatch) {
     dispatch({type:'FETCH_POOLS'});
@@ -122,24 +125,10 @@ export function selectPool(poolId) {
       dispatch({type: 'SELECT_POOL_FULFILLED', payload: body});
       //FETCH BOOKING DETAILS
       if(body.poolBooked) {
-        fetch(`/bookings/details/${poolId}`, {
-          method: 'GET',
-          headers: userHeader
-        }).then((res) => {
-          if(res.ok) {
-            return res.json();
-          }
-          else  {
-            console.log('sad');
-            return Promise.reject({status: res.status});
-          }
-        }).then((body) => {
-          dispatch({type: 'FETCH_BOOKING_FULFILLED', payload: body});
-        }).catch((e) => {
-          dispatch({type: 'FETCH_BOOKING_REJECTED', payload: e});
-        });
+        fetchBooking(dispatch, poolId, userHeader);
       }
-      //END FETCH BOOKING DETAILS
+      //FETCH HOST DETAILS
+      findUser(dispatch, body._creator);
     }).catch((e) => {
       dispatch({type: 'SELECT_POOL_REJECTED', payload: e});
     })

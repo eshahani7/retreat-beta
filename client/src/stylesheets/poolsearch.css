@@ -61,7 +61,7 @@ body{
 }
 #locationButton:hover span {
   padding-right: 25px;
-  letter-spacing: 6px;
+  letter-spacing: 5px;
 }
 #locationButton:hover span:after {
   opacity: 1;

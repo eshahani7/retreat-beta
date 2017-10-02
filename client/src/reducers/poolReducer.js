@@ -1,6 +1,7 @@
 export default function reducer (state = {
   initLocation: null,
   poolList: [],
+  hostList: [],
   selectedPool: {},
   fetching: false,
   fetched: false,
@@ -8,6 +9,7 @@ export default function reducer (state = {
   selected: false,
   creating: false,
   created: false,
+  createFailed: false,
   joining: false,
   joined: false,
   error: null
@@ -33,17 +35,20 @@ export default function reducer (state = {
     }
     case 'CREATE_POOL': {
       return {...state,
+        createFailed: false,
         creating: true
       };
     }
     case 'CREATE_POOL_REJECTED': {
       return {...state,
         creating: false,
+        createFailed: true,
         error: action.payload
       };
     }
     case 'CREATE_POOL_FULFILLED': {
       return {...state,
+        createFailed: false,
         creating: false,
         created: true,
         poolList: action.payload.pools

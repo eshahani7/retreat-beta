@@ -19,7 +19,7 @@ class PoolClosed extends Component {
               </Row>
 
               <Row>
-                Host: {this.props.host}
+                Host: {this.props.hostFirst} {this.props.hostLast}
               </Row>
 
               <Row id="closedTravelerInfo">
@@ -39,10 +39,19 @@ class PoolClosed extends Component {
             </Col>
           </Row>
 
+          <Row id="openDetailsImages">
+            Possible Bookings:
+          </Row>
           <Row id="imagesThingyClosed">
-            <img/>
-            <img/>
-            <img/>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
           </Row>
         </Panel>
       </div>

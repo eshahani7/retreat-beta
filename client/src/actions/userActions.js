@@ -78,32 +78,6 @@ export function viewUser() {
   }
 }
 
-export function findUser(userID){
-  return function(dispatch){
-    dispatch({type: 'FIND_USER'});
-
-    fetch(`/users/${userID}`, {
-      method: 'GET'
-    }).then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-      else{
-        return Promise.reject({status: res.status});
-      }
-    }).then((body) => {
-      dispatch({type: 'FIND_USER_FULFILLED', payload: {
-        email: body.email,
-        firstName: body.firstName,
-        lastName: body.lastName,
-        age: body.age}
-      });
-    }).catch((e) => {
-      dispatch({type: 'FIND_USER_REJECTED', payload: e});
-    });
-  }
-}
-
 export function logoutUser() {
   var token = sessionStorage.getItem('authToken');
   var userHeader = new Headers();
@@ -116,6 +90,7 @@ export function logoutUser() {
       headers: userHeader
     }).then((res) => {
       if(res.ok) {
+        console.log('AuthToken: ' + sessionStorage.getItem('authToken'));
         dispatch({type:'LOGOUT_USER_FULFILLED'});
       }
       else {
@@ -129,6 +104,7 @@ export function logoutUser() {
 
 export function refreshLogin() {
   if(sessionStorage.getItem('authToken') != null) {
+    console.log('AuthToken: ' + sessionStorage.getItem('authToken'));
     return {
       type: 'REFRESH_LOGIN',
       payload: true
@@ -140,4 +116,29 @@ export function refreshLogin() {
       payload: false
     }
   }
+}
+
+//-------CALLED IN POOL ACTIONS------//
+export function findUser(dispatch, userID){
+  dispatch({type: 'FIND_USER'});
+
+  fetch(`/users/${userID}`, {
+    method: 'GET'
+  }).then((res) => {
+    if(res.ok) {
+      return res.json();
+    }
+    else{
+      return Promise.reject({status: res.status});
+    }
+  }).then((body) => {
+    dispatch({type: 'FIND_USER_FULFILLED', payload: {
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      age: body.age}
+    });
+  }).catch((e) => {
+    dispatch({type: 'FIND_USER_REJECTED', payload: e});
+  });
 }

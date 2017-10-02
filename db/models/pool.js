@@ -17,7 +17,7 @@ var PoolSchema = new mongoose.Schema({
   maxAge: {type: Number},
   isOpen: {type: Boolean, default: true}, //secondary feature
   currentShares: {type: Number},
-  _userList: [{type: mongoose.Schema.Types.ObjectId}],
+  _userList: [{type: mongoose.Schema.Types.Mixed}],
   poolCloses: {type: Date, required: true},
   poolClosed: {type: Boolean, required: true, default: false},
   poolBooked: {type: Boolean, required: true, default: false}
@@ -28,14 +28,14 @@ PoolSchema.methods.toJSON = function () {
   var pool = this;
   var poolObject = pool.toObject();
 
-  return _.pick(poolObject, ['_id', 'location', '_creator', '_userList', 'themes',
+  return _.pick(poolObject, ['_id', 'location', '_creator', '_userList', 'themes', 'minPeople', 'goal',
   'gender', 'minAge', 'maxAge', 'isOpen', 'startDate', 'endDate', 'poolClosed', 'poolBooked']);
 }
 
 PoolSchema.methods.validateUser = function(user) {
   var pool = this;
   var valid = true;
-  if(pool.gender != null)
+  if(pool.gender != null && pool.gender != "")
     valid = user.gender == pool.gender;
   if(pool.minAge != null && pool.maxAge != null)
     valid = (user.age > pool.minAge && user.age < pool.maxAge);

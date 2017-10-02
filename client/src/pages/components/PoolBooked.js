@@ -46,7 +46,7 @@ class PoolBooked extends Component {
               </Row>
 
               <Row>
-                Host: {this.props.host}
+                Host: {this.props.hostFirst} {this.props.hostLast}
               </Row>
 
               <Row id="bookedTravelerDetails">
@@ -81,10 +81,19 @@ class PoolBooked extends Component {
             </Col>
           </Row>
 
-          <Row id="imagesThingyBooked">
-            <img/>
-            <img/>
-            <img/>
+          <Row id="openDetailsImages">
+            Booking:
+          </Row>
+          <Row id="imagesThingy">
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
+            <Col sm={4}>
+              <img src={require('../../img/goatPhoto.jpeg')}/>
+            </Col>
           </Row>
         </Panel>
       </div>

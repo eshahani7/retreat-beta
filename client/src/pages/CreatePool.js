@@ -16,11 +16,21 @@ import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
 import LoginControl from './components/LoginControl.js';
 
+const Loading = require('react-loading-animation');
+
+const mapStateToProps = (state ) => {
+  return {
+    creating: state.pool.creating,
+    created: state.pool.created,
+    createFailed: state.pool.createFailed
+  }
+}
+
 class CreatePool extends Component {
   state = {
     location:'',
-    startDate:'',
-    endDate:'',
+    startDate: moment(),
+    endDate: moment(new Date()).add(1,'days'),
     minPeople:'',
     goal:null,
     themes:[],
@@ -106,12 +116,139 @@ class CreatePool extends Component {
       { value: 'M', label: 'M' }
     ];
 
-    return (
+    if(this.props.creating){
+      return (
+        <div className="CreatePool">
+          <LoginControl/>
+          <Row>
+            <Col md={12} id="createPoolHeader">
+              CREATE POOL
+            </Col>
+          </Row>
+          <Form horizontal className="createPoolForm">
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Location
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='location'
+                  value={this.state.location}
+                  options={locationOptions}
+                  onChange={this.handleChangeLoc.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                From
+              </Col>
+              <Col sm={2}>
+                <DatePicker name="startDate" selected={this.state.startDate}
+                  onChange={this.handleChangeStart.bind(this)}/>
+              </Col>
+              <Col componentClass={ControlLabel} sm={1}>
+                To
+              </Col>
+              <Col sm={2}>
+                <DatePicker name="endDate" selected={this.state.endDate}
+                  onChange={this.handleChangeEnd.bind(this)}/>
+              </Col>
+            </FormGroup>
+
+            <FormField
+              className= "createPoolField"
+              title="Minimum travelers"
+              type="number"
+              holder="10"
+              name="minPeople"
+              change={this.handleChange.bind(this)}
+            />
+
+            <FormField
+              className= "createPoolField"
+              title="Goal: $"
+              type="number"
+              holder="300"
+              name="goal"
+              change={this.handleChange.bind(this)}
+            />
+
+            <Col sm={12} id="restrictionsHeader">
+              RESTRICTIONS
+            </Col>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Themes
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='themes'
+                  value={this.state.themes}
+                  options={themeOptions}
+                  multi={true}
+                  onChange={this.handleChangeTheme.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Gender
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='gender'
+                  value={this.state.gender}
+                  options={genderOptions}
+                  onChange={this.handleChangeGender.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormField
+              className= "createPoolField"
+              title="Minimum Age"
+              type="number"
+              holder="18"
+              name="minAge"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "createPoolField"
+              title="Maximum Age"
+              type="number"
+              holder="25"
+              name="maxAge"
+              change={this.handleChange.bind(this)}
+            />
+
+            <SubmitBtn title="CREATE" id="createPoolButton" submit={this.addNewPool.bind(this)}/>
+            <Loading/>
+          </Form>
+        </div>
+      );
+    }
+    else if (this.props.created){
+      return(
+        <div className="CreatePool">
+          <LoginControl/>
+          <Row>
+            <Col md={12} id="createPoolHeader">
+              POOL CREATED!
+            </Col>
+          </Row>
+        </div>
+      );
+    }
+    else if (this.props.createFailed){
       <div className="CreatePool">
         <LoginControl/>
         <Row>
           <Col md={12} id="createPoolHeader">
-            Create Pool
+            CREATE POOL FAILED. PLEASE TRY AGAIN
           </Col>
         </Row>
         <Form horizontal className="createPoolForm">
@@ -165,7 +302,7 @@ class CreatePool extends Component {
           />
 
           <Col sm={12} id="restrictionsHeader">
-            Restrictions
+            RESTRICTIONS
           </Col>
 
           <FormGroup>
@@ -217,8 +354,122 @@ class CreatePool extends Component {
           <SubmitBtn title="CREATE" id="createPoolButton" submit={this.addNewPool.bind(this)}/>
         </Form>
       </div>
-    );
+    }
+    else{
+      return (
+        <div className="CreatePool">
+          <LoginControl/>
+          <Row>
+            <Col md={12} id="createPoolHeader">
+              CREATE POOL
+            </Col>
+          </Row>
+          <Form horizontal className="createPoolForm">
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Location
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='location'
+                  value={this.state.location}
+                  options={locationOptions}
+                  onChange={this.handleChangeLoc.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                From
+              </Col>
+              <Col sm={2}>
+                <DatePicker name="startDate" selected={this.state.startDate}
+                  onChange={this.handleChangeStart.bind(this)}/>
+              </Col>
+              <Col componentClass={ControlLabel} sm={1}>
+                To
+              </Col>
+              <Col sm={2}>
+                <DatePicker name="endDate" selected={this.state.endDate}
+                  onChange={this.handleChangeEnd.bind(this)}/>
+              </Col>
+            </FormGroup>
+
+            <FormField
+              className= "createPoolField"
+              title="Minimum travelers"
+              type="number"
+              holder="10"
+              name="minPeople"
+              change={this.handleChange.bind(this)}
+            />
+
+            <FormField
+              className= "createPoolField"
+              title="Goal: $"
+              type="number"
+              holder="300"
+              name="goal"
+              change={this.handleChange.bind(this)}
+            />
+
+            <Col sm={12} id="restrictionsHeader">
+              RESTRICTIONS
+            </Col>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Themes
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='themes'
+                  value={this.state.themes}
+                  options={themeOptions}
+                  multi={true}
+                  onChange={this.handleChangeTheme.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                Gender
+              </Col>
+              <Col sm={4}>
+                <Select
+                  name='gender'
+                  value={this.state.gender}
+                  options={genderOptions}
+                  onChange={this.handleChangeGender.bind(this)}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormField
+              className= "createPoolField"
+              title="Minimum Age"
+              type="number"
+              holder="18"
+              name="minAge"
+              change={this.handleChange.bind(this)}
+            />
+            <FormField
+              className= "createPoolField"
+              title="Maximum Age"
+              type="number"
+              holder="25"
+              name="maxAge"
+              change={this.handleChange.bind(this)}
+            />
+
+            <SubmitBtn title="CREATE" id="createPoolButton" submit={this.addNewPool.bind(this)}/>
+          </Form>
+        </div>
+      );
+    }
   }
 }
 
-export default connect()(CreatePool);
+export default connect(mapStateToProps)(CreatePool);

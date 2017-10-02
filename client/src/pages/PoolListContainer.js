@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import '../stylesheets/poolsearch.css'
 
 import { fetchPools, selectPool } from '../actions/poolActions'
-import { findUser } from '../actions/userActions'
 
 import LoginControl from './components/LoginControl';
 import QueryBox from './components/QueryBox';
@@ -15,24 +14,20 @@ import NavLink from './components/Link';
 const mapStateToProps = (state) => {
   return {
     initLocation: state.pool.initLocation,
-    poolList: state.pool.poolList,
-
-    hostInfo: state.user.userInfo,
-    hostFirstName: state.user.userInfo.firstName,
-    hostLastName: state.user.userInfo.lastName,
-    finding: state.user.finding,
-    found: state.user.found
+    poolList: state.pool.poolList
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       fetchPools: (query) => { dispatch(fetchPools(query)) },
-      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
-
-      findUser: (userID) =>{ dispatch(findUser(userID))}
+      selectPool: (poolId) =>{ dispatch(selectPool(poolId)) }
   }
 };
+
+function goBack(){
+  window.history.back();
+}
 
 class PoolListContainer extends Component {
   componentWillMount() {
@@ -45,13 +40,6 @@ class PoolListContainer extends Component {
       location: loc,
       poolClosed: false
     });
-  }
-
-  queryUser(id){
-    this.props.findUser(id);
-    if(this.props.found){
-      return this.props.hostFirstName;
-    }
   }
 
   render() {

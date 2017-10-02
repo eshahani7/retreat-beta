@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Panel } from 'react-bootstrap';
+import { Row, Col, Button, Panel, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { joinPool, selectPool } from '../actions/poolActions';
@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
   return {
     selectedPool: state.pool.selectedPool,
     poolBooking: state.booking.booking,
-    poolLocation: state.booking.location
+    poolLocation: state.booking.location,
+    hostInfo: state.user.userInfo
   };
 };
 
@@ -27,6 +28,10 @@ const mapDispatchToProps = (dispatch) => {
       joinPool: (poolId) => { dispatch(joinPool(poolId)) }
   };
 };
+
+function goBack(){
+  window.history.back();
+}
 
 {/*Note: also have to display host and joined user IDs as names by lookup,
 should be similar to what needs to be done for PoolPreview*/}
@@ -60,7 +65,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={startDate.toDateString()}
         end={endDate.toDateString()}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         goal={selected.goal}
         minPeople={selected.minPeople}
         gender={selected.gender}
@@ -77,7 +83,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={booking.startDate}
         end={booking.endDate}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
         minAge={selected.minAge}
         maxAge={selected.maxAge}
@@ -93,7 +100,8 @@ class PoolDetails extends Component {
         location={selected.location}
         start={startDate.toDateString()}
         end={endDate.toDateString()}
-        host={selected._creator}
+        hostFirst={this.props.hostInfo.firstName}
+        hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
         minAge={selected.minAge}
         maxAge={selected.maxAge}
@@ -105,6 +113,7 @@ class PoolDetails extends Component {
     return(
       <div className="poolDetails">
         <LoginControl/>
+        <Button className={this.props.initLocation + "Button"} id="detailsBackButton" onClick={goBack}><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
         {details}
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Panel } from 'react-bootstrap';
+import { Row, Col, Panel, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -7,21 +7,6 @@ import { findUser } from '../../actions/userActions';
 import '../../stylesheets/poolPreview.css'
 
 import NavLink from './Link';
-
-const mapStateToProps = (state ) => {
-  return {
-    hostInfo: state.user.userInfo,
-    hostFirstName: state.user.userInfo.firstName,
-    hostLastName: state.user.userInfo.lastName,
-    found: state.user.found
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      findUser: (userID) =>{ dispatch(findUser(userID))}
-  };
-};
 
 function formatDate(convert){
   var dayNum = convert.getDay();
@@ -40,24 +25,37 @@ function formatDate(convert){
   return fullDate;
 }
 
+function formatThemes(themes){
+  var themeList = "";
+
+  for(var i = 0; i < themes.length; i++){
+    themeList += themes[i].charAt(0).toUpperCase() + themes[i].slice(1);
+    if(i != (themes.length - 1)){
+        themeList += ", ";
+    }
+  }
+
+  return themeList;
+}
+
 class PoolPreview extends Component {
   onSelect() {
     console.log(this.props.id);
     this.props.select(this.props.id);
   }
 
-  // componentWillMount(){
-  //   var response = this.props.findUser(this.props.host);
-  // }
-
   render() {
 
     var startDate = formatDate(new Date(this.props.startDate));
     var endDate = formatDate(new Date(this.props.endDate));
 
-    console.log("GOAL: " + this.props.goal);
+    var themeList = formatThemes(this.props.themes);
 
-    console.log("HOST INFO: " + this.props.hostInfo.firstName);
+    var minShare = this.props.goal / this.props.minPeople
+
+    console.log("MIN PEOPLE: " + this.props.minPeople)
+
+    // console.log("HOST INFO: " + this.props.hostInfo.firstName);
     return(
       <Panel className={this.props.className}>
         <Row>
@@ -75,12 +73,12 @@ class PoolPreview extends Component {
                 Travelers: {this.props.userList.length} people traveling
               </Col>
               <Col sm={6} id="sharePriceInfo">
-                Share Price: ${this.props.goal}
+                Minimum Share: <strong id="minPrice">${minShare}</strong>
               </Col>
             </Row>
 
             <Row id="themeInfo">
-              Themes: {this.props.themes}
+              Themes: {themeList}
             </Row>
 
             <Row id="detailsButton">
@@ -106,4 +104,4 @@ class PoolPreview extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoolPreview);
+export default PoolPreview;

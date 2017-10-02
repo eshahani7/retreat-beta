@@ -18,7 +18,9 @@ router.post('/', authenticate, (req, res) => {
   var body = req.body;
   var pool = new Pool(req.body);
   pool._creator = req.user._id;
-  pool._userList.push(req.user._id);
+  pool._userList.push(
+    [req.user.firstName + " " + req.user.lastName, req.user._id]
+  );
   pool.poolCloses = pool.endDate; //need to decide when to close pools
   schedule.scheduleJob(pool.poolCloses, () => {
     pool.poolClosed = true;
@@ -106,7 +108,9 @@ router.post('/join/:id', authenticate, (req, res) => {
 
   Pool.findById(id).then((pool) => {
     if(pool.validateUser(req.user)) {
-      pool._userList.push(req.user.id);
+      pool._userList.push(
+        [req.user.firstName + " " + req.user.lastName, req.user._id]
+      );
       pool.save().then(() => {
         res.status(200).send(pool);
       }).catch((e) => {
