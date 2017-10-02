@@ -90,6 +90,7 @@ export function logoutUser() {
       headers: userHeader
     }).then((res) => {
       if(res.ok) {
+        sessionStorage.removeItem('authToken');
         dispatch({type:'LOGOUT_USER_FULFILLED'});
       }
       else {
