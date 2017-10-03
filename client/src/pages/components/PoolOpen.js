@@ -1,5 +1,5 @@
 import React, { Component, Image } from 'react';
-import { Row, Col, Button, Panel, ProgressBar } from 'react-bootstrap';
+import { Row, Col, Button, Panel, ProgressBar, Glyphicon } from 'react-bootstrap';
 
 import '../../stylesheets/PoolDetails.css';
 
@@ -34,6 +34,14 @@ function formatThemes(themes){
   }
 }
 
+function formatTravelers(travelers){
+  
+}
+
+function goBack(){
+  window.history.back();
+}
+
 class PoolOpen extends Component {
 
   render() {
@@ -48,6 +56,7 @@ class PoolOpen extends Component {
     }
     else{
       now = this.props.joined.length / this.props.minPeople * 100;
+      now = now.toFixed(2);
     }
 
     let travelersJoin = null;
@@ -64,6 +73,7 @@ class PoolOpen extends Component {
           <Row id="infoDetails">
             <Col sm={9} id="detailsLeftSide">
               <Row id="locationDetails">
+                <Button className={this.props.initLocation + "Button"} id="detailsBackButton" onClick={goBack}><span id="backArrow"> <Glyphicon glyph="chevron-left"/> </span></Button>
                 <strong>{this.props.location}</strong>
               </Row>
 

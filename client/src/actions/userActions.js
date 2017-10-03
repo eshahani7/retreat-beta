@@ -46,6 +46,45 @@ export function loginUser(user) {
   }
 }
 
+export function logoutUser() {
+  var token = sessionStorage.getItem('authToken');
+  var userHeader = new Headers();
+  userHeader.append('x-auth', token);
+
+  return function(dispatch) {
+    dispatch({type:'LOGOUT_USER'});
+    fetch('/users/me/token', {
+      method: 'DELETE',
+      headers: userHeader
+    }).then((res) => {
+      if(res.ok) {
+        sessionStorage.removeItem('authToken');
+        dispatch({type:'LOGOUT_USER_FULFILLED'});
+      }
+      else {
+        return Promise.reject({status: res.status});
+      }
+    }).catch((e) => {
+      dispatch({type:'LOGOUT_USER_REJECTED', payload:e});
+    });
+  }
+}
+
+export function refreshLogin() {
+  if(sessionStorage.getItem('authToken') != null) {
+    return {
+      type: 'REFRESH_LOGIN',
+      payload: true
+    };
+  }
+  else {
+    return {
+      type: 'REFRESH_LOGIN',
+      payload: false
+    }
+  }
+}
+
 export function viewUser() {
   return function(dispatch) {
     dispatch({type: 'FETCH_USER'});
@@ -78,45 +117,32 @@ export function viewUser() {
   }
 }
 
-export function logoutUser() {
-  var token = sessionStorage.getItem('authToken');
-  var userHeader = new Headers();
-  userHeader.append('x-auth', token);
-
-  return function(dispatch) {
-    dispatch({type:'LOGOUT_USER'});
-    fetch('/users/me/token', {
-      method: 'DELETE',
-      headers: userHeader
-    }).then((res) => {
-      if(res.ok) {
-        sessionStorage.removeItem('authToken');
-        dispatch({type:'LOGOUT_USER_FULFILLED'});
-      }
-      else {
-        return Promise.reject({status: res.status});
-      }
-    }).catch((e) => {
-      dispatch({type:'LOGOUT_USER_REJECTED', payload:e});
-    });
-  }
-}
-
-export function refreshLogin() {
-  if(sessionStorage.getItem('authToken') != null) {
-    console.log('AuthToken: ' + sessionStorage.getItem('authToken'));
-    return {
-      type: 'REFRESH_LOGIN',
-      payload: true
-    };
-  }
-  else {
-    return {
-      type: 'REFRESH_LOGIN',
-      payload: false
-    }
-  }
-}
+// export function updateUser(user){
+//   return function(dispatch) {
+//     dispatch({type: 'UPDATE_USER'});
+//
+//     var userHeader = new Headers();
+//     userHeader.append('x-auth', token);
+//
+//     fetch('/users/me', {
+//       method: 'PATCH',
+//       headers: userHeader,
+//
+//       body: JSON.stringify(user)
+//     }).then((res) => {
+//       if(res.ok){
+//         return res.json;
+//       }
+//       else{
+//         return Promise.reject({status: res.status});
+//       }
+//     }).then((body) => {
+//       dispatch({type: 'UPDATE_USER_FULFILLED', payload: {user});
+//     }).catch((e) => {
+//       dispatch({type:'UPDATE_USER_REJECTED', payload: e});
+//     });
+//   }
+// }
 
 //-------CALLED IN POOL ACTIONS------//
 export function findUser(dispatch, userID){

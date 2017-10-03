@@ -27,12 +27,16 @@ function formatDate(convert){
 
 function formatThemes(themes){
   var themeList = "";
-
-  for(var i = 0; i < themes.length; i++){
-    themeList += themes[i].charAt(0).toUpperCase() + themes[i].slice(1);
-    if(i != (themes.length - 1)){
-        themeList += ", ";
+  if(themes != undefined){
+    for(var i = 0; i < themes.length; i++){
+      themeList += themes[i].charAt(0).toUpperCase() + themes[i].slice(1);
+      if(i != (themes.length - 1)){
+          themeList += ", ";
+      }
     }
+  }
+  else{
+    themeList = "None"
   }
 
   return themeList;
@@ -52,6 +56,8 @@ class PoolPreview extends Component {
     var themeList = formatThemes(this.props.themes);
 
     var minShare = this.props.goal / this.props.minPeople
+
+    minShare = minShare.toFixed(2);
 
     console.log("MIN PEOPLE: " + this.props.minPeople)
 

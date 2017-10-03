@@ -67,7 +67,7 @@ class PoolBooked extends Component {
 
             <Col sm={3}>
               <Row>
-                Bathrooms: ${this.props.baths}
+                Bathrooms: {this.props.baths}
               </Row>
               <Row>
                 people / minPeople
