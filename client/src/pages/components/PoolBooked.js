@@ -2,9 +2,6 @@ import '../../stylesheets/PoolDetails.css';
 
 import React, { Component } from 'react';
 import { Row, Col, Panel } from 'react-bootstrap';
-import StripeCheckout from 'react-stripe-checkout';
-const env = require('node-env-file');
-
 
 class PoolBooked extends Component {
   onToken(token) {
@@ -32,6 +29,9 @@ class PoolBooked extends Component {
   }
 
   render() {
+    var minShare = this.props.goal / this.props.minPeople
+    minShare = minShare.toFixed(2) * 100;
+
     return(
       <div className="poolDetails">
         <Panel>
@@ -71,13 +71,9 @@ class PoolBooked extends Component {
               </Row>
               <Row>
                 people / minPeople
-                {/* {this.props._userList.length}/{this.props.minPeople} */}
+                {/*{this.props._userList.length}/{this.props.minPeople} */}
               </Row>
 
-              <StripeCheckout
-                token={this.onToken.bind(this)}
-                stripeKey={process.env.STRIPE_KEY_PUBLIC}
-              />
             </Col>
           </Row>
 

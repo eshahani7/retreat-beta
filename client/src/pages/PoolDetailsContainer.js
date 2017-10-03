@@ -86,6 +86,8 @@ class PoolDetails extends Component {
         hostFirst={this.props.hostInfo.firstName}
         hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
+        goal={selected.goal}
+        minPeople={selected.minPeople}
         minAge={selected.minAge}
         maxAge={selected.maxAge}
         themes={selected.themes}
@@ -103,6 +105,8 @@ class PoolDetails extends Component {
         hostFirst={this.props.hostInfo.firstName}
         hostLast={this.props.hostInfo.lastName}
         gender={selected.gender}
+        goal={selected.goal}
+        minPeople={selected.minPeople}
         minAge={selected.minAge}
         maxAge={selected.maxAge}
         themes={selected.themes}
