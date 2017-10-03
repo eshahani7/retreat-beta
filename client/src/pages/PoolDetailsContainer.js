@@ -113,7 +113,7 @@ class PoolDetails extends Component {
     return(
       <div className="poolDetails">
         <LoginControl/>
-        <Button className={this.props.initLocation + "Button"} id="detailsBackButton" onClick={goBack}><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>
+        {/*<Button className={this.props.initLocation + "Button"} id="detailsBackButton" onClick={goBack}><span id="backArrow"> <Glyphicon glyph="chevron-left"/> {this.props.initLocation}</span></Button>*/}
         {details}
       </div>
     );
