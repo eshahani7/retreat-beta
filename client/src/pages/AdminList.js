@@ -30,12 +30,17 @@ class AdminList extends Component {
         To Book:
         {pools.map((pool) =>
           <PoolPreview
+            className="searchPoolPanel"
             key={pool._id}
             id={pool._id}
             location={pool.location}
             startDate={pool.startDate}
             endDate={pool.endDate}
             host={pool._creator}
+            userList={pool._userList}
+            goal={pool.goal}
+            minPeople={pool.minPeople}
+            themes={pool.themes}
             select={(poolId) => {this.props.selectPool(poolId)}}
             linkTarget={`/admin/book/${pool._id}`}
           />
