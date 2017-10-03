@@ -29,13 +29,30 @@ function formatThemes(themes){
           themeList += ", ";
       }
     }
-
-    return themeList;
   }
+  else{
+    themeList = "none";
+  }
+
+  return themeList;
 }
 
 function formatTravelers(travelers){
-  
+  var travelerList ="";
+  if(travelers != undefined){
+    for(var i = 0; i < travelers.length; i++){
+      travelerList += travelers[i][0].charAt(0).toUpperCase() + travelers[i][0].slice(1);
+      console.log("Traveler: " + travelers[i][0]);
+      if(i != (travelers.length - 1)){
+          travelerList += ", ";
+      }
+    }
+  }
+  else{
+    travelerList = "None yet";
+  }
+
+  return travelerList;
 }
 
 function goBack(){
@@ -49,6 +66,8 @@ class PoolOpen extends Component {
     var endDate = formatDate(new Date(this.props.end));
 
     var themeList = formatThemes(this.props.themes);
+
+    var travelerList = formatTravelers(this.props.joined);
 
     var now;
     if(this.props.joined == undefined){
@@ -86,7 +105,7 @@ class PoolOpen extends Component {
               </Row>
 
               <Row id="openTravelerDetails">
-                Travelers:
+                Travelers: {travelerList}
               </Row>
 
               <Row id="openRestrictionDetails">

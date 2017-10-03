@@ -17,7 +17,7 @@
 }
 
 input{
-  background: transparent;
+  background: white;
   color: white;
   text-align: center;
 
@@ -26,6 +26,9 @@ input{
   border-style: none;
   border-color: transparent;
   border-image: initial;
+  border-radius: 4px;
+
+  letter-spacing: 1.5px;
 
   /*display: inline;*/
 }

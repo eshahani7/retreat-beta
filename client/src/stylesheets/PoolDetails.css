@@ -1,11 +1,13 @@
 .poolDetails{
   background-color: #efefef;
   height: 100%;
-  letter-spacing: 2px;
 }
 
 .poolOpenDetails{
-  background-color: #fffcf4
+  letter-spacing: 2px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
 }
 
 #imagesThingy>.col-sm-4>img {
