@@ -60,7 +60,6 @@ function goBack(){
 }
 
 class PoolOpen extends Component {
-
   render() {
     var startDate = formatDate(new Date(this.props.start));
     var endDate = formatDate(new Date(this.props.end));
@@ -86,6 +85,22 @@ class PoolOpen extends Component {
     else{
       travelersJoin = this.props.joined.length + " / " + this.props.minPeople + " travelers have joined";
     }
+
+    //-----------RENDER BUTTON IF USER NOT IN POOL--------//
+    let joinBtn = null;
+    // if(!this.props.inUserList) {
+    //   joinBtn = <div>Joined</div>
+    // }
+    // else {
+    //   joinBtn = <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
+    // }
+
+    joinBtn = <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
+    if(this.props.inUserList) {
+      joinBtn = <Button id="joinButton">LEAVE</Button>
+    }
+
+
     return(
       <div className="poolOpenDetails">
         <Panel>
@@ -143,7 +158,7 @@ class PoolOpen extends Component {
               </Row>
 
               <Row>
-                <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
+                {joinBtn}
               </Row>
 
             </Col>
