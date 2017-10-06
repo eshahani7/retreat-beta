@@ -147,7 +147,7 @@ function checkUserInPool(dispatch, poolId, userHeader) {
     if(res.status === 200) {
       dispatch({type:'CHECK_JOINED_FULFILLED', payload: true});
     } else {
-      dispatch({type:'CHECK_JOINED_REJECTED', payload: null});
+      dispatch({type:'CHECK_JOINED_FULFILLED', payload: false});
     }
   }).catch((e) => {
     dispatch({type:'CHECK_JOINED_REJECTED', payload: e});

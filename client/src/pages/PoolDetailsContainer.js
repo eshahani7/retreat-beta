@@ -10,6 +10,7 @@ import PoolPreview from './components/PoolPreview';
 import PoolOpen from './components/PoolOpen';
 import PoolClosed from './components/PoolClosed';
 import PoolBooked from './components/PoolBooked';
+import PageError from './components/Error';
 
 import '../stylesheets/PoolDetails.css';
 
@@ -18,7 +19,8 @@ const mapStateToProps = (state) => {
     selectedPool: state.pool.selectedPool,
     poolBooking: state.booking.booking,
     poolLocation: state.booking.location,
-    hostInfo: state.user.userInfo
+    hostInfo: state.user.userInfo,
+    isUser: state.pool.userInSelected
   };
 };
 
@@ -55,7 +57,6 @@ class PoolDetails extends Component {
     const selected = this.props.selectedPool;
     const booking = this.props.poolBooking;
     const location = this.props.poolLocation;
-
     var startDate = new Date(selected.startDate);
     var endDate = new Date(selected.endDate);
 
@@ -74,8 +75,12 @@ class PoolDetails extends Component {
         maxAge={selected.maxAge}
         themes={selected.themes}
         joined={selected._userList}
+        inUserList={this.props.isUser}
         submit={this.join.bind(this)}
       />
+    }
+    else if(selected.poolBooked && !this.props.isUser) {
+      details = <PageError/>
     }
     else if(selected.poolBooked) {
       details =
@@ -96,7 +101,7 @@ class PoolDetails extends Component {
         baths={location.numBath}
       />
     }
-    else {
+    else if(selected.poolClosed){
       details =
       <PoolClosed
         location={selected.location}
@@ -112,6 +117,9 @@ class PoolDetails extends Component {
         themes={selected.themes}
         joined={selected._userList}
       />
+    }
+    else {
+      details = <PageError/>
     }
 
     return(
