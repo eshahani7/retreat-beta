@@ -3,6 +3,7 @@ export default function reducer (state = {
   poolList: [],
   hostList: [],
   selectedPool: {},
+  userInSelected: false,
   fetching: false,
   fetched: false,
   selecting: false,
@@ -12,6 +13,8 @@ export default function reducer (state = {
   createFailed: false,
   joining: false,
   joined: false,
+  checking: false,
+  checked: false,
   error: null
 }, action) {
   switch(action.type) {
@@ -86,7 +89,25 @@ export default function reducer (state = {
     case 'JOIN_POOL_FULFILLED': {
       return {...state,
         joining: false,
-        joined: true,
+        joined: true
+      };
+    }
+    case 'CHECK_JOINED': {
+      return {...state,
+        checking: true
+      };
+    }
+    case 'CHECK_JOINED_REJECTED': {
+      return {...state,
+        checking: false,
+        error: action.payload
+      };
+    }
+    case 'CHECK_JOINED_FULFILLED': {
+      return {...state,
+        checking: false,
+        checked: true,
+        userInSelected: action.payload
       };
     }
     case 'SET_INIT_LOCATION': {

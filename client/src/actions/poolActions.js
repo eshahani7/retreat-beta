@@ -129,10 +129,29 @@ export function selectPool(poolId) {
       }
       //FETCH HOST DETAILS
       findUser(dispatch, body._creator);
+      //CHECK IF CURRENT USER IN BOOKING
+      checkUserInPool(dispatch, poolId, userHeader);
     }).catch((e) => {
       dispatch({type: 'SELECT_POOL_REJECTED', payload: e});
-    })
+    });
   }
+}
+
+//helper function for select pool
+function checkUserInPool(dispatch, poolId, userHeader) {
+  dispatch({type:'CHECK_JOINED'});
+  fetch(`/pools/in/${poolId}`, {
+    method: 'GET',
+    headers: userHeader,
+  }).then((res) => {
+    if(res.status === 200) {
+      dispatch({type:'CHECK_JOINED_FULFILLED', payload: true});
+    } else {
+      dispatch({type:'CHECK_JOINED_REJECTED', payload: null});
+    }
+  }).catch((e) => {
+    dispatch({type:'CHECK_JOINED_REJECTED', payload: e});
+  });
 }
 
 export function joinPool(poolId) {

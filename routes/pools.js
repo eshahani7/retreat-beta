@@ -137,6 +137,26 @@ router.get('/me', authenticate, (req, res) => {
   });
 });
 
+//GET /pools/in/:id
+router.get('/in/:id', authenticate, (req, res) => {
+  var poolId = req.params.id;
+  var userId = req.user._id;
+
+  Pool.findById(poolId).then((pool) => {
+    var list = pool._userList;
+
+    for(var i = 0; i < list.length; i++) {
+      if(list[i][1].equals(userId)) { //id is second element in userList
+        res.status(200).send();
+      }
+    }
+    res.status(404).send();
+  }).catch((e) => {
+    console.log(e);
+    res.status(400).send();
+  })
+});
+
 // DELETE /pools/leave/:id --> leave existing pool
 router.delete('/leave/:id', authenticate, (req, res) => {
   var pool;
@@ -146,7 +166,7 @@ router.delete('/leave/:id', authenticate, (req, res) => {
   }
 
   Pool.findById(id).then((pool) => {
-    var index = pool._userList.indexOf(req.user._id);
+    var index = pool._userList.indexOf([req.user.firstName + ' ' + req.user.lastName, req.user._id]);
     pool._userList.splice(index, 1);
     pool.save().then(() => {
       res.status(200).send(pool);
