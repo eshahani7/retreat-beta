@@ -61,13 +61,15 @@ color: #00408D;
   color: green;
 }
 
-
-
-
 #imageSide{
   height: 205.45px;
   background-color: white;
-  background: url('../img/goatPhoto.jpeg');
+  /*background: url('../img/goatPhoto.jpeg');*/
   background-position: center;
   background-size: cover;
+}
+
+#poolImage{
+  height: 100%;
+  width: 100%;
 }

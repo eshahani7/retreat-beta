@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Button, Panel, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { joinPool, selectPool } from '../actions/poolActions';
+import { joinPool, selectPool, leavePool } from '../actions/poolActions';
 import { fetchBooking } from '../actions/bookingActions';
 
 import LoginControl from './components/LoginControl';
@@ -27,7 +27,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
       selectPool: (poolId) =>{ dispatch(selectPool(poolId)) },
-      joinPool: (poolId) => { dispatch(joinPool(poolId)) }
+      joinPool: (poolId) => { dispatch(joinPool(poolId)) },
+      leavePool: (poolId) => { dispatch(leavePool(poolId))}
   };
 };
 
@@ -50,6 +51,11 @@ class PoolDetails extends Component {
     e.preventDefault();
     console.log(this.props.selectedPool._id);
     this.props.joinPool(this.props.selectedPool._id);
+  }
+
+  leave(e){
+    e.preventDefault();
+    this.props.leavePool(this.props.selectedPool._id);
   }
 
   render() {
@@ -77,6 +83,7 @@ class PoolDetails extends Component {
         joined={selected._userList}
         inUserList={this.props.isUser}
         submit={this.join.bind(this)}
+        leave={this.leave.bind(this)}
       />
     }
     else if(selected.poolBooked && !this.props.isUser) {

@@ -21,6 +21,7 @@ router.post('/', authenticate, (req, res) => {
   pool._userList.push(
     [req.user.firstName + " " + req.user.lastName, req.user._id]
   );
+  
   pool.poolCloses = pool.endDate; //need to decide when to close pools
   schedule.scheduleJob(pool.poolCloses, () => {
     pool.poolClosed = true;

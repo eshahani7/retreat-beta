@@ -79,6 +79,7 @@ class PoolListContainer extends Component {
                       goal={pool.goal}
                       minPeople={pool.minPeople}
                       themes={pool.themes}
+                      image={pool.image}
                       select={(poolId) => {this.props.selectPool(poolId)}}
                       linkTarget={`/pool/details/${pool._id}`}
                     />

@@ -26,6 +26,14 @@ const mapStateToProps = (state ) => {
   }
 }
 
+function generateImage(){
+  var imgUrl = "../../img/RoomPhotos/room";
+  var num = Math.floor(Math.random() * (9)) + 1;
+  imgUrl+= ( num + ".jpg");
+
+  return imgUrl;
+}
+
 class CreatePool extends Component {
   state = {
     location:'',
@@ -37,6 +45,7 @@ class CreatePool extends Component {
     gender:'',
     minAge:null,
     maxAge:null,
+    image: generateImage()
   };
 
   //-----------------------EVENT HANDLERS----------------------//

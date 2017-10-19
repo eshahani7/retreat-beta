@@ -3,6 +3,8 @@ import { Row, Col, Panel, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import photo from '../../img/RoomPhotos/room9.jpg';
+
 import { findUser } from '../../actions/userActions';
 import '../../stylesheets/poolPreview.css'
 
@@ -93,7 +95,7 @@ class PoolPreview extends Component {
           </Col>
 
           <Col sm={3} id="imageSide">
-            {/* <img url="../../img/goatPhoto.jpeg"/> */}
+            { <img id="poolImage" src={photo}/>}
           </Col>
         </Row>
       </Panel>

@@ -11,6 +11,7 @@ var PoolSchema = new mongoose.Schema({
   minPeople: {type: Number, required: true},
   goal: {type: Number, required: true},
   maxShare: {type: Number},
+  image: {type: String},
   themes: [{type: String}],
   gender: {type: String, maxLength: 1}, //drop down option front end
   minAge: {type: Number, min: 18},

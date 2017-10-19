@@ -1,6 +1,10 @@
 import React, { Component, Image } from 'react';
 import { Row, Col, Button, Panel, ProgressBar, Glyphicon } from 'react-bootstrap';
 
+import photo1 from '../../img/RoomPhotos/room2.jpg';
+import photo2 from '../../img/RoomPhotos/room4.jpg';
+import photo3 from '../../img/RoomPhotos/room9.jpg';
+
 import '../../stylesheets/PoolDetails.css';
 
 function formatDate(convert){
@@ -95,9 +99,13 @@ class PoolOpen extends Component {
     //   joinBtn = <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
     // }
 
-    joinBtn = <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>
     if(this.props.inUserList) {
-      joinBtn = <Button id="joinButton">LEAVE</Button>
+      joinBtn = <Button id="joinButton" onClick={this.props.leave}>LEAVE</Button>;
+      console.log("Leave Button done");
+    }
+    else{
+      joinBtn = <Button id="joinButton" onClick={this.props.submit}>JOIN</Button>;
+      console.log("Join Button done");
     }
 
 
@@ -169,13 +177,13 @@ class PoolOpen extends Component {
           </Row>
           <Row id="imagesThingy">
             <Col sm={4}>
-              <img src={require('../../img/goatPhoto.jpeg')}/>
+              <img src={photo1}/>
             </Col>
             <Col sm={4}>
-              <img src={require('../../img/goatPhoto.jpeg')}/>
+              <img src={photo2}/>
             </Col>
             <Col sm={4}>
-              <img src={require('../../img/goatPhoto.jpeg')}/>
+              <img src={photo3}/>
             </Col>
           </Row>
           {/*}
