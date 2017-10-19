@@ -4,6 +4,9 @@
 
 .queryForm{
   width: 100%;
+  padding-top: 25%;
+  padding-bottom: 25%;
+
   text-align: center;
 }
 

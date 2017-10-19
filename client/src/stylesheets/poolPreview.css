@@ -35,8 +35,26 @@
 }
 
 #detailsButton{
-  margin-top: 5%;
+  width: 15%;
+  /*text-align: center;*/
+  padding: 2%;
+  margin-top: 3%;
   letter-spacing: 2px;
+  color: white;
+
+  transition: all 0.25s;
+}
+
+#detailsButton>.link{
+color: #00408D;
+  /*color: #054A9D;*/
+}
+
+#detailsButton:hover{
+  letter-spacing: 5px;
+
+  border-radius: 4px;
+
 }
 
 #minPrice{

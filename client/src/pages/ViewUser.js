@@ -8,7 +8,7 @@ import '../stylesheets/ViewUser.css';
 import FormField from './components/FormField.js';
 import SubmitBtn from './components/SubmitBtn.js';
 
-import { viewUser } from '../actions/userActions.js';
+import { viewUser, updateUser } from '../actions/userActions.js';
 
 import LoginControl from './components/LoginControl.js';
 
@@ -34,6 +34,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     viewUser: () => {dispatch(viewUser());},
+    updateUser: () => {dispatch(updateUser());}
     //add fetchUser map here
   }
 };
@@ -55,20 +56,16 @@ class ViewUser extends Component {
 
   saveChange(e) {
     e.preventDefault();
-    fetch('/users/me', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        'x-auth': sessionStorage.getItem('authToken')
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        age: this.state.age
-      })
-    });
+    var user = {
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      age: this.state.age,
+      password: null
+    };
+
+    console.log("Trying to update user..." + "USER: " + user);
+    this.props.updateUser(user);
   }
 
   render() {

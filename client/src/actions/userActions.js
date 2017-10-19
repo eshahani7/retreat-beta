@@ -117,32 +117,33 @@ export function viewUser() {
   }
 }
 
-// export function updateUser(user){
-//   return function(dispatch) {
-//     dispatch({type: 'UPDATE_USER'});
-//
-//     var userHeader = new Headers();
-//     userHeader.append('x-auth', token);
-//
-//     fetch('/users/me', {
-//       method: 'PATCH',
-//       headers: userHeader,
-//
-//       body: JSON.stringify(user)
-//     }).then((res) => {
-//       if(res.ok){
-//         return res.json;
-//       }
-//       else{
-//         return Promise.reject({status: res.status});
-//       }
-//     }).then((body) => {
-//       dispatch({type: 'UPDATE_USER_FULFILLED', payload: {user});
-//     }).catch((e) => {
-//       dispatch({type:'UPDATE_USER_REJECTED', payload: e});
-//     });
-//   }
-// }
+export function updateUser(user){
+  return function(dispatch) {
+    dispatch({type: 'UPDATE_USER'});
+
+    var token = sessionStorage.getItem('authToken');
+
+    fetch('/users/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json',
+        'x-auth': sessionStorage.getItem('authToken')
+      },
+      body: JSON.stringify(user)
+    }).then((res) => {
+      if(res.ok){
+        return res.json;
+      }
+      else{
+        return Promise.reject({status: res.status});
+      }
+    }).then((body) => {
+      dispatch({type: 'UPDATE_USER_FULFILLED', payload: user});
+    }).catch((e) => {
+      dispatch({type:'UPDATE_USER_REJECTED', payload: e});
+    });
+  }
+}
 
 //-------CALLED IN POOL ACTIONS------//
 export function findUser(dispatch, userID){

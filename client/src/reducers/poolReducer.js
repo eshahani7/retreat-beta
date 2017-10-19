@@ -13,6 +13,8 @@ export default function reducer (state = {
   createFailed: false,
   joining: false,
   joined: false,
+  leaving: false,
+  left: false,
   checking: false,
   checked: false,
   error: null
@@ -90,6 +92,23 @@ export default function reducer (state = {
       return {...state,
         joining: false,
         joined: true
+      };
+    }
+    case 'LEAVE_POOL': {
+      return {...state,
+        leaving: true
+      };
+    }
+    case 'LEAVE_POOL_REJECTED': {
+      return {...state,
+        leaving: false,
+        error: action.payload
+      };
+    }
+    case 'LEAVE_POOL_FULFILLED':{
+      return {...state,
+        leaving: false,
+        error: action.payload
       };
     }
     case 'CHECK_JOINED': {

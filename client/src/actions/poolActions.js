@@ -178,3 +178,28 @@ export function joinPool(poolId) {
     })
   }
 }
+
+export function leavePool(poolId){
+  return function(dispatch) {
+    dispatch({ type:'LEAVE_POOL '});
+    var token = sessionStorage.getItem('authToken');
+    var userHeader = new Headers();
+    userHeader.append('x-auth', token);
+
+    fetch(`/pools/leave/${poolId}`, {
+      method:'DELETE',
+      headers: userHeader
+    }).then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+      else  {
+        return Promise.reject({status: res.status});
+      }
+    }).then((body) => {
+      dispatch({type: 'LEAVE_POOL_FULFILLED', payload: body});
+    }).catch((e) => {
+      dispatch({type: 'LEAVE_POOL_REJECTED', payload: e});
+    })
+  }
+}
